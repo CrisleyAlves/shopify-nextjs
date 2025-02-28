@@ -19,7 +19,7 @@ const Footer = () => {
           </li>
 
           <li className="mb-1 font-light text-sm ml-5 mr-5">
-            <Link href="/contact">Contact</Link>
+            <Link href="/contact-us">Contact</Link>
           </li>
 
           <li className="mb-1 font-light text-sm">
