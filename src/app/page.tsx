@@ -1,9 +1,17 @@
-import ProductCard, { ProductList } from "@/ui/ProductCard";
+import React from "react";
+import Banner from "@/ui/Banner";
+import CollectionBanners from "@/ui/CollectionBanners";
+import { ProductList } from "@/ui/ProductCard";
 
-export default function Home() {
+export default function Home(): React.ReactElement {
   return (
     <main>
-      <ProductList title="Men's" />
+      <Banner />
+      <ProductList title="Men Best Sales" />
+      <div className="bg-gray-100">
+        <ProductList title="Women Best Sales" />
+      </div>
+      <CollectionBanners />
     </main>
   );
 }
