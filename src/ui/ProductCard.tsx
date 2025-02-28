@@ -1,13 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export const ProductList = ({ title }: { title: string }) => {
   return (
-    <div className="container mx-auto p-5">
+    <div className="container p-5 md:pt-5 md:pb-5 xl:pl-0 xl:pr-0">
       <h2 className="text-3xl font-bold">{title}</h2>
       <section
         className="
-        gap-y-6 mt-5
-        justify-items-center justify-center md:gap-y-16 gap-x-14 md:mt-10 mb-5 w-fit grid grid-cols-1
+        gap-y-6
+        justify-items-center justify-center md:gap-y-16 gap-x-14 mt-10 mb-5 w-fit grid grid-cols-1
         md:grid-cols-3 md:gap-x-8
         lg:grid-cols-4"
       >
@@ -23,37 +24,41 @@ const ProductCard = () => {
   return (
     <div
       className="
+        bg-white
         shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl
-        md:w-56
+        md:w-full
       "
     >
-      <a
+      <Link
         className="
-        flex flex-row
-        md:block
+        flex flex-row h-40
+        md:h-auto md:block
         "
-        href="#"
+        href="/product/dynamic"
       >
         <Image
+          priority
           src="/product-male-1.webp"
           alt="Product"
-          width={1000}
+          width={0}
           height={0}
+          sizes="100vw"
           className="
-          w-40
-          md:h-80 md:w-56 object-cover rounded-t-xl"
+          w-40 h-40 object-cover rounded-t-xl
+          md:h-80 md:w-full"
         />
         <div
           className="
+          px-4 py-3
           md:block
-          px-4 py-3 w-52
+          lg:w-full
           "
         >
           <span className="text-gray-400 mr-3 uppercase text-xs">Brand</span>
           <p className="text-lg font-bold text-black truncate block capitalize">
             Product Name
           </p>
-          <p className="font-light text-xs h-10 overflow-hidden md:h-auto">
+          <p className="font-light text-sm h-10 overflow-hidden md:h-auto">
             Fantastic pants for usage. Clean, useful...
           </p>
           <div className="flex items-center">
@@ -81,7 +86,7 @@ const ProductCard = () => {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };
