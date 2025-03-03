@@ -2,6 +2,7 @@
 import { MouseEventHandler, useEffect, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
+import SearchForm from "./SearchForm";
 
 const SideMenu = ({
   showSideNav = false,
@@ -188,17 +189,7 @@ const Navbar = () => {
           hidden: !showForm,
         })}
       >
-        <form
-          action="#"
-          className="
-            justify-between
-            px-3
-            py-3 flex flex-row
-            md:justify-between md:container md:px-5 xl:px-0"
-        >
-          <input className="button w-full font-light" placeholder="search..." />
-          <button className="font-semibold text-base ml-2">search</button>
-        </form>
+        <SearchForm />
       </div>
     </>
   );

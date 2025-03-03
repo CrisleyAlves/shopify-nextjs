@@ -57,3 +57,8 @@ export const DOMAIN = process.env.SHOPIFY_STORE_DOMAIN
   : "";
 export const ENDPOINT = `${DOMAIN}${SHOPIFY_GRAPHQL_API_ENDPOINT}`;
 export const STOREFRONT_KEY = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
+
+/**
+ * @todo organize constants file later
+ */
+export const SEARCH_ROUTE = "/search";
