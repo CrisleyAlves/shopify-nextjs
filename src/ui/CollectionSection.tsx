@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const CollectionSection = () => {
   return (
-    <div className="mb-5 md:mb-0 ml-6 mr-6 md:ml-0 md:mr-0 col-span-5 md:col-span-1 border bg-gray-100 p-5 rounded-md max-h-[500px]">
+    <div className="mb-5 md:mb-0 ml-6 mr-6 md:ml-0 md:mr-0 col-span-5 md:col-span-1 border bg-gray-100 p-5 rounded-md max-h-[500px] z-10">
       <div className="collections">
         <h3 className="font-semibold text-base uppercase mb-5">Collections</h3>
         <ul>

@@ -3,6 +3,7 @@ import { MouseEventHandler, useEffect, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
 import SearchForm from "./SearchForm";
+import Cart from "./Cart";
 
 const SideMenu = ({
   showSideNav = false,
@@ -71,6 +72,7 @@ const SideMenu = ({
 const Navbar = () => {
   const [showStickyNav, setShowStickyNav] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [showCart, setShowCart] = useState(false);
   const [showSidenav, setShowSidenav] = useState(false);
 
   useEffect(() => {
@@ -165,7 +167,7 @@ const Navbar = () => {
               />
             </svg>
           </button>
-          <button>
+          <button onClick={() => setShowCart(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -183,6 +185,7 @@ const Navbar = () => {
           </button>
         </div>
       </header>
+      <Cart showCart={showCart} onClickCloseIcon={() => setShowCart(false)} />
       <div
         className={clsx("bg-white border border-b-gray-300 shadow-md", {
           "z-20 fixed top-16 w-full": !!showStickyNav,
