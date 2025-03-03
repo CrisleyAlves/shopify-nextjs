@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export const ProductList = ({ title }: { title: string }) => {
+export const ProductList = ({ title }: { title?: string }) => {
   return (
-    <div className="container p-5 md:pt-5 md:pb-5 xl:pl-0 xl:pr-0">
-      <h2 className="text-3xl font-bold">{title}</h2>
+    <section>
+      {title && <h2 className="text-3xl font-bold">{title}</h2>}
       <section
         className="
         gap-y-6
@@ -16,7 +16,7 @@ export const ProductList = ({ title }: { title: string }) => {
           <ProductCard key={value} />
         ))}
       </section>
-    </div>
+    </section>
   );
 };
 
