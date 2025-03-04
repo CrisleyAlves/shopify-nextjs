@@ -128,19 +128,19 @@ const Navbar = () => {
 
         <nav className="hidden md:block">
           <ul className="flex flex-row items-center justify-center h-full uppercase">
-            <li className="font-light text-base ml-3">
+            <li className="font-light text-sm ml-3">
               <Link href="/collections/men">Men</Link>
             </li>
 
-            <li className="font-light text-base mr-3 ml-3">
+            <li className="font-light text-sm mr-3 ml-3">
               <Link href="/collections/woman">Woman</Link>
             </li>
 
-            <li className="font-light text-base">
+            <li className="font-light text-sm">
               <Link href="/collections/kids">Kids</Link>
             </li>
 
-            <li className="font-light text-base ml-3">
+            <li className="font-light text-sm ml-3">
               <Link href="/collections/best-sales">Best Sales</Link>
             </li>
           </ul>
