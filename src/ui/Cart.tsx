@@ -83,14 +83,14 @@ const Cart = ({
 }) => {
   return (
     <div
-      className={clsx("", {
-        "z-30 md:bg-black/50 md:w-full md:h-full md:fixed": showCart,
+      className={clsx("z-30 md:bg-black/50 md:w-full md:h-full md:fixed", {
+        hidden: !showCart,
       })}
     >
       <div
         className={clsx(
           `w-full ease-in-out fixed bg-white shadow-2xl bottom-[-100%]  text-black
-          transition duration-100
+          transition duration-100 h-[100%]
           md:w-[25%]`,
           {
             "top-0 bottom-0 transition duration-100 md:right-0 md:w-[400px]":
@@ -118,7 +118,7 @@ const Cart = ({
           </button>
         </h2>
 
-        <div className="p-5 flex flex-col justify-between">
+        <div className="p-5 flex flex-col justify-between h-[95%]">
           <div
             className="
           min-h-[55vh] max-h-[55vh] overflow-y-auto shadow-sm
@@ -133,7 +133,7 @@ const Cart = ({
               </div>
             ))}
           </div>
-          <div className="bottom-0 w-full right-0 p-5">
+          <div className="w-full right-0 p-5 fixed bottom-0 md:relative">
             <div className="flex justify-between">
               <span className="text-right font-semibold">TOTAL: 1 Item</span>
               <span className="text-right text-green-700 font-semibold">
