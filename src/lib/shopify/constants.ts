@@ -1,8 +1,15 @@
 import { ensureStartWith } from "@/lib/shopify/utils/navigation";
 
+export const SORT_KEYS = {
+  RELEVANCE: "RELEVANCE",
+  BEST_SELLING: "BEST_SELLING",
+  CREATED_AT: "CREATED_AT",
+  PRICE: "PRICE",
+};
+
 export type SortFilterItem = {
   title: string;
-  slug: string | null;
+  slug: string | "";
   sortKey: "RELEVANCE" | "BEST_SELLING" | "CREATED_AT" | "PRICE";
   reverse: boolean;
 };
@@ -15,7 +22,7 @@ export const TAGS = {
 
 export const DEFAULT_SORT: SortFilterItem = {
   title: "Relevance",
-  slug: null,
+  slug: "",
   sortKey: "RELEVANCE",
   reverse: false,
 };

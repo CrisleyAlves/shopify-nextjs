@@ -23,7 +23,7 @@ const SortSelect = () => {
       onChange={handleSorting}
     >
       {sorting.map((item) => (
-        <option key={item.slug} value={item.sortKey}>
+        <option key={item.slug} value={item.slug}>
           {item.title}
         </option>
       ))}
