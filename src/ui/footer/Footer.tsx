@@ -1,6 +1,7 @@
+import { Menu } from "@/lib/shopify/menu/types";
 import Link from "next/link";
 
-const Footer = () => {
+const Footer = ({ footerMenu }: { footerMenu: Menu[] }) => {
   return (
     <footer className="w-full bg-blue-950">
       <div
@@ -14,17 +15,11 @@ const Footer = () => {
         </h2>
 
         <ul className="flex flex-row justify-end">
-          <li className="mb-1 font-light text-sm">
-            <Link href="/about">About</Link>
-          </li>
-
-          <li className="mb-1 font-light text-sm ml-5 mr-5">
-            <Link href="/contact-us">Contact</Link>
-          </li>
-
-          <li className="mb-1 font-light text-sm">
-            <Link href="/privacy">Privacy</Link>
-          </li>
+          {footerMenu.map((item) => (
+            <li className="mb-1 font-light text-sm ml-5">
+              <Link href={item.path}>{item.title}</Link>
+            </li>
+          ))}
         </ul>
       </div>
     </footer>

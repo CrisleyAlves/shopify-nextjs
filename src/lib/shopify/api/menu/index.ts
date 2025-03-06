@@ -17,7 +17,10 @@ export async function getMenu(handle: string): Promise<Menu[]> {
       title: item.title,
       path: item.url
         .replace(DOMAIN, "")
-        .replace("collections", "/search")
+        /**
+         * @todo may or may not be necessary, check later
+         */
+        // .replace("collections", "/search")
         .replace("pages", ""),
     })) || []
   );

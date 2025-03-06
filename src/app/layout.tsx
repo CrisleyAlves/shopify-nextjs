@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { outfit } from "@/fonts";
 import "./globals.css";
-import Navbar from "@/ui/Navbar";
-import Footer from "@/ui/Footer";
+import NavbarContainer from "@/ui/navbar/NavbarContainer";
+import FooterContainer from "@/ui/footer/FooterContainer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,9 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.className} antialiased flex flex-col flex-1`}>
-        <Navbar />
+        <NavbarContainer />
         <div className="min-h-[100vh]">{children}</div>
-        <Footer />
+        <FooterContainer />
       </body>
     </html>
   );

@@ -1,5 +1,10 @@
 import { ensureStartWith } from "@/lib/shopify/utils/navigation";
 
+export const STORE_FRONT_API_MENUS = {
+  NAVBAR_MENU: "next-js-frontend-menu",
+  FOOTER_MENU: "next-js-footer-menu",
+};
+
 export const SORT_KEYS = {
   RELEVANCE: "RELEVANCE",
   BEST_SELLING: "BEST_SELLING",

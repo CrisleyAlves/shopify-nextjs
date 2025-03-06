@@ -2,13 +2,16 @@
 import { MouseEventHandler, useEffect, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
-import SearchForm from "./SearchForm";
-import Cart from "./Cart";
+import { Menu } from "@/lib/shopify/menu/types";
+import SearchForm from "../SearchForm";
+import Cart from "../Cart";
 
 const SideMenu = ({
+  menu,
   showSideNav = false,
   onClickCloseIcon,
 }: {
+  menu: Menu[];
   showSideNav: boolean;
   onClickCloseIcon: MouseEventHandler<HTMLButtonElement>;
 }) => {
@@ -47,33 +50,18 @@ const SideMenu = ({
       <nav className="mt-10">
         <h2 className="text-base font-bold mb-2">Collections</h2>
         <ul>
-          <li className="mb-1 font-light text-sm">
-            <Link href="/collections/pants">Pants</Link>
-          </li>
-          <li className="mb-1 font-light text-sm">
-            <Link href="/collections/shorts">Shorts</Link>
-          </li>
-          <li className="mb-1 font-light text-sm">
-            <Link href="/collections/best-sales">Best Sales</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <nav className="mt-10">
-        <h2 className="text-base font-bold mb-2">Pages</h2>
-        <ul>
-          <li className="mb-1 font-light text-sm">About</li>
-
-          <li className="mb-1 font-light text-sm">Contact</li>
-
-          <li className="mb-1 font-light text-sm">Privacy</li>
+          {menu.map((item) => (
+            <li key={item.path} className="mb-1 font-light text-sm">
+              <Link href={item.path}>{item.title}</Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </div>
   );
 };
 
-const Navbar = () => {
+export default function Navbar({ menu }: { menu: Menu[] }) {
   const [showStickyNav, setShowStickyNav] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -105,6 +93,7 @@ const Navbar = () => {
         )}
       >
         <SideMenu
+          menu={menu}
           showSideNav={showSidenav}
           onClickCloseIcon={() => setShowSidenav(false)}
         />
@@ -132,17 +121,11 @@ const Navbar = () => {
 
         <nav className="hidden md:block">
           <ul className="flex flex-row items-center justify-center h-full uppercase">
-            <li className="font-light text-sm ml-3">
-              <Link href="/collections/shorts">Shorts</Link>
-            </li>
-
-            <li className="font-light text-sm mr-3 ml-3">
-              <Link href="/collections/pants">Pants</Link>
-            </li>
-
-            <li className="font-light text-sm ml-3">
-              <Link href="/collections/best-sales">Best Sales</Link>
-            </li>
+            {menu.map((item) => (
+              <li key={item.path} className="font-light text-sm ml-3">
+                <Link href={item.path}>{item.title}</Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
@@ -196,6 +179,4 @@ const Navbar = () => {
       </div>
     </>
   );
-};
-
-export default Navbar;
+}
