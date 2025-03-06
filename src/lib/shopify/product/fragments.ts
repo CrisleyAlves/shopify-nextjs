@@ -9,6 +9,10 @@ export const productFragment = /* GraphQl */ `
     title
     description
     descriptionHtml
+    brand: metafield(namespace: "custom", key: "brand") {
+      value
+      type
+    }
     options {
       id
       name
