@@ -47,11 +47,15 @@ const SideMenu = ({
       <nav className="mt-10">
         <h2 className="text-base font-bold mb-2">Collections</h2>
         <ul>
-          <li className="mb-1 font-light text-sm">Woman</li>
-
-          <li className="mb-1 font-light text-sm">Man</li>
-
-          <li className="mb-1 font-light text-sm">Kids</li>
+          <li className="mb-1 font-light text-sm">
+            <Link href="/collections/pants">Pants</Link>
+          </li>
+          <li className="mb-1 font-light text-sm">
+            <Link href="/collections/shorts">Shorts</Link>
+          </li>
+          <li className="mb-1 font-light text-sm">
+            <Link href="/collections/best-sales">Best Sales</Link>
+          </li>
         </ul>
       </nav>
 
@@ -129,15 +133,11 @@ const Navbar = () => {
         <nav className="hidden md:block">
           <ul className="flex flex-row items-center justify-center h-full uppercase">
             <li className="font-light text-sm ml-3">
-              <Link href="/collections/men">Men</Link>
+              <Link href="/collections/shorts">Shorts</Link>
             </li>
 
             <li className="font-light text-sm mr-3 ml-3">
-              <Link href="/collections/woman">Woman</Link>
-            </li>
-
-            <li className="font-light text-sm">
-              <Link href="/collections/kids">Kids</Link>
+              <Link href="/collections/pants">Pants</Link>
             </li>
 
             <li className="font-light text-sm ml-3">
