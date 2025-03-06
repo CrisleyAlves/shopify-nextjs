@@ -1,7 +1,14 @@
+import { Product } from "@/lib/shopify/product/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export const ProductList = ({ title }: { title?: string }) => {
+export const ProductList = ({
+  title,
+  products,
+}: {
+  title?: string;
+  products: Product[];
+}) => {
   return (
     <section>
       {title && <h2 className="text-3xl font-bold">{title}</h2>}
@@ -12,15 +19,16 @@ export const ProductList = ({ title }: { title?: string }) => {
         md:grid-cols-3 md:gap-x-8
         lg:grid-cols-4"
       >
-        {[0, 1, 2, 4].map((value) => (
-          <ProductCard key={value} />
-        ))}
+        {!!products?.length &&
+          products.map((product) => (
+            <ProductCard key={product.handle} product={product} />
+          ))}
       </section>
     </section>
   );
 };
 
-const ProductCard = () => {
+const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div
       className="
@@ -34,12 +42,12 @@ const ProductCard = () => {
         flex flex-row h-40
         md:h-auto md:block
         "
-        href="/product/dynamic"
+        href={`/product/${product.handle}`}
       >
         <Image
           priority
-          src="/product-male-1.webp"
-          alt="Product"
+          src={product.featuredImage.url}
+          alt={product.featuredImage.altText}
           width={0}
           height={0}
           sizes="100vw"
@@ -54,20 +62,25 @@ const ProductCard = () => {
           lg:w-full
           "
         >
-          <span className="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+          <span className="text-gray-400 mr-3 uppercase text-xs">
+            {product.brand.value}
+          </span>
           <p className="text-lg font-bold text-black truncate block capitalize">
-            Product Name
+            {product.title}
           </p>
           <p className="font-light text-sm h-10 overflow-hidden md:h-auto">
-            Fantastic pants for usage. Clean, useful...
+            {product.description.substring(0, 20)}
           </p>
           <div className="flex items-center">
             <p className="text-lg font-semibold text-black cursor-auto my-3">
-              $149
+              {product.priceRange.maxVariantPrice.amount}{" "}
+              <span className="text-sm font-light">
+                {product.priceRange.maxVariantPrice.currencyCode}
+              </span>
             </p>
-            <del>
+            {/* <div>
               <p className="text-sm text-gray-600 cursor-auto ml-2">$199</p>
-            </del>
+            </div> */}
             <div className="ml-auto">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
