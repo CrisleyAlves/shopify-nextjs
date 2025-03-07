@@ -1,5 +1,10 @@
-import { ShopifyProduct } from "../product/types";
+import { Product, ShopifyProduct } from "../product/types";
 import { Connection, SEO } from "../shared/types";
+
+export type CollectionProducts = {
+  products: Product[];
+  descriptionHtml: string;
+};
 
 export type ShopifyCollection = {
   handle: string;
@@ -22,6 +27,7 @@ export type ShopifyCollectionsOperation = {
 export type ShopifyCollectionProductsOperation = {
   data: {
     collection: {
+      descriptionHtml: string;
       products: Connection<ShopifyProduct>;
     };
   };

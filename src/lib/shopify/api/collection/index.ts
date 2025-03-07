@@ -5,6 +5,7 @@ import {
 } from "../../collection/queries";
 import {
   Collection,
+  CollectionProducts,
   ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
 } from "../../collection/types";
@@ -52,7 +53,7 @@ export async function getCollectionProducts({
   collection: string;
   reverse?: boolean;
   sortKey?: string;
-}): Promise<Product[]> {
+}): Promise<CollectionProducts> {
   const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
     query: getCollectionProductsQuery,
     tags: [TAGS.collections, TAGS.products],
@@ -65,10 +66,18 @@ export async function getCollectionProducts({
 
   if (!res.body.data.collection) {
     console.log(`No collection found for \`${collection}\``);
-    return [];
+    return {
+      products: [],
+      descriptionHtml: "",
+    };
   }
 
-  return reshapeProducts(
+  const products = reshapeProducts(
     removeEdgesAndNodes(res.body.data.collection.products)
   );
+
+  return {
+    products,
+    descriptionHtml: res.body.data.collection.descriptionHtml,
+  };
 }

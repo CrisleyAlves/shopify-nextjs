@@ -2,6 +2,7 @@
 import { MouseEventHandler, useEffect, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu } from "@/lib/shopify/menu/types";
 import SearchForm from "../SearchForm";
 import Cart from "../Cart";
@@ -62,6 +63,8 @@ const SideMenu = ({
 };
 
 export default function Navbar({ menu }: { menu: Menu[] }) {
+  const pathname = usePathname();
+
   const [showStickyNav, setShowStickyNav] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -121,11 +124,19 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
 
         <nav className="hidden md:block">
           <ul className="flex flex-row items-center justify-center h-full uppercase">
-            {menu.map((item) => (
-              <li key={item.path} className="font-light text-sm ml-3">
-                <Link href={item.path}>{item.title}</Link>
-              </li>
-            ))}
+            {menu.map((item) => {
+              const url = pathname.includes("collections/")
+                ? item.path.replace("collections/", "")
+                : item.path;
+
+              return (
+                <li key={item.path} className="font-light text-sm ml-3">
+                  <Link prefetch href={url}>
+                    {item.title}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 

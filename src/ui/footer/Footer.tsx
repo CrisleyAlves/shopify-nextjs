@@ -16,7 +16,7 @@ const Footer = ({ footerMenu }: { footerMenu: Menu[] }) => {
 
         <ul className="flex flex-row justify-end">
           {footerMenu.map((item) => (
-            <li className="mb-1 font-light text-sm ml-5">
+            <li key={item.path} className="mb-1 font-light text-sm ml-5">
               <Link href={item.path}>{item.title}</Link>
             </li>
           ))}
