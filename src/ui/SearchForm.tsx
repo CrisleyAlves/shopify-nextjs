@@ -1,41 +1,24 @@
 "use client";
-import { SEARCH_ROUTE } from "@/lib/shopify/constants";
-import { buildQueryStringParams } from "@/lib/shopify/utils/navigation";
-import { useSearchParams, useRouter } from "next/navigation";
+import { FormEventHandler } from "react";
 
-const SearchForm = () => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const val = e.target as HTMLFormElement;
-    const search = val.search as HTMLInputElement;
-
-    const url = buildQueryStringParams(
-      SEARCH_ROUTE,
-      searchParams,
-      search.value
-    );
-    router.push(url);
-  }
-
+const SearchForm = ({
+  onSubmitSearchForm,
+}: {
+  onSubmitSearchForm: FormEventHandler<HTMLFormElement>;
+}) => {
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={onSubmitSearchForm}
       className="
-            justify-between
-            px-3
-            py-3 flex flex-row
-            md:justify-between md:container md:px-5 xl:px-0"
+        justify-between px-3 py-3 flex flex-row
+        md:justify-between md:container md:px-5 xl:px-0"
     >
       <input
         name="search"
-        className="button w-full font-light"
+        className="button w-full font-light placeholder:font-light"
         placeholder="search..."
       />
-      <button className="font-semibold text-base ml-2">search</button>
+      <button className="font-light text-base ml-2">search</button>
     </form>
   );
 };

@@ -2,10 +2,13 @@
 import { MouseEventHandler, useEffect, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
-import { usePathname } from "next/navigation";
 import { Menu } from "@/lib/shopify/menu/types";
 import { useCart } from "@/state/cart/CartContext";
+import { buildQueryStringParams } from "@/lib/shopify/utils/navigation";
+import { SEARCH_ROUTE } from "@/lib/shopify/constants";
 
 import SearchForm from "../SearchForm";
 import SideCart from "../cart/SideCart";
@@ -13,60 +16,77 @@ import SideCart from "../cart/SideCart";
 const SideMenu = ({
   menu,
   showSideNav = false,
+  pathname,
   onClickCloseIcon,
 }: {
   menu: Menu[];
   showSideNav: boolean;
+  pathname: string;
   onClickCloseIcon: MouseEventHandler<HTMLButtonElement>;
 }) => {
   return (
     <div
-      className={clsx(
-        `w-[60%] ease-in-out fixed h-[100vh] bg-white shadow-2xl left-0 top-0 p-4 text-black
-      md:hidden`,
-        {
-          "left-[-100%]": !showSideNav,
-        }
-      )}
+      className={clsx("z-30 bg-black/50 w-full h-full fixed top-0", {
+        hidden: !showSideNav,
+      })}
     >
-      <div className="flex flex-row justify-between items-center">
-        <h1 className="font-bold text-3xl uppercase">
-          <Link href="/">Clothes</Link>
-        </h1>
-        <button onClick={onClickCloseIcon}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18 18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
+      <div
+        className={clsx(
+          `w-[60%] ease-in-out fixed h-[100vh] bg-white shadow-2xl left-0 top-0 p-4 text-black z-20
+      md:hidden`,
+          {
+            "left-[-100%]": !showSideNav,
+          }
+        )}
+      >
+        <div className="flex flex-row justify-between items-center">
+          <h1 className="font-light text-3xl uppercase">
+            <Link href="/">Clothes</Link>
+          </h1>
+          <button onClick={onClickCloseIcon}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
 
-      <nav className="mt-10">
-        <h2 className="text-base font-bold mb-2">Collections</h2>
-        <ul>
-          {menu.map((item) => (
-            <li key={item.path} className="mb-1 font-light text-sm">
-              <Link href={item.path}>{item.title}</Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+        <nav className="mt-10">
+          <h2 className="text-base font-bold mb-2">Collections</h2>
+          <ul>
+            {menu.map((item) => {
+              const url = pathname.includes("collections/")
+                ? item.path.replace("collections/", "")
+                : item.path;
+
+              return (
+                <li key={item.path} className="mb-1 font-light text-sm">
+                  <Link href={url}>{item.title}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 };
 
 export default function Navbar({ menu }: { menu: Menu[] }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const { totalQuantity } = useCart();
 
   const [showStickyNav, setShowStickyNav] = useState(false);
@@ -82,6 +102,28 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (showSidenav) {
+      setShowSidenav(false);
+    }
+  }, [pathname]);
+
+  function onSubmitSearchForm(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const val = e.target as HTMLFormElement;
+    const search = val.search as HTMLInputElement;
+
+    const url = buildQueryStringParams(
+      SEARCH_ROUTE,
+      searchParams,
+      search.value
+    );
+
+    setShowForm(false);
+    router.push(url);
+  }
+
   const stickNavbar = () => {
     if (window !== undefined) {
       const windowHeight = window.scrollY;
@@ -93,13 +135,14 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
     <>
       <header
         className={clsx(
-          "p-5 grid grid-cols-3 shadow-sm bg-blue-950 text-white/85",
+          "p-5 grid grid-cols-3 shadow-md bg-white text-black/85",
           {
             "z-20 fixed w-full": !!showStickyNav,
           }
         )}
       >
         <SideMenu
+          pathname={pathname}
           menu={menu}
           showSideNav={showSidenav}
           onClickCloseIcon={() => setShowSidenav(false)}
@@ -110,7 +153,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.5"
+            strokeWidth="1"
             stroke="currentColor"
             className="size-6"
           >
@@ -122,7 +165,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
           </svg>
         </button>
 
-        <h1 className="hidden font-bold md:block uppercase">
+        <h1 className="hidden font-light md:block uppercase">
           <Link href="/">Clothes</Link>
         </h1>
 
@@ -134,7 +177,10 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
                 : item.path;
 
               return (
-                <li key={item.path} className="font-light text-sm ml-3">
+                <li
+                  key={item.path}
+                  className="font-light text-md ml-3 hover:underline"
+                >
                   <Link prefetch href={url}>
                     {item.title}
                   </Link>
@@ -144,7 +190,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
           </ul>
         </nav>
 
-        <h1 className="font-bold text-2xl text-center md:hidden uppercase">
+        <h1 className="font-light text-2xl text-center md:hidden uppercase">
           <Link href="/">Clothes</Link>
         </h1>
 
@@ -154,7 +200,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth="1.5"
+              strokeWidth="1"
               stroke="currentColor"
               className="size-6"
             >
@@ -198,7 +244,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
           hidden: !showForm,
         })}
       >
-        <SearchForm />
+        <SearchForm onSubmitSearchForm={onSubmitSearchForm} />
       </div>
     </>
   );
