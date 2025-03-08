@@ -19,8 +19,7 @@ export async function getCartIdFromCookies(): Promise<string | undefined> {
 }
 
 export async function addItemToCart(selectedVariantId: string) {
-  const cookie = await cookies();
-  const cartId = cookie.get("cartId")?.value;
+  const cartId = await getCartIdFromCookies();
 
   if (!cartId || !selectedVariantId) {
     return new Error("Error adding item to cart");
