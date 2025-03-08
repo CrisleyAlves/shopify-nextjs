@@ -64,7 +64,7 @@ export function reshapeCollection(
 
   return {
     ...collection,
-    path: `/search/${collection.handle}`,
+    path: `/collections/${collection.handle}`,
   };
 }
 

@@ -15,7 +15,7 @@ export const ProductList = ({
       <section
         className="
         gap-y-6
-        justify-items-center justify-center md:gap-y-16 gap-x-14 mt-10 mb-5 w-fit grid grid-cols-1
+        justify-items-center justify-center md:gap-y-16 gap-x-14 mt-10 mb-5 w-full grid grid-cols-1
         md:grid-cols-3 md:gap-x-8
         lg:grid-cols-4"
       >
@@ -32,9 +32,8 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div
       className="
-        bg-white
+        bg-white w-full
         shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl
-        md:w-full
       "
     >
       <Link

@@ -1,5 +1,5 @@
 import { Product, ShopifyProduct } from "../product/types";
-import { Connection, SEO } from "../shared/types";
+import { Connection, Image, SEO } from "../shared/types";
 
 export type CollectionProducts = {
   products: Product[];
@@ -10,6 +10,7 @@ export type ShopifyCollection = {
   handle: string;
   title: string;
   description: string;
+  image: Image;
   seo: SEO;
   updatedAt: string;
 };

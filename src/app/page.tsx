@@ -4,6 +4,7 @@ import CollectionBanners from "@/ui/CollectionBanners";
 import { ProductList } from "@/ui/ProductCard";
 import { getProducts } from "@/lib/shopify/api/product";
 import { SORT_KEYS } from "@/lib/shopify/constants";
+import { getCollections } from "@/lib/shopify/api/collection";
 
 export default async function Home(): Promise<React.ReactElement> {
   const products = await getProducts({
@@ -11,6 +12,8 @@ export default async function Home(): Promise<React.ReactElement> {
     reverse: false,
     query: "",
   });
+
+  const collections = await getCollections();
 
   return (
     <main>
@@ -26,7 +29,7 @@ export default async function Home(): Promise<React.ReactElement> {
           />
         </div>
       </div>
-      <CollectionBanners />
+      <CollectionBanners collections={collections} />
     </main>
   );
 }

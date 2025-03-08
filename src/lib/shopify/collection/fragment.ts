@@ -5,6 +5,11 @@ export const collectionFragment = /* GraphQL */ `
     handle
     title
     description
+    image {
+      altText
+      id
+      url
+    }
     seo {
       ...seo
     }
