@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "@/lib/shopify/menu/types";
 import SearchForm from "../SearchForm";
-import Cart from "../Cart";
+import SideCart from "../cart/SideCart";
 
 const SideMenu = ({
   menu,
@@ -179,7 +179,10 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
           </button>
         </div>
       </header>
-      <Cart showCart={showCart} onClickCloseIcon={() => setShowCart(false)} />
+      <SideCart
+        showCart={showCart}
+        onClickCloseIcon={() => setShowCart(false)}
+      />
       <div
         className={clsx("bg-white border border-b-gray-300 shadow-md", {
           "z-20 fixed top-16 w-full": !!showStickyNav,

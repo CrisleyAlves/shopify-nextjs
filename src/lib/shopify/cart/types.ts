@@ -4,11 +4,18 @@ export type CartProduct = {
   id: string;
   handle: string;
   title: string;
+  brand: {
+    value: string;
+  };
   featuredImage: Image;
+  priceRange: {
+    maxVariantPrice: Money;
+    minVariantPrice: Money;
+  };
 };
 
 export type CartItem = {
-  id: string | undefined;
+  id: string;
   quantity: number;
   cost: {
     totalAmount: Money;

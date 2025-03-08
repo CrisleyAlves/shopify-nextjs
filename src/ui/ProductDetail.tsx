@@ -1,15 +1,31 @@
+"use client";
 import Image from "next/image";
-import Prose from "@/components/prose";
-import { Product } from "@/lib/shopify/product/types";
-import GuaranteeStatement from "./GuaranteeStatement";
+import { useState } from "react";
 import clsx from "clsx";
+import Prose from "@/components/prose";
+import { addItemToCart } from "@/state/cart/actions";
+import { Product, ProductVariant } from "@/lib/shopify/product/types";
+import { useCart } from "@/state/cart/CartContext";
+import GuaranteeStatement from "./GuaranteeStatement";
 
 export const ProductDetail = ({ product }: { product: Product }) => {
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>();
+  const { updateShopifyCart } = useCart();
+
   /**
-   * @todo work on business rule later
+   * @todo add notification for success/error
    */
-  const selected = "X";
-  const disabled = "S";
+  const onClickAddToCart = async () => {
+    if (!selectedVariant) return;
+
+    try {
+      const shopifyCart = await addItemToCart(selectedVariant.id);
+      updateShopifyCart(shopifyCart);
+    } catch (error) {
+      console.error("Error adding item to cart");
+      console.error(error);
+    }
+  };
 
   return (
     <div
@@ -52,15 +68,17 @@ export const ProductDetail = ({ product }: { product: Product }) => {
         <div className="grid grid-cols-5 gap-2 mt-2 mb-3">
           {product.variants.map((variant) => (
             <button
+              onClick={() => setSelectedVariant(variant)}
               key={variant.id}
               disabled={!variant.availableForSale}
               className={clsx(
                 `p-1 aspect-square border border-gray-300 text-black font-light text-sm
                   md:py-0 md:px-0 md:h-10 md:w-full hover:bg-indigo-950 hover:text-white`,
                 {
-                  "bg-indigo-950 text-white": variant.title === selected,
+                  "bg-indigo-950 text-white":
+                    variant.id === selectedVariant?.id,
                   "disabled:bg-gray-100 disabled:cursor-not-allowed hover:text-black":
-                    disabled === "S",
+                    !variant.availableForSale,
                 }
               )}
             >
@@ -69,7 +87,14 @@ export const ProductDetail = ({ product }: { product: Product }) => {
           ))}
         </div>
 
-        <button className="w-full  bg-indigo-950 text-white p-3 uppercase hover:text-indigo-950 hover:bg-white border border-indigo-950">
+        <button
+          disabled={!selectedVariant}
+          type="button"
+          onClick={onClickAddToCart}
+          className="
+            w-full  bg-indigo-950 text-white p-3 uppercase hover:text-indigo-950 hover:bg-white border border-indigo-950
+            disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-50 disabled:hover:text-white"
+        >
           add to cart
         </button>
         <p className="font-thin text-center mt-3">
@@ -108,7 +133,7 @@ export const ProductDetail = ({ product }: { product: Product }) => {
             </label>
             <div
               className="
-                peer-checked/description:max-h-72 peer-checked/description:opacity-100 peer-checked/description:translate-y-0 max-h-0 opacity-0 -translate-y-2 overflow-hidden transition-all duration-500 ease-in-out
+                peer-checked/description:max-h-full peer-checked/description:opacity-100 peer-checked/description:translate-y-0 max-h-0 opacity-0 -translate-y-2 overflow-hidden transition-all duration-500 ease-in-out
                 "
             >
               <Prose html={product.descriptionHtml} />
