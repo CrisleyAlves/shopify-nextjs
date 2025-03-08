@@ -81,8 +81,8 @@ export default function SideCart({
               <div className="flex justify-between">
                 <span className="text-right font-semibold">{totalText}</span>
                 <span className="text-right text-green-700 font-semibold">
+                  {cart?.cost.totalAmount.amount}{" "}
                   {cart?.cost.totalAmount.currencyCode}
-                  {cart?.cost.totalAmount.amount}
                 </span>
               </div>
               <p className="mb-3 font-thin text-right">free shipping</p>

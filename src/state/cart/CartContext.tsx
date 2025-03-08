@@ -11,6 +11,7 @@ import { Cart } from "@/lib/shopify/cart/types";
 type CartContextType = {
   cart: Cart | undefined;
   updateShopifyCart: (payload: any) => void;
+  totalQuantity: number;
   isEmpty: boolean;
 };
 
@@ -32,6 +33,7 @@ export function CartProvider({
       cart,
       updateShopifyCart,
       isEmpty: !!cart?.lines?.length,
+      totalQuantity: cart?.totalQuantity || 0,
     }),
     [cart]
   );

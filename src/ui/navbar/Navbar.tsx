@@ -2,8 +2,11 @@
 import { MouseEventHandler, useEffect, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
+
 import { usePathname } from "next/navigation";
 import { Menu } from "@/lib/shopify/menu/types";
+import { useCart } from "@/state/cart/CartContext";
+
 import SearchForm from "../SearchForm";
 import SideCart from "../cart/SideCart";
 
@@ -64,6 +67,7 @@ const SideMenu = ({
 
 export default function Navbar({ menu }: { menu: Menu[] }) {
   const pathname = usePathname();
+  const { totalQuantity } = useCart();
 
   const [showStickyNav, setShowStickyNav] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -161,7 +165,12 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
               />
             </svg>
           </button>
-          <button onClick={() => setShowCart(true)}>
+          <button className="relative" onClick={() => setShowCart(true)}>
+            {totalQuantity > 0 && (
+              <span className="absolute bg-red-600 rounded-full py-0 px-2 text-white text-sm top-[-5px]">
+                {totalQuantity}
+              </span>
+            )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
