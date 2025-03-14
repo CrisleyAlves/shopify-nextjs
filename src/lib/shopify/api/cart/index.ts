@@ -32,6 +32,7 @@ export async function getCart(
   if (!cartId) return undefined;
 
   const res = await shopifyFetch<ShopifyCartOperation>({
+    cache: "no-cache",
     query: getCartQuery,
     variables: { cartId },
     tags: [TAGS.cart],
