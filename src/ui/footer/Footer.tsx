@@ -9,7 +9,7 @@ const Footer = ({ footerMenu }: { footerMenu: Menu[] }) => {
           grid grid-cols-4
           container text-black p-5"
       >
-        <h2 className="font-bold uppercase">
+        <h2 className="font-light uppercase">
           <Link href="/">Clothes</Link>
         </h2>
 
