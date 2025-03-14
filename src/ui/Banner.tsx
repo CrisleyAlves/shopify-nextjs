@@ -4,7 +4,7 @@ import React from "react";
 
 const Banner = (): React.ReactElement => {
   return (
-    <Link href="/collections/best-sales" className="w-full">
+    <Link href="/collections/sales" className="w-full">
       <Image
         priority
         src="/banner2.jpg"

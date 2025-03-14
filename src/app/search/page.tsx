@@ -1,3 +1,4 @@
+import { getCollections } from "@/lib/shopify/api/collection";
 import { getProducts } from "@/lib/shopify/api/product";
 import { DEFAULT_SORT, sorting } from "@/lib/shopify/constants";
 import { Product } from "@/lib/shopify/product/types";
@@ -35,11 +36,12 @@ export default async function Page({
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }>) {
   const products = await getProductsWithArguments({ searchParams });
+  const collections = await getCollections();
 
   return (
     <div className="container pt-5 pb-5">
       <div className="grid md:grid-cols-5">
-        <CollectionSection />
+        <CollectionSection collections={collections} />
 
         <div className="col-span-4 ml-5">
           <div className="mb-[-20px] flex justify-between items-center">
