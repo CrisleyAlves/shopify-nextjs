@@ -1,10 +1,16 @@
 import React from "react";
+
 import Banner from "@/ui/Banner";
-import CollectionBanners from "@/ui/CollectionBanners";
-import { ProductList } from "@/ui/ProductCard";
 import { getProducts } from "@/lib/shopify/api/product";
 import { SORT_KEYS } from "@/lib/shopify/constants";
 import { getCollections } from "@/lib/shopify/api/collection";
+import CollectionBanners from "@/ui/CollectionBanners";
+import { ProductList } from "@/ui/ProductCard";
+
+export const metadata = {
+  title: "CLOTHES | Store",
+  description: "A huge variety of clothes for men",
+};
 
 export default async function Home(): Promise<React.ReactElement> {
   const products = await getProducts({
