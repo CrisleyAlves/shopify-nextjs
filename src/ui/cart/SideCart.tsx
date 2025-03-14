@@ -24,9 +24,13 @@ export default function SideCart({
 
   return (
     <div
-      className={clsx("z-30 md:bg-black/50 md:w-full md:h-full md:fixed", {
-        hidden: !showCart,
-      })}
+      className={clsx(
+        `fixed top-0 right-0 w-full h-full md:bg-black/70 shadow-xl z-50 transition-transform duration-300 ease-in-out`,
+        {
+          "translate-x-[100%] duration-500 ease-in-out": !showCart,
+          "translate-x-0": showCart,
+        }
+      )}
     >
       <div
         className={clsx(

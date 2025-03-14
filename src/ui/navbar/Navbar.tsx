@@ -16,7 +16,6 @@ import SideCart from "../cart/SideCart";
 const SideMenu = ({
   menu,
   showSideNav = false,
-  pathname,
   onClickCloseIcon,
 }: {
   menu: Menu[];
@@ -26,16 +25,20 @@ const SideMenu = ({
 }) => {
   return (
     <div
-      className={clsx("z-30 bg-black/50 w-full h-full fixed top-0", {
-        hidden: !showSideNav,
-      })}
+      className={clsx(
+        "z-30 bg-black/50 w-full h-full fixed top-0 transition-opacity duration-300",
+        {
+          "opacity-0 pointer-events-none": !showSideNav,
+          "opacity-100": showSideNav,
+        }
+      )}
     >
       <div
         className={clsx(
-          `w-[60%] ease-in-out fixed h-[100vh] bg-white shadow-2xl left-0 top-0 p-4 text-black z-20
-      md:hidden`,
+          `w-[60%] h-[100vh] bg-white shadow-2xl fixed left-0 top-0 p-4 text-black z-20 md:hidden transition-transform duration-300 ease-in-out`,
           {
-            "left-[-100%]": !showSideNav,
+            "translate-x-[-100%]": !showSideNav,
+            "translate-x-0": showSideNav,
           }
         )}
       >
@@ -65,13 +68,9 @@ const SideMenu = ({
           <h2 className="text-base font-bold mb-2">Collections</h2>
           <ul>
             {menu.map((item) => {
-              const url = pathname.includes("collections/")
-                ? item.path.replace("collections/", "")
-                : item.path;
-
               return (
                 <li key={item.path} className="mb-1 font-light text-sm">
-                  <Link href={url}>{item.title}</Link>
+                  <Link href={"/" + item.path}>{item.title}</Link>
                 </li>
               );
             })}
@@ -127,7 +126,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
   const stickNavbar = () => {
     if (window !== undefined) {
       const windowHeight = window.scrollY;
-      windowHeight > 200 ? setShowStickyNav(true) : setShowStickyNav(false);
+      windowHeight > 64 ? setShowStickyNav(true) : setShowStickyNav(false);
     }
   };
 
@@ -172,16 +171,12 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
         <nav className="hidden md:block">
           <ul className="flex flex-row items-center justify-center h-full uppercase">
             {menu.map((item) => {
-              const url = pathname.includes("collections/")
-                ? item.path.replace("collections/", "")
-                : item.path;
-
               return (
                 <li
                   key={item.path}
                   className="font-light text-md ml-3 hover:underline"
                 >
-                  <Link prefetch href={url}>
+                  <Link prefetch href={"/" + item.path}>
                     {item.title}
                   </Link>
                 </li>
