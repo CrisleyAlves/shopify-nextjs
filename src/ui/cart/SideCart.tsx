@@ -1,8 +1,11 @@
 "use client";
+
 import clsx from "clsx";
 import { MouseEventHandler, useEffect } from "react";
+
 import { useCart } from "@/state/cart/CartContext";
 import { createCartAndSetCookie } from "@/state/cart/actions";
+
 import CartItem from "./CartItem";
 
 export default function SideCart({

@@ -1,14 +1,15 @@
-import { Product } from "@/lib/shopify/product/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export const ProductList = ({
+import { Product } from "@/lib/shopify/product/types";
+
+export default function ProductList({
   title,
   products,
 }: {
   title?: string;
   products: Product[];
-}) => {
+}) {
   return (
     <section>
       {title && <h2 className="text-3xl font-bold">{title}</h2>}
@@ -26,7 +27,7 @@ export const ProductList = ({
       </section>
     </section>
   );
-};
+}
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
@@ -102,5 +103,3 @@ const ProductCard = ({ product }: { product: Product }) => {
     </div>
   );
 };
-
-export default ProductCard;

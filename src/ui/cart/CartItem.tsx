@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import { CartItem as CartItemType } from "@/lib/shopify/cart/types";
 import { updateItemQuantity } from "@/state/cart/actions";
 import { useCart } from "@/state/cart/CartContext";

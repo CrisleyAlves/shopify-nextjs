@@ -1,30 +1,26 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import clsx from "clsx";
-import Prose from "@/components/prose";
-import { addItemToCart } from "@/state/cart/actions";
+import { useState } from "react";
+
+import { PRODUCT_VARIANT_TYPE } from "@/lib/shopify/constants";
 import { Product, ProductVariant } from "@/lib/shopify/product/types";
-import { useCart } from "@/state/cart/CartContext";
-import GuaranteeStatement from "./GuaranteeStatement";
 
-export const ProductDetail = ({ product }: { product: Product }) => {
+import Prose from "@/components/prose";
+import GuaranteeStatement from "@/ui/shared/GuaranteeStatement";
+
+export const ProductDetail = ({
+  product,
+  onClickAddToCart,
+}: {
+  product: Product;
+  onClickAddToCart: Function;
+}) => {
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant>();
-  const { updateShopifyCart } = useCart();
 
-  /**
-   * @todo add notification for success/error
-   */
-  const onClickAddToCart = async () => {
-    if (!selectedVariant) return;
-
-    try {
-      const shopifyCart = await addItemToCart(selectedVariant.id);
-      updateShopifyCart(shopifyCart);
-    } catch (error) {
-      console.error("Error adding item to cart");
-      console.error(error);
-    }
+  const handleOnClickAddToCart = () => {
+    onClickAddToCart(selectedVariant);
+    setSelectedVariant(undefined);
   };
 
   return (
@@ -62,35 +58,46 @@ export const ProductDetail = ({ product }: { product: Product }) => {
         <p className="font-semibold mt-3 ">
           Sent From: <span className="font-light">Brazil, South America</span>
         </p>
-        <p className="font-semibold">
-          Size: <span className="font-light">Small</span>
-        </p>
+        {selectedVariant?.selectedOptions[0]?.value && (
+          <p className="font-semibold">
+            Size:{" "}
+            <span className="font-light">
+              {selectedVariant?.selectedOptions[0].value}
+            </span>
+          </p>
+        )}
         <div className="grid grid-cols-5 gap-2 mt-2 mb-3">
-          {product.variants.map((variant) => (
-            <button
-              onClick={() => setSelectedVariant(variant)}
-              key={variant.id}
-              disabled={!variant.availableForSale}
-              className={clsx(
-                `p-1 aspect-square border border-gray-300 text-black font-light text-sm
-                  md:py-0 md:px-0 md:h-10 md:w-full hover:bg-indigo-950 hover:text-white`,
-                {
-                  "bg-indigo-950 text-white":
-                    variant.id === selectedVariant?.id,
-                  "disabled:bg-gray-100 disabled:cursor-not-allowed hover:text-black":
-                    !variant.availableForSale,
-                }
-              )}
-            >
-              {variant.title}
-            </button>
-          ))}
+          {product.variants.map((variant) => {
+            return variant.selectedOptions
+              .filter((item) => item.name === PRODUCT_VARIANT_TYPE.SIZE)
+              .map((item) => {
+                return (
+                  <button
+                    onClick={() => setSelectedVariant(variant)}
+                    key={item.value}
+                    disabled={!variant.availableForSale}
+                    className={clsx(
+                      `p-1 aspect-square border border-gray-300 text-black font-light text-sm
+                        md:py-0 md:px-0 md:h-10 md:w-full hover:bg-indigo-950 hover:text-white`,
+                      {
+                        "bg-indigo-950 text-white":
+                          variant.id === selectedVariant?.id,
+                        "disabled:bg-gray-100 disabled:cursor-not-allowed disabled:hover:text-black":
+                          !variant.availableForSale,
+                      }
+                    )}
+                  >
+                    {item.value}
+                  </button>
+                );
+              });
+          })}
         </div>
 
         <button
           disabled={!selectedVariant}
           type="button"
-          onClick={onClickAddToCart}
+          onClick={handleOnClickAddToCart}
           className="
             w-full  bg-indigo-950 text-white p-3 uppercase hover:text-indigo-950 hover:bg-white border border-indigo-950
             disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-50 disabled:hover:text-white"

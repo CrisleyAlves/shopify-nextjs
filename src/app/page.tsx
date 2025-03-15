@@ -1,11 +1,12 @@
 import React from "react";
 
-import Banner from "@/ui/Banner";
 import { getProducts } from "@/lib/shopify/api/product";
 import { SORT_KEYS } from "@/lib/shopify/constants";
 import { getCollections } from "@/lib/shopify/api/collection";
-import CollectionBanners from "@/ui/CollectionBanners";
-import { ProductList } from "@/ui/ProductCard";
+
+import CollectionBanners from "@/ui/shared/CollectionBanners";
+import ProductList from "@/ui/shared/ProductList";
+import Banner from "@/ui/shared/Banner";
 
 export const metadata = {
   title: "CLOTHES | Store",

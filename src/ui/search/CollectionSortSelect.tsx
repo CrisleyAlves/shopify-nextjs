@@ -1,10 +1,11 @@
 "use client";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+
 import { sorting } from "@/lib/shopify/constants";
 import { buildSortingParams } from "@/lib/shopify/utils/navigation";
 
-const SortSelect = () => {
+export default function CollectionSortSelect() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -29,6 +30,4 @@ const SortSelect = () => {
       ))}
     </select>
   );
-};
-
-export default SortSelect;
+}

@@ -1,5 +1,3 @@
-import React from "react";
-
 const GuaranteeStatement = (): React.JSX.Element => {
   return (
     <div className="mb-5">

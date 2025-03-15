@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getCollectionProducts } from "@/lib/shopify/api/collection";
+
 import { SORT_KEYS } from "@/lib/shopify/constants";
-import { ProductList } from "@/ui/ProductCard";
+import { getCollectionProducts } from "@/lib/shopify/api/collection";
+
+import CollectionsContainer from "@/ui/collections/CollectionsContainer";
 
 export async function generateMetadata({
   params,
@@ -38,12 +40,9 @@ export default async function Page({
   if (!collection.products.length) return notFound();
 
   return (
-    <div>
-      <h2 className="text-5xl font-light tex capitalize text-center">
-        {collectionName}
-      </h2>
-
-      <ProductList products={collection.products} />
-    </div>
+    <CollectionsContainer
+      collectionName={collectionName}
+      products={collection.products}
+    />
   );
 }

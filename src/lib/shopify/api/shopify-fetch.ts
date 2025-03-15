@@ -1,4 +1,4 @@
-import { ENDPOINT, STOREFRONT_KEY } from "../constants";
+import { STOREFRONT_GRAPHQL_ENDPOINT, STOREFRONT_KEY } from "../constants";
 import { isShopifyError } from "../utils/type-guards";
 
 type ExtractVariables<T> = T extends { variables: object }
@@ -19,7 +19,7 @@ export async function shopifyFetch<T>({
   variables?: ExtractVariables<T>;
 }): Promise<{ status: number; body: T } | never> {
   try {
-    const result = await fetch(ENDPOINT, {
+    const result = await fetch(STOREFRONT_GRAPHQL_ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

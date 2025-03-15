@@ -23,7 +23,7 @@ export function CartProvider({
 }: {
   children: React.ReactNode;
   shopifyCart: Cart | undefined;
-}): ReactElement<any, any> {
+}): ReactElement {
   const [cart, setCart] = useState<Cart | undefined>(shopifyCart);
 
   const updateShopifyCart = (payload: Cart) => setCart(payload);

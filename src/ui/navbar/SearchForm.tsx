@@ -1,11 +1,12 @@
 "use client";
+
 import { FormEventHandler } from "react";
 
-const SearchForm = ({
+export default function SearchForm({
   onSubmitSearchForm,
 }: {
   onSubmitSearchForm: FormEventHandler<HTMLFormElement>;
-}) => {
+}) {
   return (
     <form
       onSubmit={onSubmitSearchForm}
@@ -21,6 +22,4 @@ const SearchForm = ({
       <button className="font-light text-base ml-2">search</button>
     </form>
   );
-};
-
-export default SearchForm;
+}

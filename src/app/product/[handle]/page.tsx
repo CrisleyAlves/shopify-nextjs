@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
+
 import { getProduct, getProducts } from "@/lib/shopify/api/product";
-import { ProductList } from "@/ui/ProductCard";
-import ProductDetail from "@/ui/ProductDetail";
+
+import ProductDetailContainer from "@/ui/product-detail/ProductDetailContainer";
 
 export async function generateMetadata({
   params,
@@ -47,14 +48,5 @@ export default async function Page({
     query: "",
   });
 
-  return (
-    <>
-      <ProductDetail product={product} />
-
-      <ProductList
-        title="Recommended for you"
-        products={recommended.slice(0, 4)}
-      />
-    </>
-  );
+  return <ProductDetailContainer product={product} recommended={recommended} />;
 }
