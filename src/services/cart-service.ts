@@ -22,7 +22,7 @@ export async function addItemToCart(selectedVariantId: string) {
   const cartId = await getCartIdFromCookies();
 
   if (!cartId || !selectedVariantId) {
-    return new Error("Error adding item to cart");
+    return new Error("Missing cartId or selectedVariantId");
   }
 
   try {
@@ -80,6 +80,10 @@ export async function updateItemQuantity(payload: {
   }
 }
 
+/**
+ * @todo rework on redirectToCheckout later, need to confirm behavior
+ *
+ */
 export async function redirectToCheckout() {
   const cartId = await getCartIdFromCookies();
 
