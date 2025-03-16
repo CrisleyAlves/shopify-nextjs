@@ -6,7 +6,9 @@ import { getCartIdFromCookies } from "@/services/cart-service";
 import NavbarContainer from "@/ui/navbar/NavbarContainer";
 import FooterContainer from "@/ui/footer/FooterContainer";
 import { getCart } from "@/lib/shopify/api/cart";
+
 import Loader from "@/components/Loader";
+import Notification from "@/components/Notification";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,6 +28,7 @@ export default async function RootLayout({
       <body className={`${outfit.className} antialiased flex flex-col flex-1`}>
         <AppProviders shopifyCart={cart}>
           <Loader />
+          <Notification />
           <NavbarContainer />
           <div className="min-h-[100vh]">{children}</div>
           <FooterContainer />

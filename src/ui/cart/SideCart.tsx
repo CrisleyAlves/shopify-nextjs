@@ -3,6 +3,7 @@
 import clsx from "clsx";
 import { MouseEventHandler, useEffect } from "react";
 
+import { MESSAGES, NOTIFICATION_TYPES } from "@/constants";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
 import { CartItem as CartItemType } from "@/lib/shopify/cart/types";
@@ -21,7 +22,7 @@ export default function SideCart({
   onClickCloseIcon: MouseEventHandler<HTMLButtonElement>;
 }) {
   const { cart, isEmpty, updateShopifyCart } = useCart();
-  const { setShowLoader } = useUI();
+  const { setShowLoader, handleNotification } = useUI();
 
   useEffect(() => {
     if (!cart) {
@@ -29,34 +30,58 @@ export default function SideCart({
     }
   }, [cart]);
 
-  /**
-   * @todo try/catch Crisley, try/catch
-   *
-   */
   const onClickIncreaseItem = async (item: CartItemType) => {
-    setShowLoader(true);
-    const shopifyCart = await updateItemQuantity({
-      merchandiseId: item.merchandise.id,
-      quantity: item.quantity + 1,
-    });
+    try {
+      setShowLoader(true);
+      const shopifyCart = await updateItemQuantity({
+        merchandiseId: item.merchandise.id,
+        quantity: item.quantity + 1,
+      });
 
-    updateShopifyCart(shopifyCart);
-    setShowLoader(false);
+      updateShopifyCart(shopifyCart);
+      handleNotification({
+        type: NOTIFICATION_TYPES.SUCCESS,
+        message: MESSAGES.SUCCESS.INCREASE_QUANTITY,
+        visible: true,
+      });
+    } catch (error) {
+      handleNotification({
+        type: NOTIFICATION_TYPES.ERROR,
+        message: MESSAGES.ERROR.INCREASE_QUANTITY,
+        visible: true,
+      });
+      console.error("Error increasing item quantity");
+      console.error(error);
+    } finally {
+      setShowLoader(false);
+    }
   };
 
-  /**
-   * @todo try/catch Crisley, try/catch
-   *
-   */
   const onClickDecreaseItem = async (item: CartItemType) => {
-    setShowLoader(true);
-    const shopifyCart = await updateItemQuantity({
-      merchandiseId: item.merchandise.id,
-      quantity: item.quantity + -1,
-    });
+    try {
+      setShowLoader(true);
+      const shopifyCart = await updateItemQuantity({
+        merchandiseId: item.merchandise.id,
+        quantity: item.quantity + -1,
+      });
 
-    updateShopifyCart(shopifyCart);
-    setShowLoader(false);
+      updateShopifyCart(shopifyCart);
+      handleNotification({
+        type: NOTIFICATION_TYPES.SUCCESS,
+        message: MESSAGES.SUCCESS.DECREASE_QUANTITY,
+        visible: true,
+      });
+    } catch (error) {
+      handleNotification({
+        type: NOTIFICATION_TYPES.ERROR,
+        message: MESSAGES.ERROR.DECREASE_QUANTITY,
+        visible: true,
+      });
+      console.error("Error decreasing item quantity");
+      console.error(error);
+    } finally {
+      setShowLoader(false);
+    }
   };
 
   const totalText = `Total: (${cart?.totalQuantity}) Item(s)`;
@@ -64,7 +89,7 @@ export default function SideCart({
   return (
     <div
       className={clsx(
-        `fixed top-0 right-0 w-full h-full md:bg-black/70 shadow-xl z-50 transition-transform duration-300 ease-in-out`,
+        `fixed top-0 right-0 w-full h-full md:bg-black/70 shadow-xl z-30 transition-transform duration-300 ease-in-out`,
         {
           "translate-x-[100%] duration-500 ease-in-out": !showCart,
           "translate-x-0": showCart,
