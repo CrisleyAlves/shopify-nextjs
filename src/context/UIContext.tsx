@@ -1,6 +1,18 @@
 "use client";
 import { createContext, useContext, useState } from "react";
 
+type NotificationType = {
+  message?: string;
+  type: "info" | "success" | "warning" | "error";
+  visible: boolean;
+};
+
+const NOTIFICATION_INITIAL_VALUES: NotificationType = {
+  visible: false,
+  message: "",
+  type: "info",
+};
+
 interface UIProviderType {
   showStickyNav: boolean;
   setShowStickyNav: (value: boolean) => void;
@@ -12,6 +24,8 @@ interface UIProviderType {
   setShowSidenav: (value: boolean) => void;
   showLoader: boolean;
   setShowLoader: (value: boolean) => void;
+  handleNotification: (value: NotificationType) => void;
+  notification: NotificationType;
 }
 
 const UIContext = createContext<UIProviderType | undefined>(undefined);
@@ -22,6 +36,20 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
   const [showCart, setShowCart] = useState(false);
   const [showSidenav, setShowSidenav] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [notification, setNotification] = useState<NotificationType>(
+    NOTIFICATION_INITIAL_VALUES
+  );
+
+  const handleNotification = (value: NotificationType) => {
+    setNotification({ ...value, visible: true });
+
+    setTimeout(() => {
+      setNotification((prev) => ({
+        ...prev,
+        visible: false,
+      }));
+    }, 3000);
+  };
 
   return (
     <UIContext.Provider
@@ -36,6 +64,8 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
         setShowSidenav,
         showLoader,
         setShowLoader,
+        notification,
+        handleNotification,
       }}
     >
       {children}
