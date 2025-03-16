@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { outfit } from "@/fonts";
 import "./globals.css";
+import { AppProviders } from "@/context/AppProviders";
+import { getCartIdFromCookies } from "@/services/cart-service";
 import NavbarContainer from "@/ui/navbar/NavbarContainer";
 import FooterContainer from "@/ui/footer/FooterContainer";
 import { getCart } from "@/lib/shopify/api/cart";
-import { CartProvider } from "@/state/cart/CartContext";
-import { getCartIdFromCookies } from "@/state/cart/actions";
+import Loader from "@/components/Loader";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,11 +24,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.className} antialiased flex flex-col flex-1`}>
-        <CartProvider shopifyCart={cart}>
+        <AppProviders shopifyCart={cart}>
+          <Loader />
           <NavbarContainer />
           <div className="min-h-[100vh]">{children}</div>
           <FooterContainer />
-        </CartProvider>
+        </AppProviders>
       </body>
     </html>
   );

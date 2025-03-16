@@ -2,12 +2,13 @@
 
 import clsx from "clsx";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 
+import { useCart } from "@/context/CartContext";
+import { useUI } from "@/context/UIContext";
 import { Menu } from "@/lib/shopify/menu/types";
-import { useCart } from "@/state/cart/CartContext";
 import { buildQueryStringParams } from "@/lib/shopify/utils/navigation";
 import { SEARCH_ROUTE } from "@/lib/shopify/constants";
 import SideCart from "@/ui/cart/SideCart";
@@ -20,12 +21,18 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const { totalQuantity } = useCart();
+  const {
+    showStickyNav,
+    setShowSidenav,
+    setShowSearchForm,
+    setShowCart,
+    setShowStickyNav,
+    showCart,
+    showSearchForm,
+    showSidenav,
+  } = useUI();
 
-  const [showStickyNav, setShowStickyNav] = useState(false);
-  const [showSearchForm, setShowSearchForm] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-  const [showSidenav, setShowSidenav] = useState(false);
+  const { totalQuantity } = useCart();
 
   useEffect(() => {
     window.addEventListener("scroll", stickNavbar);
@@ -39,23 +46,29 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
     if (showSidenav) {
       setShowSidenav(false);
     }
+
+    if (showSearchForm) {
+      setShowSearchForm(false);
+    }
   }, [pathname]);
 
-  function onSubmitSearchForm(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  const onSubmitSearchForm = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const val = e.target as HTMLFormElement;
-    const search = val.search as HTMLInputElement;
+      const val = e.target as HTMLFormElement;
+      const search = val.search as HTMLInputElement;
 
-    const url = buildQueryStringParams(
-      SEARCH_ROUTE,
-      searchParams,
-      search.value
-    );
+      const url = buildQueryStringParams(
+        SEARCH_ROUTE,
+        searchParams,
+        search.value
+      );
 
-    setShowSearchForm(false);
-    router.push(url);
-  }
+      router.push(url);
+    },
+    [router, searchParams]
+  );
 
   const stickNavbar = () => {
     if (window !== undefined) {

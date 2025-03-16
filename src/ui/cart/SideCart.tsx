@@ -3,10 +3,15 @@
 import clsx from "clsx";
 import { MouseEventHandler, useEffect } from "react";
 
-import { useCart } from "@/state/cart/CartContext";
-import { createCartAndSetCookie } from "@/state/cart/actions";
+import { useCart } from "@/context/CartContext";
+import { useUI } from "@/context/UIContext";
+import { CartItem as CartItemType } from "@/lib/shopify/cart/types";
+import {
+  createCartAndSetCookie,
+  updateItemQuantity,
+} from "@/services/cart-service";
 
-import CartItem from "./CartItem";
+import CartItemUI from "./CartItemUI";
 
 export default function SideCart({
   showCart = false,
@@ -15,13 +20,44 @@ export default function SideCart({
   showCart: boolean;
   onClickCloseIcon: MouseEventHandler<HTMLButtonElement>;
 }) {
-  const { cart, isEmpty } = useCart();
+  const { cart, isEmpty, updateShopifyCart } = useCart();
+  const { setShowLoader } = useUI();
 
   useEffect(() => {
     if (!cart) {
       createCartAndSetCookie();
     }
   }, [cart]);
+
+  /**
+   * @todo try/catch Crisley, try/catch
+   *
+   */
+  const onClickIncreaseItem = async (item: CartItemType) => {
+    setShowLoader(true);
+    const shopifyCart = await updateItemQuantity({
+      merchandiseId: item.merchandise.id,
+      quantity: item.quantity + 1,
+    });
+
+    updateShopifyCart(shopifyCart);
+    setShowLoader(false);
+  };
+
+  /**
+   * @todo try/catch Crisley, try/catch
+   *
+   */
+  const onClickDecreaseItem = async (item: CartItemType) => {
+    setShowLoader(true);
+    const shopifyCart = await updateItemQuantity({
+      merchandiseId: item.merchandise.id,
+      quantity: item.quantity + -1,
+    });
+
+    updateShopifyCart(shopifyCart);
+    setShowLoader(false);
+  };
 
   const totalText = `Total: (${cart?.totalQuantity}) Item(s)`;
 
@@ -79,7 +115,12 @@ export default function SideCart({
 
             {cart?.lines.map((cart) => (
               <div key={cart.id} className="mb-5">
-                <CartItem key={cart.id} item={cart} />
+                <CartItemUI
+                  key={cart.id}
+                  item={cart}
+                  onClickDecreaseItemAction={onClickDecreaseItem}
+                  onClickIncreaseItemAction={onClickIncreaseItem}
+                />
               </div>
             ))}
           </div>

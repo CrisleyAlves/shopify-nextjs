@@ -1,7 +1,9 @@
 "use client";
+import { useEffect } from "react";
 import { Product, ProductVariant } from "@/lib/shopify/product/types";
-import { useCart } from "@/state/cart/CartContext";
-import { addItemToCart } from "@/state/cart/actions";
+import { addItemToCart } from "@/services/cart-service";
+import { useCart } from "@/context/CartContext";
+import { useUI } from "@/context/UIContext";
 
 import ProductList from "../shared/ProductList";
 import ProductDetailUI from "./ProductDetailUI";
@@ -14,6 +16,11 @@ export default function ProductDetailContainer({
   recommended: Product[];
 }) {
   const { updateShopifyCart } = useCart();
+  const { setShowCart, setShowLoader } = useUI();
+
+  useEffect(() => {
+    setShowCart(false);
+  }, []);
 
   /**
    * @todo add notification for success/error
@@ -22,17 +29,22 @@ export default function ProductDetailContainer({
     if (!selectedVariant) return;
 
     try {
+      setShowLoader(true);
       const shopifyCart = await addItemToCart(selectedVariant.id);
       updateShopifyCart(shopifyCart);
     } catch (error) {
       console.error("Error adding item to cart");
-      console.error(error);
+    } finally {
+      setShowLoader(false);
     }
   };
 
   return (
     <>
-      <ProductDetailUI product={product} onClickAddToCart={onClickAddToCart} />
+      <ProductDetailUI
+        product={product}
+        onClickAddToCartAction={onClickAddToCart}
+      />
 
       <ProductList
         title="Recommended for you"

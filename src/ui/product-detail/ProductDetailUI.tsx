@@ -11,15 +11,17 @@ import GuaranteeStatement from "@/ui/shared/GuaranteeStatement";
 
 export const ProductDetail = ({
   product,
-  onClickAddToCart,
+  onClickAddToCartAction,
 }: {
   product: Product;
-  onClickAddToCart: Function;
+  onClickAddToCartAction: (selectedVariant: ProductVariant) => void;
 }) => {
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant>();
 
   const handleOnClickAddToCart = () => {
-    onClickAddToCart(selectedVariant);
+    if (!selectedVariant) return;
+
+    onClickAddToCartAction(selectedVariant);
     setSelectedVariant(undefined);
   };
 
@@ -33,7 +35,7 @@ export const ProductDetail = ({
     >
       <section className="w-full h-[50vh] md:h-[600px]">
         <Image
-          priority
+          priority={true}
           src={product.featuredImage.url}
           alt={product.featuredImage.altText}
           width={0}

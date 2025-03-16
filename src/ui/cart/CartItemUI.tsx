@@ -1,30 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { CartItem as CartItemType } from "@/lib/shopify/cart/types";
-import { updateItemQuantity } from "@/state/cart/actions";
-import { useCart } from "@/state/cart/CartContext";
 
-export default function CartItem({ item }: { item: CartItemType }) {
-  const { updateShopifyCart } = useCart();
-
-  const onClickIncreaseItem = async () => {
-    const shopifyCart = await updateItemQuantity({
-      merchandiseId: item.merchandise.id,
-      quantity: item.quantity + 1,
-    });
-
-    updateShopifyCart(shopifyCart);
-  };
-
-  const onClickDecreaseItem = async () => {
-    const shopifyCart = await updateItemQuantity({
-      merchandiseId: item.merchandise.id,
-      quantity: item.quantity + -1,
-    });
-
-    updateShopifyCart(shopifyCart);
-  };
-
+export default function CartItem({
+  item,
+  onClickIncreaseItemAction,
+  onClickDecreaseItemAction,
+}: {
+  item: CartItemType;
+  onClickIncreaseItemAction: (item: CartItemType) => void;
+  onClickDecreaseItemAction: (item: CartItemType) => void;
+}) {
   return (
     <div
       className="
@@ -33,17 +20,19 @@ export default function CartItem({ item }: { item: CartItemType }) {
         "
     >
       <div className="col-span-3 w-full flex">
-        <Image
-          priority
-          src={item.merchandise.product.featuredImage.url}
-          alt={item.merchandise.product.featuredImage.altText}
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="
+        <Link href={`/product/${item.merchandise.product.handle}`}>
+          <Image
+            priority={true}
+            src={item.merchandise.product.featuredImage.url}
+            alt={item.merchandise.product.featuredImage.altText}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="
                   w-20 h-auto object-fill rounded-sm mr-3
                   md:w-40 md:h-40"
-        />
+          />
+        </Link>
         <div className="flex flex-col">
           <p className="text-sm font-semibold text-black truncate block capitalize">
             {item.merchandise.product.title}
@@ -67,7 +56,7 @@ export default function CartItem({ item }: { item: CartItemType }) {
         className="
           flex flex-row items-center justify-center  h-full md:items-start md:pt-10"
       >
-        <button onClick={onClickDecreaseItem}>
+        <button onClick={() => onClickDecreaseItemAction(item)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -81,7 +70,7 @@ export default function CartItem({ item }: { item: CartItemType }) {
         </button>
 
         <span className="ml-2 mr-2">{item.quantity}</span>
-        <button onClick={onClickIncreaseItem}>
+        <button onClick={() => onClickIncreaseItemAction(item)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
