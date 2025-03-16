@@ -45,7 +45,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         href={`/product/${product.handle}`}
       >
         <Image
-          priority
+          priority={true}
           src={product.featuredImage.url}
           alt={product.featuredImage.altText}
           width={0}

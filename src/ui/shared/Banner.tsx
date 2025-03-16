@@ -5,7 +5,7 @@ const Banner = (): React.ReactElement => {
   return (
     <Link href="/collections/sales" className="w-full">
       <Image
-        priority
+        priority={true}
         src="/banner.webp"
         alt="Product"
         width={0}

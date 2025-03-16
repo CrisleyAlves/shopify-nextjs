@@ -34,7 +34,7 @@ const CollectionBanners = ({
                 {collection.title}
               </h3>
               <Image
-                priority
+                priority={true}
                 src={collection.image.url}
                 alt={`${collection.title} Collection`}
                 width={0}
