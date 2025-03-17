@@ -8,6 +8,7 @@ export const MESSAGES = {
     ADD_TO_CART: "Item added to cart",
     INCREASE_QUANTITY: "Item quantity increased",
     DECREASE_QUANTITY: "Item quantity decreased",
+    ITEM_REMOVED_FROM_CART: "Item removed from cart",
   },
 } as const;
 

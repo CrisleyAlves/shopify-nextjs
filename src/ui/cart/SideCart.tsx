@@ -66,9 +66,14 @@ export default function SideCart({
       });
 
       updateShopifyCart(shopifyCart);
+
+      const decreaseMessage =
+        item.quantity === 1
+          ? MESSAGES.SUCCESS.ITEM_REMOVED_FROM_CART
+          : MESSAGES.SUCCESS.DECREASE_QUANTITY;
       handleNotification({
         type: NOTIFICATION_TYPES.SUCCESS,
-        message: MESSAGES.SUCCESS.DECREASE_QUANTITY,
+        message: decreaseMessage,
         visible: true,
       });
     } catch (error) {

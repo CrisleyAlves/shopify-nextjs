@@ -12,8 +12,14 @@ export default function Notification() {
     error: "bg-red-100 text-red-800 border-red-300",
   }[notification.type];
 
+  if (!notification.visible) return "";
+
   return (
-    <div className="fixed top-4 right-4 z-40">
+    <div
+      className="
+      fixed flex items-center w-full z-40 justify-center mt-3
+      md:justify-end md:pr-2"
+    >
       <div
         className={`py-2 px-10 border-l-4 rounded-md ${bgColor} shadow-md max-w-sm font-light
         transition-all duration-500 transform ${
