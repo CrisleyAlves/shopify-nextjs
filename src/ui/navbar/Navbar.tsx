@@ -112,7 +112,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
         </button>
 
         <h1 className="hidden font-light md:block uppercase">
-          <Link href="/">Clothes</Link>
+          <Link href="/">BEYOND</Link>
         </h1>
 
         <nav className="hidden md:block">
@@ -133,7 +133,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
         </nav>
 
         <h1 className="font-light text-2xl text-center md:hidden uppercase">
-          <Link href="/">Clothes</Link>
+          <Link href="/">BEYOND</Link>
         </h1>
 
         <div className="flex flex-row justify-end">

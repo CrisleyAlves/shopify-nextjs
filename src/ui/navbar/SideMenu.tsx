@@ -35,7 +35,7 @@ export default function SideMenu({
       >
         <div className="flex flex-row justify-between items-center">
           <h1 className="font-light text-3xl uppercase">
-            <Link href="/">Clothes</Link>
+            <Link href="/">BEYOND</Link>
           </h1>
           <button onClick={onClickCloseIcon}>
             <svg

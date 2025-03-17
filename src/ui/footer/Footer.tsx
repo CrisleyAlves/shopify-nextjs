@@ -10,7 +10,7 @@ const Footer = ({ footerMenu }: { footerMenu: Menu[] }) => {
           container text-black p-5"
       >
         <h2 className="font-light uppercase">
-          <Link href="/">Clothes</Link>
+          <Link href="/">BEYOND</Link>
         </h2>
 
         <ul className="flex flex-row justify-end col-span-3 items-center">
