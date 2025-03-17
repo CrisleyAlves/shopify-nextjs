@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 
-import { getProduct, getProducts } from "@/lib/shopify/api/product";
+import {
+  getProduct,
+  getProductRecommendations,
+} from "@/lib/shopify/api/product";
 
 import ProductDetailContainer from "@/ui/product-detail/ProductDetailContainer";
 
@@ -39,14 +42,6 @@ export default async function Page({
   const product = await getProduct((await params).handle);
   if (!product) return notFound();
 
-  /**
-   * @todo read docs to understand recommended usage
-   */
-  const recommended = await getProducts({
-    sortKey: "RELEVANCE",
-    reverse: false,
-    query: "",
-  });
-
+  const recommended = await getProductRecommendations(product.id);
   return <ProductDetailContainer product={product} recommended={recommended} />;
 }
