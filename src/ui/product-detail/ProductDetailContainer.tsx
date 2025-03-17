@@ -7,7 +7,7 @@ import { addItemToCart } from "@/services/cart-service";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
 
-import ProductList from "../shared/ProductList";
+import ProductList from "@/ui/shared/ProductList";
 import ProductDetailUI from "./ProductDetailUI";
 
 export default function ProductDetailContainer({
@@ -24,9 +24,6 @@ export default function ProductDetailContainer({
     setShowCart(false);
   }, []);
 
-  /**
-   * @todo add notification for success/error
-   */
   const onClickAddToCart = async (selectedVariant: ProductVariant) => {
     if (!selectedVariant) return;
 

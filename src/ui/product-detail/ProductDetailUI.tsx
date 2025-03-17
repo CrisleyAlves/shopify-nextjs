@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import clsx from "clsx";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import { PRODUCT_VARIANT_TYPE } from "@/lib/shopify/constants";
 import { Product, ProductVariant } from "@/lib/shopify/product/types";
@@ -9,31 +9,34 @@ import { Product, ProductVariant } from "@/lib/shopify/product/types";
 import Prose from "@/components/prose";
 import GuaranteeStatement from "@/ui/shared/GuaranteeStatement";
 
-export const ProductDetail = ({
+export default function ProductDetail({
   product,
   onClickAddToCartAction,
 }: {
   product: Product;
   onClickAddToCartAction: (selectedVariant: ProductVariant) => void;
-}) => {
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>();
+}) {
+  const [selectedVariant, setSelectedVariant] = useState<
+    ProductVariant | undefined
+  >(undefined);
 
-  const handleOnClickAddToCart = () => {
+  const handleOnClickAddToCart = useCallback(() => {
     if (!selectedVariant) return;
 
     onClickAddToCartAction(selectedVariant);
     setSelectedVariant(undefined);
-  };
+  }, [selectedVariant, onClickAddToCartAction]);
 
   return (
     <div
       className="
-          grid grid-cols-1
-          md:grid-cols-2 md:gap-x-10 md:mb-10 md:mt-5
-          lg:gap-x-20
-        "
+        grid grid-cols-1
+        md:gap-x-10 md:mb-10 md:mt-5
+        xl:grid-cols-2
+        xl:gap-x-20
+      "
     >
-      <section className="w-full h-[50vh] md:h-[600px]">
+      <section className="w-full h-[50vh] md:h-auto md:mb-3 xl:h-[600px]">
         <Image
           priority={true}
           src={product.featuredImage.url}
@@ -101,8 +104,9 @@ export const ProductDetail = ({
           type="button"
           onClick={handleOnClickAddToCart}
           className="
-            w-full  bg-indigo-950 text-white p-3 uppercase hover:text-indigo-950 hover:bg-white border border-indigo-950
-            disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-50 disabled:hover:text-white"
+            w-full bg-indigo-950 text-white p-3 uppercase hover:text-indigo-950 hover:bg-white border border-indigo-950
+            disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-50 disabled:hover:text-white
+          "
         >
           add to cart
         </button>
@@ -143,7 +147,7 @@ export const ProductDetail = ({
             <div
               className="
                 peer-checked/description:max-h-full peer-checked/description:opacity-100 peer-checked/description:translate-y-0 max-h-0 opacity-0 -translate-y-2 overflow-hidden transition-all duration-500 ease-in-out
-                "
+              "
             >
               <Prose html={product.descriptionHtml} />
             </div>
@@ -154,6 +158,4 @@ export const ProductDetail = ({
       </section>
     </div>
   );
-};
-
-export default ProductDetail;
+}

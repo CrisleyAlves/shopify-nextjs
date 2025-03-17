@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { MouseEventHandler, useEffect } from "react";
+import { MouseEventHandler, useCallback, useEffect } from "react";
 
 import { MESSAGES, NOTIFICATION_TYPES } from "@/constants";
 import { useCart } from "@/context/CartContext";
@@ -30,64 +30,70 @@ export default function SideCart({
     }
   }, [cart]);
 
-  const onClickIncreaseItem = async (item: CartItemType) => {
-    try {
-      setShowLoader(true);
-      const shopifyCart = await updateItemQuantity({
-        merchandiseId: item.merchandise.id,
-        quantity: item.quantity + 1,
-      });
+  const onClickIncreaseItem = useCallback(
+    async (item: CartItemType) => {
+      try {
+        setShowLoader(true);
+        const shopifyCart = await updateItemQuantity({
+          merchandiseId: item.merchandise.id,
+          quantity: item.quantity + 1,
+        });
 
-      updateShopifyCart(shopifyCart);
-      handleNotification({
-        type: NOTIFICATION_TYPES.SUCCESS,
-        message: MESSAGES.SUCCESS.INCREASE_QUANTITY,
-        visible: true,
-      });
-    } catch (error) {
-      handleNotification({
-        type: NOTIFICATION_TYPES.ERROR,
-        message: MESSAGES.ERROR.INCREASE_QUANTITY,
-        visible: true,
-      });
-      console.error("Error increasing item quantity");
-      console.error(error);
-    } finally {
-      setShowLoader(false);
-    }
-  };
+        updateShopifyCart(shopifyCart);
+        handleNotification({
+          type: NOTIFICATION_TYPES.SUCCESS,
+          message: MESSAGES.SUCCESS.INCREASE_QUANTITY,
+          visible: true,
+        });
+      } catch (error) {
+        handleNotification({
+          type: NOTIFICATION_TYPES.ERROR,
+          message: MESSAGES.ERROR.INCREASE_QUANTITY,
+          visible: true,
+        });
+        console.error("Error increasing item quantity");
+        console.error(error);
+      } finally {
+        setShowLoader(false);
+      }
+    },
+    [setShowLoader, updateShopifyCart, handleNotification]
+  );
 
-  const onClickDecreaseItem = async (item: CartItemType) => {
-    try {
-      setShowLoader(true);
-      const shopifyCart = await updateItemQuantity({
-        merchandiseId: item.merchandise.id,
-        quantity: item.quantity + -1,
-      });
+  const onClickDecreaseItem = useCallback(
+    async (item: CartItemType) => {
+      try {
+        setShowLoader(true);
+        const shopifyCart = await updateItemQuantity({
+          merchandiseId: item.merchandise.id,
+          quantity: item.quantity - 1,
+        });
 
-      updateShopifyCart(shopifyCart);
+        updateShopifyCart(shopifyCart);
 
-      const decreaseMessage =
-        item.quantity === 1
-          ? MESSAGES.SUCCESS.ITEM_REMOVED_FROM_CART
-          : MESSAGES.SUCCESS.DECREASE_QUANTITY;
-      handleNotification({
-        type: NOTIFICATION_TYPES.SUCCESS,
-        message: decreaseMessage,
-        visible: true,
-      });
-    } catch (error) {
-      handleNotification({
-        type: NOTIFICATION_TYPES.ERROR,
-        message: MESSAGES.ERROR.DECREASE_QUANTITY,
-        visible: true,
-      });
-      console.error("Error decreasing item quantity");
-      console.error(error);
-    } finally {
-      setShowLoader(false);
-    }
-  };
+        const decreaseMessage =
+          item.quantity === 1
+            ? MESSAGES.SUCCESS.ITEM_REMOVED_FROM_CART
+            : MESSAGES.SUCCESS.DECREASE_QUANTITY;
+        handleNotification({
+          type: NOTIFICATION_TYPES.SUCCESS,
+          message: decreaseMessage,
+          visible: true,
+        });
+      } catch (error) {
+        handleNotification({
+          type: NOTIFICATION_TYPES.ERROR,
+          message: MESSAGES.ERROR.DECREASE_QUANTITY,
+          visible: true,
+        });
+        console.error("Error decreasing item quantity");
+        console.error(error);
+      } finally {
+        setShowLoader(false);
+      }
+    },
+    [setShowLoader, updateShopifyCart, handleNotification]
+  );
 
   const totalText = `Total: (${cart?.totalQuantity}) Item(s)`;
 
@@ -139,9 +145,7 @@ export default function SideCart({
           md:min-h-[65vh] md:max-h-[65vh]
           "
           >
-            {!isEmpty && (
-              <p className="text-center font-light">Cart is empty</p>
-            )}
+            {isEmpty && <p className="text-center font-light">Cart is empty</p>}
 
             {cart?.lines.map((cart) => (
               <div key={cart.id} className="mb-5">
@@ -154,7 +158,7 @@ export default function SideCart({
               </div>
             ))}
           </div>
-          {isEmpty && (
+          {!isEmpty && (
             <div className="w-full right-0 p-5 fixed bottom-0 md:relative">
               <div className="flex justify-between">
                 <span className="text-right font-semibold">{totalText}</span>
