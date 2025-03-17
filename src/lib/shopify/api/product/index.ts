@@ -33,6 +33,7 @@ export async function getProductRecommendations(
     variables: {
       productId,
     },
+    cache: "no-cache",
   });
 
   return reshapeProducts(res.body.data.productRecommendations);
