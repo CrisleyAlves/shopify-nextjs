@@ -33,7 +33,7 @@ export function CartProvider({
     () => ({
       cart,
       updateShopifyCart,
-      isEmpty: !!cart?.lines?.length,
+      isEmpty: (cart?.lines?.length || 0) === 0,
       totalQuantity: cart?.totalQuantity || 0,
     }),
     [cart]
