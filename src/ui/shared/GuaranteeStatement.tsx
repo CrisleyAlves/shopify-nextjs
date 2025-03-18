@@ -1,7 +1,7 @@
-const GuaranteeStatement = (): React.JSX.Element => {
+export default function GuaranteeStatement(): React.JSX.Element {
   return (
     <div className="mb-5">
-      <h3 className="font-semibold text-md mb-4 z-10 flex flex-row items-center">
+      <h3 className="font-normal text-md mb-4 z-10 flex flex-row items-center">
         Guarantee Statement{" "}
         <span className="ml-1 text-green-700">
           <svg
@@ -42,6 +42,4 @@ const GuaranteeStatement = (): React.JSX.Element => {
       </div>
     </div>
   );
-};
-
-export default GuaranteeStatement;
+}

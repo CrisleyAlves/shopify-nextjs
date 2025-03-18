@@ -49,19 +49,20 @@ export default function ProductDetail({
       </section>
       <section className="w-full">
         <div className="mt-5 md:mt-0 flex justify-between items-center">
-          <h2 className="font-semibold md:text-2xl">{product.title}</h2>
-          <span className="text-right text-green-700 font-semibold">
-            <span className="line-through text-red-400">
+          <h2 className="font-light md:text-2xl">{product.title}</h2>
+          <p className="text-right text-green-700 font-light">
+            <span className="line-through text-red-400 mr-1">
               100.00 {product.priceRange.maxVariantPrice.currencyCode}
             </span>{" "}
             {product.priceRange.maxVariantPrice.amount}{" "}
             <span className="text-sm font-light">
               {product.priceRange.maxVariantPrice.currencyCode}
             </span>
-          </span>
+          </p>
         </div>
-        <p className="font-semibold mt-3 ">
-          Sent From: <span className="font-light">Brazil, South America</span>
+        <p className="font-light mt-3 ">
+          Sent From:{" "}
+          <span className="font-extralight">Brazil, South America</span>
         </p>
         {selectedVariant?.selectedOptions[0]?.value && (
           <p className="font-semibold">
@@ -126,13 +127,13 @@ export default function ProductDetail({
               htmlFor="description"
               className="flex items-center cursor-pointer flex-row justify-between mb-4 z-10"
             >
-              <h3 className="font-semibold text-md">Description</h3>
+              <h3 className="font-normal text-md">Description</h3>
               <span className="">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth="1.5"
+                  strokeWidth="1"
                   stroke="currentColor"
                   className="size-5"
                 >

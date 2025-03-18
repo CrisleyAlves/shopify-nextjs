@@ -34,17 +34,17 @@ export default function CartItem({
           />
         </Link>
         <div className="flex flex-col">
-          <p className="text-sm font-semibold text-black truncate block capitalize">
+          <p className="text-sm font-light text-black truncate block capitalize">
             {item.merchandise.product.title}
           </p>
-          <p className="font-light text-sm">
+          <p className="font-extralight text-sm">
             {item.merchandise.product.brand.value}
           </p>
-          <p className="font-light text-sm">
+          <p className="font-extralight text-sm">
             {item.merchandise.selectedOptions[0].name}:{" "}
             {item.merchandise.selectedOptions[0].value}
           </p>
-          <p className="text-lg font-semibold text-black cursor-auto my-3">
+          <p className="text-sm font-light text-black cursor-auto my-3">
             {item.merchandise.product.priceRange.maxVariantPrice.amount}{" "}
             <span className="text-sm font-light">
               {item.merchandise.product.priceRange.maxVariantPrice.currencyCode}
@@ -61,7 +61,7 @@ export default function CartItem({
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.5"
+            strokeWidth="1"
             stroke="currentColor"
             className="size-6"
           >
@@ -75,7 +75,7 @@ export default function CartItem({
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.2"
+            strokeWidth="1"
             stroke="currentColor"
             className="size-6"
           >

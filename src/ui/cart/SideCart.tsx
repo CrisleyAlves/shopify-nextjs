@@ -169,7 +169,7 @@ export default function SideCart({
               </div>
               <p className="mb-3 font-thin text-right">free shipping</p>
               <div className="flex justify-between flex-row"></div>
-              <button className="w-full bg-indigo-950 text-white p-3">
+              <button className="w-full bg-indigo-950 hover:text-indigo-950 hover:bg-white border border-indigo-950 text-white p-3">
                 CHECKOUT
               </button>
             </div>

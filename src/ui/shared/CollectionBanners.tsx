@@ -4,14 +4,14 @@ import React from "react";
 
 import { Collection } from "@/lib/shopify/collection/types";
 
-const CollectionBanners = ({
+export default function CollectionBanners({
   collections,
 }: {
   collections: Collection[];
-}): React.ReactElement => {
+}): React.JSX.Element {
   return (
     <section className="container px-5 mt-8">
-      <h2 className="text-3xl font-bold">Collections</h2>
+      <h2 className="text-3xl font-extralight">Collections</h2>
       <ul
         className="
         grid gap-y-4 pt-10 pb-10 grid-cols-2 gap-x-3
@@ -19,17 +19,12 @@ const CollectionBanners = ({
       >
         {collections.map((collection) => (
           <li key={collection.path}>
-            <Link
-              key={collection.path}
-              href={collection.path}
-              className="relative w-full shadow-lg"
-            >
+            <Link href={collection.path} className="relative w-full shadow-lg">
               <h3
                 className="
-            text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-10 rounded-sm
-            p-4
-            md:px-20 md:py-4
-            lg:text-lg lg:px-12"
+                text-center absolute top-1/2 left-1/2 bg-white rounded-sm p-4 font-light
+                md:px-20 md:py-4
+                lg:text-lg lg:px-12"
               >
                 {collection.title}
               </h3>
@@ -48,6 +43,4 @@ const CollectionBanners = ({
       </ul>
     </section>
   );
-};
-
-export default CollectionBanners;
+}

@@ -12,7 +12,7 @@ export default function ProductList({
 }) {
   return (
     <section>
-      {title && <h2 className="text-3xl font-bold">{title}</h2>}
+      {title && <h2 className="text-3xl font-extralight">{title}</h2>}
       <section
         className="
         gap-y-6
@@ -62,25 +62,22 @@ const ProductCard = ({ product }: { product: Product }) => {
           lg:w-full
           "
         >
-          <span className="text-gray-400 mr-3 uppercase text-xs">
+          <span className="text-gray-400 mr-3 uppercase text-xs font-extralight">
             {product.brand.value}
           </span>
-          <p className="text-lg font-bold text-black truncate block capitalize">
+          <p className="text-lg font-light text-black truncate block capitalize">
             {product.title}
           </p>
-          <p className="font-light text-sm h-10 overflow-hidden md:h-auto">
+          <p className="font-extralight text-sm h-10 overflow-hidden md:h-auto">
             {product.description.substring(0, 20)}
           </p>
           <div className="flex items-center">
-            <p className="text-lg font-semibold text-black cursor-auto my-3">
+            <p className="text-lg font-light text-black cursor-auto my-3">
               {product.priceRange.maxVariantPrice.amount}{" "}
               <span className="text-sm font-light">
                 {product.priceRange.maxVariantPrice.currencyCode}
               </span>
             </p>
-            {/* <div>
-              <p className="text-sm text-gray-600 cursor-auto ml-2">$199</p>
-            </div> */}
             <div className="ml-auto">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
