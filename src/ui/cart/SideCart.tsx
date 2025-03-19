@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import { MouseEventHandler, useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { MESSAGES, NOTIFICATION_TYPES } from "@/constants";
 import { useCart } from "@/context/CartContext";
@@ -21,6 +22,7 @@ export default function SideCart({
   showCart: boolean;
   onClickCloseIcon: MouseEventHandler<HTMLButtonElement>;
 }) {
+  const router = useRouter();
   const { cart, isEmpty, updateShopifyCart } = useCart();
   const { setShowLoader, handleNotification } = useUI();
 
@@ -94,6 +96,14 @@ export default function SideCart({
     },
     [setShowLoader, updateShopifyCart, handleNotification]
   );
+
+  const onClickCheckout = useCallback(() => {
+    setShowLoader(true);
+    setTimeout(() => {
+      setShowLoader(false);
+      router.push("/checkout");
+    }, 2000);
+  }, [router]);
 
   const totalText = `Total: (${cart?.totalQuantity}) Item(s)`;
 
@@ -169,7 +179,10 @@ export default function SideCart({
               </div>
               <p className="mb-3 font-thin text-right">free shipping</p>
               <div className="flex justify-between flex-row"></div>
-              <button className="w-full bg-indigo-950 hover:text-indigo-950 hover:bg-white border border-indigo-950 text-white p-3">
+              <button
+                onClick={onClickCheckout}
+                className="w-full bg-indigo-950 hover:text-indigo-950 hover:bg-white border border-indigo-950 text-white p-3"
+              >
                 CHECKOUT
               </button>
             </div>
