@@ -18,3 +18,36 @@ export const NOTIFICATION_TYPES = {
   INFO: "info",
   WARNING: "warning",
 } as const;
+
+export const STEPS = {
+  SHIPPING_ADDRESS: {
+    id: 1,
+    label: "Shipping Address",
+  },
+  PRODUCT_REVIEW: {
+    id: 2,
+    label: "Product Review",
+  },
+  PAYMENT_METHOD: {
+    id: 3,
+    label: "Payment Method",
+  },
+};
+
+export const PAYMENT_OPTIONS = [
+  {
+    id: "credit_card",
+    label: "Credit Card",
+    content: "Credit Card",
+  },
+  {
+    id: "paypal",
+    label: "Paypal",
+    content: "Paypal",
+  },
+  {
+    id: "debt_card",
+    label: "Debt Card",
+    content: "Debt Card",
+  },
+];
