@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import Link from "next/link";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 
@@ -15,8 +15,10 @@ import SideCart from "@/ui/cart/SideCart";
 
 import SearchForm from "./SearchForm";
 import SideMenu from "./SideMenu";
+import BasicNavbar from "./BasicNavbar";
 
 export default function Navbar({ menu }: { menu: Menu[] }) {
+  const [showBasicNavbar, setShowBasicNavbar] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -76,6 +78,15 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
       windowHeight > 64 ? setShowStickyNav(true) : setShowStickyNav(false);
     }
   };
+
+  useEffect(() => {
+    const isCheckout = pathname.includes("checkout");
+    setShowBasicNavbar(isCheckout);
+  }, [pathname]);
+
+  if (showBasicNavbar) {
+    return <BasicNavbar />;
+  }
 
   return (
     <>
