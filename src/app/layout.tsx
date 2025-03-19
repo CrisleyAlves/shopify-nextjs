@@ -24,7 +24,7 @@ export default async function RootLayout({
   const cart = await getCart(cartId);
 
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={`${outfit.className} antialiased flex flex-col flex-1`}>
         <AppProviders shopifyCart={cart}>
           <Loader />
