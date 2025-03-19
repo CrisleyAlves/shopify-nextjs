@@ -24,7 +24,7 @@ export default function CollectionBanners({
                 className="
                 text-center absolute top-1/2 left-1/2 bg-white rounded-sm p-4 font-light
                 md:px-20 md:py-4
-                lg:text-lg lg:px-12"
+                lg:text-lg lg:px-12 z-10 transform -translate-x-1/2 -translate-y-1/2"
               >
                 {collection.title}
               </h3>
