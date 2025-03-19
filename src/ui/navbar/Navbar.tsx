@@ -80,8 +80,9 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
   };
 
   useEffect(() => {
-    const isCheckout = pathname.includes("checkout");
-    setShowBasicNavbar(isCheckout);
+    const showBasicNav =
+      pathname.includes("checkout") || pathname.includes("success");
+    setShowBasicNavbar(showBasicNav);
   }, [pathname]);
 
   if (showBasicNavbar) {

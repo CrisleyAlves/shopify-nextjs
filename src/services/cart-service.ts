@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { TAGS } from "@/lib/shopify/constants";
+import { Cart } from "@/lib/shopify/cart/types";
 import {
   addToCart,
   createCart,
@@ -100,8 +101,9 @@ export async function redirectToCheckout() {
   redirect(cart.checkoutUrl);
 }
 
-export async function createCartAndSetCookie() {
+export async function createCartAndSetCookie(): Promise<Cart> {
   const cart = await createCart();
   const cookie = await cookies();
   cookie.set("cartId", cart.id!);
+  return cart;
 }

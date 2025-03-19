@@ -1,29 +1,35 @@
 "use client";
 import clsx from "clsx";
 import { useEffect, useState, useMemo, useCallback, JSX } from "react";
+import { useRouter } from "next/navigation";
 
 import { PAYMENT_OPTIONS, STEPS } from "@/constants";
-import { useCart } from "@/context/CartContext";
 import { scrollToTop } from "@/ui/utils";
+import { createCartAndSetCookie } from "@/services/cart-service";
+import { useCart } from "@/context/CartContext";
+import { useUI } from "@/context/UIContext";
 
 import Summary from "./Summary";
 import ShippingAddress from "./ShippingAddress";
 import CheckoutItems from "./CheckoutItems";
 
-/**
- *
- * @todo validate if we have items in the cart before rendering
- */
 export default function CheckoutContainer(): JSX.Element {
+  const router = useRouter();
   const [step, setStep] = useState<number>(STEPS.SHIPPING_ADDRESS.id);
   const [selected, setSelected] = useState<string | null>(null);
-  const { cart } = useCart();
+
+  const { cart, updateShopifyCart } = useCart();
+  const { setShowLoader } = useUI();
 
   const paymentOptions = useMemo(() => PAYMENT_OPTIONS, []);
 
   useEffect(() => {
     scrollToTop();
   }, [step]);
+
+  useEffect(() => {
+    return () => setShowLoader(false);
+  }, []);
 
   const handleStepAnimation = useCallback(
     (currentStep: number) =>
@@ -41,6 +47,13 @@ export default function CheckoutContainer(): JSX.Element {
     },
     [step]
   );
+
+  const onCLickFinishOrder = useCallback(async () => {
+    setShowLoader(true);
+    const cart = await createCartAndSetCookie();
+    updateShopifyCart(cart);
+    router.replace("/success");
+  }, [router]);
 
   return (
     <div className="grid grid-cols-5">
@@ -129,7 +142,7 @@ export default function CheckoutContainer(): JSX.Element {
                 </div>
               </section>
               <button
-                onClick={() => setStep(STEPS.PAYMENT_METHOD.id)}
+                onClick={() => onCLickFinishOrder()}
                 disabled={selected === null}
                 type="button"
                 className="

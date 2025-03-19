@@ -24,7 +24,14 @@ export default function SideCart({
 }) {
   const router = useRouter();
   const { cart, isEmpty, updateShopifyCart } = useCart();
-  const { setShowLoader, handleNotification } = useUI();
+  const { setShowLoader, handleNotification, setShowCart } = useUI();
+
+  useEffect(() => {
+    return () => {
+      setShowCart(false);
+      setShowLoader(false);
+    };
+  }, []);
 
   useEffect(() => {
     if (!cart) {
@@ -100,7 +107,6 @@ export default function SideCart({
   const onClickCheckout = useCallback(() => {
     setShowLoader(true);
     setTimeout(() => {
-      setShowLoader(false);
       router.push("/checkout");
     }, 2000);
   }, [router]);
