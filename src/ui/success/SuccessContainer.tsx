@@ -4,6 +4,11 @@ import { useRouter } from "next/navigation";
 import { Product } from "@/lib/shopify/product/types";
 import ProductList from "@/ui/shared/ProductList";
 
+export const metadata = {
+  title: "Success Page",
+  description: "Success Page",
+};
+
 export default function SuccessContainer({
   orderId,
   recommendedProducts,
