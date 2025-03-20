@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Beyond - Clothes Store
 
-## Getting Started
+@todo
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project was created to study Shopify and understand how communication between products, collections and pages work using the Shopify StoreFront API.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run the project, it is necessary to configure some settings in the Shopify platform—such as adding products, collections, pages and setting up API key permissions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+I am currently exploring whether Shopify provides a way to export these configurations. If I find anything, I will update this section accordingly.
 
-## Learn More
+If you're reading this, it's probably because I haven't found a solution yet.
 
-To learn more about Next.js, take a look at the following resources:
+## Screenshots
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Desktop:<br>
+![Screenshot 1](screenshots/desktop/Beyond - Home.png)
+![Screenshot 1](screenshots/desktop/Beyond - Collection.png)
+![Screenshot 1](screenshots/desktop/Beyond - Product Detail.png)
+![Screenshot 1](screenshots/desktop/Beyond - Checkout.png)
+![Screenshot 1](screenshots/desktop/Beyond - Side Cart.png)
+![Screenshot 1](screenshots/desktop/Beyond - Success.png)
+![Screenshot 1](screenshots/desktop/Beyond - Search.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Mobile:<br>
+![Screenshot 1](screenshots/mobile/Beyond - Home.png)
+![Screenshot 1](screenshots/mobile/Beyond - Collection.png)
+![Screenshot 1](screenshots/mobile/Beyond - Product Detail.png)
+![Screenshot 1](screenshots/mobile/Beyond - Checkout.png)
+![Screenshot 1](screenshots/mobile/Beyond - Side Cart.png)
+![Screenshot 1](screenshots/mobile/Beyond - Success.png)
+![Screenshot 1](screenshots/mobile/Beyond - Search.png)
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+@todo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
+
+@todo
