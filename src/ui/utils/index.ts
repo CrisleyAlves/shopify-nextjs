@@ -4,6 +4,6 @@ export const scrollToTop = () => {
   });
 };
 
-export const getRandomNumber = () => {
-  return Math.floor(Math.random() * (100 - 50 + 1)) + 50;
+export const getRandomOrderId = () => {
+  return Math.floor(Math.random() * (1000 - 50 + 1)) + 50;
 };

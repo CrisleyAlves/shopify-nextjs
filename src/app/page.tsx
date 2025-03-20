@@ -9,7 +9,7 @@ import ProductList from "@/ui/shared/ProductList";
 import Banner from "@/ui/shared/Banner";
 
 export const metadata = {
-  title: "CLOTHES | Store",
+  title: "Beyond | Store",
   description: "A huge variety of clothes for men",
 };
 
