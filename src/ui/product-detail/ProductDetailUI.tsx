@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import clsx from "clsx";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 
 import { PRODUCT_VARIANT_TYPE } from "@/lib/shopify/constants";
 import { Product, ProductVariant } from "@/lib/shopify/product/types";
@@ -26,6 +26,14 @@ export default function ProductDetail({
     onClickAddToCartAction(selectedVariant);
     setSelectedVariant(undefined);
   }, [selectedVariant, onClickAddToCartAction]);
+
+  /**
+   * @todo check docs to see if shopify provides this "service"
+   */
+  const fakeDiscount = useMemo(
+    () => Number(product.priceRange.maxVariantPrice.amount) * 2.0,
+    []
+  );
 
   return (
     <div
@@ -52,7 +60,7 @@ export default function ProductDetail({
           <h2 className="font-light md:text-2xl">{product.title}</h2>
           <p className="text-right text-green-700 font-light">
             <span className="line-through text-red-400 mr-1">
-              100.00 {product.priceRange.maxVariantPrice.currencyCode}
+              {fakeDiscount} {product.priceRange.maxVariantPrice.currencyCode}
             </span>{" "}
             {product.priceRange.maxVariantPrice.amount}{" "}
             <span className="text-sm font-light">
