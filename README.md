@@ -18,22 +18,27 @@ If you're reading this, it's probably because I haven't found a solution yet.
 
 Desktop:<br>
 
-![home](screenshots/desktop/home.png)
-![collection](screenshots/desktop/collection.png)
-![product-detail](screenshots/desktop/product-detail.png)
-![checkout](screenshots/desktop/checkout.png)
-![side-cart](screenshots/desktop/side-cart.png)
-![success](screenshots/desktop/success.png)
-![search](screenshots/desktop/search.png)
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="screenshots/desktop/home.png" alt="Home" width="300">
+  <img src="screenshots/desktop/collection.png" alt="Collection" width="300">
+  <img src="screenshots/desktop/product-detail.png" alt="Product Detail" width="300">
+  <img src="screenshots/desktop/checkout.png" alt="Checkout" width="300">
+  <img src="screenshots/desktop/side-cart.png" alt="Side Cart" width="300">
+  <img src="screenshots/desktop/success.png" alt="Success" width="300">
+  <img src="screenshots/desktop/search.png" alt="Search" width="300">
+</div>
 
 Mobile:<br>
-![home](screenshots/mobile/home.png)
-![collection](screenshots/mobile/collection.png)
-![product-detail](screenshots/mobile/product-detail.png)
-![checkout](screenshots/mobile/checkout.png)
-![side-cart](screenshots/mobile/side-cart.png)
-![success](screenshots/mobile/success.png)
-![search](screenshots/mobile/search.png)
+
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="screenshots/mobile/home.png" alt="Home" width="300" height="800">
+  <img src="screenshots/mobile/collection.png" alt="Collection" width="300" height="800">
+  <img src="screenshots/mobile/product-detail.png" alt="Product Detail" width="300" height="800">
+  <img src="screenshots/mobile/checkout.png" alt="Checkout" width="300" height="800">
+  <img src="screenshots/mobile/side-cart.png" alt="Side Cart" width="300" height="800">
+  <img src="screenshots/mobile/success.png" alt="Success" width="300" height="800">
+  <img src="screenshots/mobile/search.png" alt="Search" width="300" height="800">
+</div>
 
 ## License
 
