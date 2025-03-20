@@ -14,6 +14,7 @@ import {
 } from "@/services/cart-service";
 
 import CartItemUI from "./CartItemUI";
+import { ROUTES } from "@/lib/shopify/constants";
 
 export default function SideCart({
   showCart = false,
@@ -107,7 +108,7 @@ export default function SideCart({
   const onClickCheckout = useCallback(() => {
     setShowLoader(true);
     setTimeout(() => {
-      router.push("/checkout");
+      router.push(ROUTES.CHECKOUT);
     }, 2000);
   }, [router]);
 

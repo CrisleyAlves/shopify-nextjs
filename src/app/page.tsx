@@ -4,9 +4,9 @@ import { getProducts } from "@/lib/shopify/api/product";
 import { SORT_KEYS } from "@/lib/shopify/constants";
 import { getCollections } from "@/lib/shopify/api/collection";
 
-import CollectionBanners from "@/ui/shared/CollectionBanners";
-import ProductList from "@/ui/shared/ProductList";
-import Banner from "@/ui/shared/Banner";
+import CollectionBanners from "@/components/shared/CollectionBanners";
+import ProductList from "@/components/shared/ProductList";
+import Banner from "@/components/shared/Banner";
 
 export const metadata = {
   title: "Beyond | Store",

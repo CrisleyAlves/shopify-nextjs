@@ -6,8 +6,8 @@ import { useState, useCallback } from "react";
 import { PRODUCT_VARIANT_TYPE } from "@/lib/shopify/constants";
 import { Product, ProductVariant } from "@/lib/shopify/product/types";
 
-import Prose from "@/components/prose";
-import GuaranteeStatement from "@/ui/shared/GuaranteeStatement";
+import Prose from "@/components/shared/Prose";
+import GuaranteeStatement from "@/components/shared/GuaranteeStatement";
 
 export default function ProductDetail({
   product,

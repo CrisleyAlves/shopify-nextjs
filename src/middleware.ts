@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { getCartIdFromCookies } from "@/services/cart-service";
 import { getCart } from "@/lib/shopify/api/cart";
+import { ROUTES } from "@/lib/shopify/constants";
 
 async function isCartValidForCheckout(request: NextRequest) {
   const url = request.nextUrl;
-  const protectedPaths = ["/checkout"];
+  const protectedPaths = [ROUTES.CHECKOUT];
   const cartId = await getCartIdFromCookies();
   const cart = await getCart(cartId);
 

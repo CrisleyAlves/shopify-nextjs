@@ -5,12 +5,12 @@ import "./globals.css";
 
 import { AppProviders } from "@/context/AppProviders";
 import { getCartIdFromCookies } from "@/services/cart-service";
-import NavbarContainer from "@/ui/navbar/NavbarContainer";
-import FooterContainer from "@/ui/footer/FooterContainer";
 import { getCart } from "@/lib/shopify/api/cart";
 
-import Loader from "@/components/Loader";
-import Notification from "@/components/Notification";
+import Loader from "@/components/shared/Loader";
+import FooterContainer from "@/components/footer/FooterContainer";
+import NavbarContainer from "@/components/navbar/NavbarContainer";
+import Notification from "@/components/shared/Notification";
 
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -7,7 +7,7 @@ import { addItemToCart } from "@/services/cart-service";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
 
-import ProductList from "@/ui/shared/ProductList";
+import ProductList from "@/components/shared/ProductList";
 import ProductDetailUI from "./ProductDetailUI";
 
 export default function ProductDetailContainer({

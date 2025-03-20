@@ -12,6 +12,7 @@ import { useUI } from "@/context/UIContext";
 import Summary from "./Summary";
 import ShippingAddress from "./ShippingAddress";
 import CheckoutItems from "./CheckoutItems";
+import { ROUTES } from "@/lib/shopify/constants";
 
 export default function CheckoutContainer(): JSX.Element {
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function CheckoutContainer(): JSX.Element {
     setShowLoader(true);
     const cart = await createCartAndSetCookie();
     updateShopifyCart(cart);
-    router.replace("/success");
+    router.replace(ROUTES.SUCCESS);
   }, [router]);
 
   return (

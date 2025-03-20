@@ -74,7 +74,12 @@ export const STOREFRONT_KEY = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
 /**
  * @todo organize constants file later
  */
-export const SEARCH_ROUTE = "/search";
+export const ROUTES = {
+  SEARCH: "/search",
+  CHECKOUT: "/checkout",
+  SUCCESS: "/success",
+};
+
 export const PRODUCT_VARIANT_TYPE = {
   SIZE: "Size",
 };

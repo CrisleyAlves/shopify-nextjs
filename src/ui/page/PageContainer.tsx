@@ -1,4 +1,4 @@
-import Prose from "@/components/prose";
+import Prose from "@/components/shared/Prose";
 import { Page } from "@/lib/shopify/page/types";
 
 export default function PageContainer({ pageDetails }: { pageDetails: Page }) {

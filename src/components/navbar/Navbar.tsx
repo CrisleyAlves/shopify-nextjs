@@ -6,12 +6,12 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 
+import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
 import { Menu } from "@/lib/shopify/menu/types";
 import { buildQueryStringParams } from "@/lib/shopify/utils/navigation";
-import { SEARCH_ROUTE } from "@/lib/shopify/constants";
-import SideCart from "@/ui/cart/SideCart";
+import SideCart from "@/components/cart/SideCart";
 
 import SearchForm from "./SearchForm";
 import SideMenu from "./SideMenu";
@@ -62,7 +62,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
       const search = val.search as HTMLInputElement;
 
       const url = buildQueryStringParams(
-        SEARCH_ROUTE,
+        ROUTES.SEARCH,
         searchParams,
         search.value
       );
