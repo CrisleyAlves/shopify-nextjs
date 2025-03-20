@@ -1,6 +1,6 @@
 # Beyond - Clothes Store
 
-@todo
+Latest version deployed in Vercel: https://shopify-nextjs-r391rn5dn-crisleyalves-projects.vercel.app/
 
 ## Description
 
@@ -17,27 +17,28 @@ If you're reading this, it's probably because I haven't found a solution yet.
 ## Screenshots
 
 Desktop:<br>
-![Screenshot 1](screenshots/desktop/Beyond - Home.png)
-![Screenshot 1](screenshots/desktop/Beyond - Collection.png)
-![Screenshot 1](screenshots/desktop/Beyond - Product Detail.png)
-![Screenshot 1](screenshots/desktop/Beyond - Checkout.png)
-![Screenshot 1](screenshots/desktop/Beyond - Side Cart.png)
-![Screenshot 1](screenshots/desktop/Beyond - Success.png)
-![Screenshot 1](screenshots/desktop/Beyond - Search.png)
+
+![home](screenshots/desktop/home.png)
+![collection](screenshots/desktop/collection.png)
+![product-detail](screenshots/desktop/product-detail.png)
+![checkout](screenshots/desktop/checkout.png)
+![side-cart](screenshots/desktop/side-cart.png)
+![success](screenshots/desktop/success.png)
+![search](screenshots/desktop/search.png)
 
 Mobile:<br>
-![Screenshot 1](screenshots/mobile/Beyond - Home.png)
-![Screenshot 1](screenshots/mobile/Beyond - Collection.png)
-![Screenshot 1](screenshots/mobile/Beyond - Product Detail.png)
-![Screenshot 1](screenshots/mobile/Beyond - Checkout.png)
-![Screenshot 1](screenshots/mobile/Beyond - Side Cart.png)
-![Screenshot 1](screenshots/mobile/Beyond - Success.png)
-![Screenshot 1](screenshots/mobile/Beyond - Search.png)
+![home](screenshots/mobile/home.png)
+![collection](screenshots/mobile/collection.png)
+![product-detail](screenshots/mobile/product-detail.png)
+![checkout](screenshots/mobile/checkout.png)
+![side-cart](screenshots/mobile/side-cart.png)
+![success](screenshots/mobile/success.png)
+![search](screenshots/mobile/search.png)
 
 ## License
 
-@todo
+The images used in this project were sourced from https://kidoriman.com/. Proper credit is given where required. Images are primarily stored in Shopify, though a few are used locally for development purposes.
 
 ## Contact
 
-@todo
+If you'd like to contact me, you can reach out via LinkedIn https://www.linkedin.com/in/crisley-a-89a3a116b/
