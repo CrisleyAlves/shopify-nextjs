@@ -10,7 +10,7 @@ export default function CollectionBanners({
   collections: Collection[];
 }): React.JSX.Element {
   return (
-    <section className="container px-5 mt-8">
+    <section className="container px-5 mt-5">
       <h2 className="text-3xl font-extralight">Collections</h2>
       <ul
         className="
