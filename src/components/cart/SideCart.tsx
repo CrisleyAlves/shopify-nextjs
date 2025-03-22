@@ -10,6 +10,7 @@ import { useUI } from "@/context/UIContext";
 import { CartItem as CartItemType } from "@/lib/shopify/cart/types";
 import {
   createCartAndSetCookie,
+  redirectToCheckout,
   updateItemQuantity,
 } from "@/services/cart-service";
 
@@ -105,12 +106,17 @@ export default function SideCart({
     [setShowLoader, updateShopifyCart, handleNotification]
   );
 
-  const onClickCheckout = useCallback(() => {
+  const onClickCheckout = useCallback(async () => {
     setShowLoader(true);
-    setTimeout(() => {
-      router.push(ROUTES.CHECKOUT);
-    }, 2000);
+    await redirectToCheckout();
   }, [router]);
+
+  // const onClickCheckout = useCallback(() => {
+  //   setShowLoader(true);
+  //   setTimeout(() => {
+  //     router.push(ROUTES.CHECKOUT);
+  //   }, 2000);
+  // }, [router]);
 
   const totalText = `Total: (${cart?.totalQuantity}) Item(s)`;
 
