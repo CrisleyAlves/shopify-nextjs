@@ -1,3 +1,4 @@
+NODE_ENV='development'
 COMPANY_NAME='Fashion'
 TWITTER_CREATOR='Clothes Store'
 TWITTER_SITE='Link'

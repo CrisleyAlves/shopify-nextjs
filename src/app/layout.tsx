@@ -30,21 +30,23 @@ export default async function RootLayout({
       {/**
        * @todo organize this Analytics config later
        */}
-      <head>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.ANALYTICS_TRACKING_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+      {process.env.NODE_ENV === "production" && (
+        <head>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.ANALYTICS_TRACKING_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
 
           gtag('config', "${process.env.ANALYTICS_TRACKING_ID}");
         `}
-        </Script>
-      </head>
+          </Script>
+        </head>
+      )}
       <body className={`${outfit.className} antialiased flex flex-col flex-1`}>
         <AppProviders shopifyCart={cart}>
           <Loader />
