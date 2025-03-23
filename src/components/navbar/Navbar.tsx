@@ -106,7 +106,11 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
           onClickCloseIcon={() => setShowSidenav(false)}
         />
 
-        <button className="md:hidden" onClick={() => setShowSidenav(true)}>
+        <button
+          className="md:hidden"
+          onClick={() => setShowSidenav(true)}
+          aria-label="Open side menu"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -114,6 +118,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
             strokeWidth="1"
             stroke="currentColor"
             className="size-6"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -152,6 +157,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
           <button
             className="mr-2"
             onClick={() => setShowSearchForm(!showSearchForm)}
+            aria-label="Open search form"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +174,11 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
               />
             </svg>
           </button>
-          <button className="relative" onClick={() => setShowCart(true)}>
+          <button
+            aria-label="Open cart"
+            className="relative"
+            onClick={() => setShowCart(true)}
+          >
             {totalQuantity > 0 && (
               <span className="absolute bg-red-600 rounded-full py-0 px-2 text-white text-sm top-[-5px]">
                 {totalQuantity}
@@ -181,6 +191,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
               strokeWidth="1"
               stroke="currentColor"
               className="size-6"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"

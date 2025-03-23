@@ -32,7 +32,7 @@ export default function ProductDetail({
    */
   const fakeDiscount = useMemo(
     () => Number(product.priceRange.maxVariantPrice.amount) * 2.0,
-    []
+    [product.priceRange.maxVariantPrice.amount]
   );
 
   return (
@@ -48,7 +48,7 @@ export default function ProductDetail({
         <Image
           priority={true}
           src={product.featuredImage.url}
-          alt={product.featuredImage.altText}
+          alt={product.featuredImage.altText || "Product Image"}
           width={0}
           height={0}
           sizes="100vw"
@@ -100,6 +100,7 @@ export default function ProductDetail({
                           !variant.availableForSale,
                       }
                     )}
+                    aria-label={`Select size ${item.value}`}
                   >
                     {item.value}
                   </button>
@@ -116,6 +117,7 @@ export default function ProductDetail({
             w-full bg-indigo-950 text-white p-3 uppercase hover:text-indigo-950 hover:bg-white border border-indigo-950
             disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-50 disabled:hover:text-white
           "
+          aria-label="Add to cart"
         >
           add to cart
         </button>
@@ -144,6 +146,7 @@ export default function ProductDetail({
                   strokeWidth="1"
                   stroke="currentColor"
                   className="size-5"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"

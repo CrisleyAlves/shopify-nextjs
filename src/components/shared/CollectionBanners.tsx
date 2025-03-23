@@ -19,7 +19,11 @@ export default function CollectionBanners({
       >
         {collections.map((collection) => (
           <li key={collection.path}>
-            <Link href={collection.path} className="relative w-full shadow-lg">
+            <Link
+              href={collection.path}
+              className="relative w-full shadow-lg"
+              aria-label={`View ${collection.title} collection`}
+            >
               <h3
                 className="
                 text-center absolute top-1/2 left-1/2 bg-white rounded-sm p-4 font-light

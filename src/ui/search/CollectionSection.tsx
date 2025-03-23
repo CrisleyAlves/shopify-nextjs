@@ -18,7 +18,12 @@ const CollectionSection = ({ collections }: { collections: Collection[] }) => {
                 key={item.path}
                 className="mb-1 hover:underline font-light text-base"
               >
-                <Link href={item.path}>{item.title}</Link>
+                <Link
+                  href={item.path}
+                  aria-label={`View ${item.title} collection`}
+                >
+                  {item.title}
+                </Link>
               </li>
             );
           })}

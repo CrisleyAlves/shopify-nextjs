@@ -18,8 +18,11 @@ export default function SearchForm({
         name="search"
         className="button w-full font-light placeholder:font-light"
         placeholder="search..."
+        aria-label="Search"
       />
-      <button className="font-light text-base ml-2">search</button>
+      <button type="submit" className="font-light text-base ml-2">
+        Search
+      </button>
     </form>
   );
 }

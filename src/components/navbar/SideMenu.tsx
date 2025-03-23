@@ -37,7 +37,7 @@ export default function SideMenu({
           <h1 className="font-light text-3xl uppercase">
             <Link href="/">BEYOND</Link>
           </h1>
-          <button onClick={onClickCloseIcon}>
+          <button aria-label="Close Sidemenu" onClick={onClickCloseIcon}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -45,6 +45,7 @@ export default function SideMenu({
               strokeWidth={1.5}
               stroke="currentColor"
               className="size-6"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"

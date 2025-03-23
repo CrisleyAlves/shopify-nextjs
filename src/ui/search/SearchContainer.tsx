@@ -21,7 +21,9 @@ export default function SearchContainer({
           <div className="mb-[-20px] flex justify-between items-center">
             <p className="text-sm">
               showing{" "}
-              <span className="font-bold text-blue-950">{products.length}</span>{" "}
+              <span className="font-bold text-blue-950" aria-live="polite">
+                {products.length}
+              </span>{" "}
               results
             </p>
             <CollectionSortSelect />
@@ -29,7 +31,7 @@ export default function SearchContainer({
           {!!products.length ? (
             <ProductList products={products} />
           ) : (
-            <p className="pt-5">not results found</p>
+            <p className="pt-5">No results found</p>
           )}
         </div>
       </div>

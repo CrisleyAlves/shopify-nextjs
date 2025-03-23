@@ -137,7 +137,11 @@ export default function SideCart({
       >
         <h2 className="text-center text-base font-bold border border-b-gray-200 pb-5 pt-5 relative">
           Cart
-          <button className="absolute right-5 top-5" onClick={onClickCloseIcon}>
+          <button
+            aria-label="Close SideCart"
+            className="absolute right-5 top-5"
+            onClick={onClickCloseIcon}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -145,6 +149,7 @@ export default function SideCart({
               strokeWidth={1}
               stroke="currentColor"
               className="size-6"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -187,6 +192,7 @@ export default function SideCart({
               <p className="mb-3 font-thin text-right">free shipping</p>
               <div className="flex justify-between flex-row"></div>
               <button
+                aria-label="Checkout"
                 onClick={onClickCheckout}
                 className="w-full bg-indigo-950 hover:text-indigo-950 hover:bg-white border border-indigo-950 text-white p-3"
               >

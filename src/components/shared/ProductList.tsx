@@ -62,7 +62,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           lg:w-full
           "
         >
-          <span className="text-gray-400 mr-3 uppercase text-xs font-extralight">
+          <span className="text-black mr-3 uppercase text-xs font-extralight">
             {product.brand.value}
           </span>
           <p className="text-lg font-light text-black truncate block capitalize">
