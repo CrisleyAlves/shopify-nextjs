@@ -1,6 +1,6 @@
 # Beyond - Clothes Store
 
-Latest version deployed in Vercel: https://shopify-nextjs-r391rn5dn-crisleyalves-projects.vercel.app/
+Latest version deployed in Vercel: https://shopify-nextjs-delta.vercel.app/
 
 ## Description
 
