@@ -1,9 +1,7 @@
 "use client";
 import { useEffect } from "react";
 
-import { MESSAGES, NOTIFICATION_TYPES } from "@/constants";
 import { Product, ProductVariant } from "@/lib/shopify/product/types";
-import { addItemToCart } from "@/services/cart-service";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
 
@@ -17,8 +15,8 @@ export default function ProductDetailContainer({
   product: Product;
   recommended: Product[];
 }) {
-  const { updateShopifyCart } = useCart();
-  const { setShowCart, setShowLoader, handleNotification } = useUI();
+  const { addToCart } = useCart();
+  const { setShowCart } = useUI();
 
   useEffect(() => {
     setShowCart(false);
@@ -26,27 +24,7 @@ export default function ProductDetailContainer({
 
   const onClickAddToCart = async (selectedVariant: ProductVariant) => {
     if (!selectedVariant) return;
-
-    try {
-      setShowLoader(true);
-      const shopifyCart = await addItemToCart(selectedVariant.id);
-      updateShopifyCart(shopifyCart);
-      handleNotification({
-        type: NOTIFICATION_TYPES.SUCCESS,
-        message: MESSAGES.SUCCESS.ADD_TO_CART,
-        visible: true,
-      });
-    } catch (error) {
-      handleNotification({
-        type: NOTIFICATION_TYPES.ERROR,
-        message: MESSAGES.ERROR.ADD_TO_CART,
-        visible: true,
-      });
-      console.error("Error adding item to cart");
-      console.error(error);
-    } finally {
-      setShowLoader(false);
-    }
+    addToCart(selectedVariant);
   };
 
   return (

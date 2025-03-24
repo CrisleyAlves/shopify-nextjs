@@ -4,17 +4,13 @@ import clsx from "clsx";
 import { MouseEventHandler, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import { MESSAGES, NOTIFICATION_TYPES } from "@/constants";
+import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
 import { CartItem as CartItemType } from "@/lib/shopify/cart/types";
-import {
-  createCartAndSetCookie,
-  updateItemQuantity,
-} from "@/services/cart-service";
+import { createCartAndSetCookie } from "@/services/cart-service";
 
 import CartItemUI from "./CartItemUI";
-import { ROUTES } from "@/lib/shopify/constants";
 
 export default function SideCart({
   showCart = false,
@@ -24,7 +20,13 @@ export default function SideCart({
   onClickCloseIcon: MouseEventHandler<HTMLButtonElement>;
 }) {
   const router = useRouter();
-  const { cart, isEmpty, updateShopifyCart } = useCart();
+  const {
+    cart,
+    isEmpty,
+    updateShopifyCart,
+    increaseItemQuantity,
+    decreaseItemQuantity,
+  } = useCart();
   const { setShowLoader, handleNotification, setShowCart } = useUI();
 
   useEffect(() => {
@@ -42,65 +44,14 @@ export default function SideCart({
 
   const onClickIncreaseItem = useCallback(
     async (item: CartItemType) => {
-      try {
-        setShowLoader(true);
-        const shopifyCart = await updateItemQuantity({
-          merchandiseId: item.merchandise.id,
-          quantity: item.quantity + 1,
-        });
-
-        updateShopifyCart(shopifyCart);
-        handleNotification({
-          type: NOTIFICATION_TYPES.SUCCESS,
-          message: MESSAGES.SUCCESS.INCREASE_QUANTITY,
-          visible: true,
-        });
-      } catch (error) {
-        handleNotification({
-          type: NOTIFICATION_TYPES.ERROR,
-          message: MESSAGES.ERROR.INCREASE_QUANTITY,
-          visible: true,
-        });
-        console.error("Error increasing item quantity");
-        console.error(error);
-      } finally {
-        setShowLoader(false);
-      }
+      increaseItemQuantity(item);
     },
     [setShowLoader, updateShopifyCart, handleNotification]
   );
 
   const onClickDecreaseItem = useCallback(
     async (item: CartItemType) => {
-      try {
-        setShowLoader(true);
-        const shopifyCart = await updateItemQuantity({
-          merchandiseId: item.merchandise.id,
-          quantity: item.quantity - 1,
-        });
-
-        updateShopifyCart(shopifyCart);
-
-        const decreaseMessage =
-          item.quantity === 1
-            ? MESSAGES.SUCCESS.ITEM_REMOVED_FROM_CART
-            : MESSAGES.SUCCESS.DECREASE_QUANTITY;
-        handleNotification({
-          type: NOTIFICATION_TYPES.SUCCESS,
-          message: decreaseMessage,
-          visible: true,
-        });
-      } catch (error) {
-        handleNotification({
-          type: NOTIFICATION_TYPES.ERROR,
-          message: MESSAGES.ERROR.DECREASE_QUANTITY,
-          visible: true,
-        });
-        console.error("Error decreasing item quantity");
-        console.error(error);
-      } finally {
-        setShowLoader(false);
-      }
+      decreaseItemQuantity(item);
     },
     [setShowLoader, updateShopifyCart, handleNotification]
   );
