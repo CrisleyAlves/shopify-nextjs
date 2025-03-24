@@ -19,7 +19,9 @@ export async function getCartIdFromCookies(): Promise<string | undefined> {
   return cartId;
 }
 
-export async function addItemToCart(selectedVariantId: string) {
+export async function addItemToCart(
+  selectedVariantId: string
+): Promise<Cart | Error> {
   const cartId = await getCartIdFromCookies();
 
   if (!cartId || !selectedVariantId) {
@@ -40,7 +42,7 @@ export async function addItemToCart(selectedVariantId: string) {
 export async function updateItemQuantity(payload: {
   merchandiseId: string;
   quantity: number;
-}) {
+}): Promise<Cart | Error> {
   const cartId = await getCartIdFromCookies();
   if (!cartId) {
     return new Error("Missing cart ID");
@@ -77,7 +79,7 @@ export async function updateItemQuantity(payload: {
     return shopifyCart;
   } catch (error) {
     console.error(error);
-    return "Error updating item quantity";
+    return new Error("Error updating item quantity");
   }
 }
 

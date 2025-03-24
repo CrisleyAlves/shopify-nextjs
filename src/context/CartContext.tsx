@@ -42,6 +42,11 @@ export function CartProvider({
     try {
       setShowLoader(true);
       const shopifyCart = await addItemToCart(selectedVariant.id);
+
+      if (shopifyCart instanceof Error) {
+        throw shopifyCart;
+      }
+
       updateShopifyCart(shopifyCart);
       handleNotification({
         type: NOTIFICATION_TYPES.SUCCESS,
@@ -68,6 +73,10 @@ export function CartProvider({
         merchandiseId: item.merchandise.id,
         quantity: item.quantity + 1,
       });
+
+      if (shopifyCart instanceof Error) {
+        throw shopifyCart;
+      }
 
       updateShopifyCart(shopifyCart);
 
@@ -96,6 +105,10 @@ export function CartProvider({
         merchandiseId: item.merchandise.id,
         quantity: item.quantity - 1,
       });
+
+      if (shopifyCart instanceof Error) {
+        throw shopifyCart;
+      }
 
       updateShopifyCart(shopifyCart);
 
