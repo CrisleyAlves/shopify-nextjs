@@ -1,23 +1,36 @@
 "use client";
 
 import clsx from "clsx";
-import { MouseEventHandler, useCallback, useEffect } from "react";
+import dynamic from "next/dynamic";
+import { MouseEventHandler, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
+import type { CartItem as CartItemType } from "@/lib/shopify/cart/types";
+import type { Product, ProductVariant } from "@/lib/shopify/product/types";
+
+const AddToCartModal = dynamic(
+  () => import("@/components/modals/AddToCartModal"),
+  {
+    ssr: false,
+  }
+);
 
 import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
-import { CartItem as CartItemType } from "@/lib/shopify/cart/types";
 import { createCartAndSetCookie } from "@/services/cart-service";
 
 import CartItemUI from "./CartItemUI";
+import SideCartSuggestions from "./SideCartSuggestions";
 
 export default function SideCart({
   showCart = false,
   onClickCloseIcon,
+  products = [],
 }: {
   showCart: boolean;
   onClickCloseIcon: MouseEventHandler<HTMLButtonElement>;
+  products: Product[];
 }) {
   const router = useRouter();
   const {
@@ -26,8 +39,20 @@ export default function SideCart({
     updateShopifyCart,
     increaseItemQuantity,
     decreaseItemQuantity,
+    addToCart,
   } = useCart();
   const { setShowLoader, handleNotification, setShowCart } = useUI();
+  const [selectedProduct, setSelectedProduct] = useState<undefined | Product>(
+    undefined
+  );
+
+  const handleOnClickAddToCart = useCallback(
+    (productVariant: ProductVariant) => {
+      addToCart(productVariant);
+      setSelectedProduct(undefined);
+    },
+    [addToCart, setSelectedProduct]
+  );
 
   useEffect(() => {
     return () => {
@@ -111,6 +136,14 @@ export default function SideCart({
           </button>
         </h2>
 
+        {selectedProduct && (
+          <AddToCartModal
+            product={selectedProduct}
+            onClickAddToCartAction={handleOnClickAddToCart}
+            onClickCloseModalAction={() => setSelectedProduct(undefined)}
+          />
+        )}
+
         <div className="p-5 flex flex-col justify-between h-[95%]">
           <div
             className="
@@ -130,27 +163,34 @@ export default function SideCart({
                 />
               </div>
             ))}
+            <SideCartSuggestions
+              onClickAddToCart={(product) => setSelectedProduct(product)}
+              products={products.slice(0, 8)}
+            />
           </div>
-          {!isEmpty && (
-            <div className="w-full right-0 p-5 fixed bottom-0 md:relative">
-              <div className="flex justify-between">
-                <span className="text-right font-semibold">{totalText}</span>
-                <span className="text-right text-green-700 font-semibold">
-                  {cart?.cost.totalAmount.amount}{" "}
-                  {cart?.cost.totalAmount.currencyCode}
-                </span>
-              </div>
-              <p className="mb-3 font-thin text-right">free shipping</p>
-              <div className="flex justify-between flex-row"></div>
-              <button
-                aria-label="Checkout"
-                onClick={onClickCheckout}
-                className="w-full bg-indigo-950 hover:text-indigo-950 hover:bg-white border border-indigo-950 text-white p-3"
-              >
-                CHECKOUT
-              </button>
+
+          <div className="w-full right-0 p-5 fixed bottom-0 md:relative">
+            <div className="flex justify-between">
+              <span className="text-right font-semibold">{totalText}</span>
+              <span className="text-right text-green-700 font-semibold">
+                {cart?.cost.totalAmount.amount}{" "}
+                {cart?.cost.totalAmount.currencyCode}
+              </span>
             </div>
-          )}
+            <p className="mb-3 font-thin text-right">free shipping</p>
+            <div className="flex justify-between flex-row"></div>
+            <button
+              disabled={isEmpty}
+              aria-label="Checkout"
+              onClick={onClickCheckout}
+              className="
+                  w-full bg-indigo-950
+                hover:text-indigo-950 hover:bg-white border border-indigo-950 text-white p-3
+                disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed disabled:border-transparent"
+            >
+              CHECKOUT
+            </button>
+          </div>
         </div>
       </div>
     </div>

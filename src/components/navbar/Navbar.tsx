@@ -6,10 +6,12 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 
+import type { Menu } from "@/lib/shopify/menu/types";
+import type { Product } from "@/lib/shopify/product/types";
+
 import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
-import { Menu } from "@/lib/shopify/menu/types";
 import { buildQueryStringParams } from "@/lib/shopify/utils/navigation";
 import SideCart from "@/components/cart/SideCart";
 
@@ -17,7 +19,13 @@ import SearchForm from "./SearchForm";
 import SideMenu from "./SideMenu";
 import BasicNavbar from "./BasicNavbar";
 
-export default function Navbar({ menu }: { menu: Menu[] }) {
+export default function Navbar({
+  menu,
+  products,
+}: {
+  menu: Menu[];
+  products: Product[];
+}) {
   const [showBasicNavbar, setShowBasicNavbar] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -203,6 +211,7 @@ export default function Navbar({ menu }: { menu: Menu[] }) {
         </div>
       </header>
       <SideCart
+        products={products}
         showCart={showCart}
         onClickCloseIcon={() => setShowCart(false)}
       />
