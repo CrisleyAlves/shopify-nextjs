@@ -1,8 +1,9 @@
 "use client";
 import clsx from "clsx";
 
+import type { ProductVariant } from "@/lib/shopify/product/types";
+
 import { PRODUCT_VARIANT_TYPE } from "@/lib/shopify/constants";
-import { ProductVariant } from "@/lib/shopify/product/types";
 
 export default function SizeVariant({
   sizeVariants,

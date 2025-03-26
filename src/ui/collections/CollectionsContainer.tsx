@@ -1,4 +1,5 @@
-import { Product } from "@/lib/shopify/product/types";
+import type { Product } from "@/lib/shopify/product/types";
+
 import ProductList from "@/components/shared/ProductList";
 
 export default function CollectionsContainer({

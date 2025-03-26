@@ -3,8 +3,9 @@ import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+import type { Cart } from "@/lib/shopify/cart/types";
+
 import { TAGS } from "@/lib/shopify/constants";
-import { Cart } from "@/lib/shopify/cart/types";
 import {
   addToCart,
   createCart,

@@ -7,9 +7,10 @@ import {
   useState,
 } from "react";
 
+import type { Cart, CartItem } from "@/lib/shopify/cart/types";
+import type { ProductVariant } from "@/lib/shopify/product/types";
+
 import { MESSAGES, NOTIFICATION_TYPES } from "@/constants";
-import { Cart, CartItem } from "@/lib/shopify/cart/types";
-import { ProductVariant } from "@/lib/shopify/product/types";
 import { addItemToCart, updateItemQuantity } from "@/services/cart-service";
 
 import { useUI } from "./UIContext";

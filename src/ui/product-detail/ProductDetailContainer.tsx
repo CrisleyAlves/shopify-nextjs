@@ -1,11 +1,12 @@
 "use client";
 import { useEffect } from "react";
 
-import { Product, ProductVariant } from "@/lib/shopify/product/types";
+import type { Product, ProductVariant } from "@/lib/shopify/product/types";
+
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
-
 import ProductList from "@/components/shared/ProductList";
+
 import ProductDetailUI from "./ProductDetailUI";
 
 export default function ProductDetailContainer({

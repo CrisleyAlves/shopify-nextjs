@@ -1,6 +1,6 @@
 import { JSX } from "react";
 
-import { Cart } from "@/lib/shopify/cart/types";
+import type { Cart } from "@/lib/shopify/cart/types";
 
 export default function Summary({
   cart,

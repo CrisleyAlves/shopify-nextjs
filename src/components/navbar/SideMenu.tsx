@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { MouseEventHandler } from "react";
 
-import { Menu } from "@/lib/shopify/menu/types";
+import type { Menu } from "@/lib/shopify/menu/types";
 
 export default function SideMenu({
   menu,

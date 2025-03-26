@@ -1,4 +1,5 @@
-import { Menu } from "@/lib/shopify/menu/types";
+import type { Menu } from "@/lib/shopify/menu/types";
+
 import Link from "next/link";
 
 const Footer = ({ footerMenu }: { footerMenu: Menu[] }) => {

@@ -1,5 +1,6 @@
+import type { Page } from "@/lib/shopify/page/types";
+
 import Prose from "@/components/shared/Prose";
-import { Page } from "@/lib/shopify/page/types";
 
 export default function PageContainer({ pageDetails }: { pageDetails: Page }) {
   return (

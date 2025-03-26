@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-import { Product } from "@/lib/shopify/product/types";
+import type { Product } from "@/lib/shopify/product/types";
+
 import ProductList from "@/components/shared/ProductList";
 
 export const metadata = {

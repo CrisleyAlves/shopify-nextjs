@@ -1,11 +1,12 @@
-import {
+import type {
   Cart,
   ShopifyAddToCartOperation,
   ShopifyCartOperation,
   ShopifyCreateCartOperation,
   ShopifyRemoveFromCartOperation,
   ShopifyUpdateCartOperation,
-} from "../../cart/types";
+} from "@/lib/shopify/cart/types";
+
 import { shopifyFetch } from "../shopify-fetch";
 import {
   addToCartMutation,

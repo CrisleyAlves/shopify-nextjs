@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { CartItem as CartItemType } from "@/lib/shopify/cart/types";
+import type { CartItem as CartItemType } from "@/lib/shopify/cart/types";
 
 export default function CartItem({
   item,

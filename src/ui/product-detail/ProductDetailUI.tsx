@@ -2,7 +2,8 @@
 import Image from "next/image";
 import { useState, useCallback, useMemo } from "react";
 
-import { Product, ProductVariant } from "@/lib/shopify/product/types";
+import type { Product, ProductVariant } from "@/lib/shopify/product/types";
+
 import Prose from "@/components/shared/Prose";
 import GuaranteeStatement from "@/components/shared/GuaranteeStatement";
 import SizeVariant from "@/components/variants/SizeVariant";

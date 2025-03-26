@@ -1,5 +1,6 @@
-import { Product } from "@/lib/shopify/product/types";
-import { Collection } from "@/lib/shopify/collection/types";
+import type { Product } from "@/lib/shopify/product/types";
+import type { Collection } from "@/lib/shopify/collection/types";
+
 import ProductList from "@/components/shared/ProductList";
 
 import CollectionSortSelect from "./CollectionSortSelect";

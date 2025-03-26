@@ -1,7 +1,8 @@
+import type { Product } from "@/lib/shopify/product/types";
+
 import { getCollections } from "@/lib/shopify/api/collection";
 import { getProducts } from "@/lib/shopify/api/product";
 import { DEFAULT_SORT, sorting } from "@/lib/shopify/constants";
-import { Product } from "@/lib/shopify/product/types";
 import SearchContainer from "@/ui/search/SearchContainer";
 
 export const metadata = {
