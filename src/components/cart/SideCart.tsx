@@ -19,6 +19,7 @@ import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
 import { createCartAndSetCookie } from "@/services/cart-service";
+import Icon from "@/components/shared/Icon";
 
 import CartItemUI from "./CartItemUI";
 import SideCartSuggestions from "./SideCartSuggestions";
@@ -118,21 +119,7 @@ export default function SideCart({
             className="absolute right-5 top-5"
             onClick={onClickCloseIcon}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1}
-              stroke="currentColor"
-              className="size-6"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
-            </svg>
+            <Icon path="/icons/close.svg" altText="Close Side Cart" />
           </button>
         </h2>
 

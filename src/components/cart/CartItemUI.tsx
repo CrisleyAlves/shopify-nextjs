@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import type { CartItem as CartItemType } from "@/lib/shopify/cart/types";
 
+import Icon from "@/components/shared/Icon";
+
 export default function CartItem({
   item,
   onClickIncreaseItemAction,
@@ -57,34 +59,12 @@ export default function CartItem({
           flex flex-row items-center justify-center  h-full md:items-start md:pt-10"
       >
         <button onClick={() => onClickDecreaseItemAction(item)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1"
-            stroke="currentColor"
-            className="size-6"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-          </svg>
+          <Icon path="/icons/minus.svg" altText="decrease quantity" />
         </button>
 
         <span className="ml-2 mr-2">{item.quantity}</span>
         <button onClick={() => onClickIncreaseItemAction(item)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1"
-            stroke="currentColor"
-            className="size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 4.5v15m7.5-7.5h-15"
-            />
-          </svg>
+          <Icon path="/icons/plus.svg" altText="increase quantity" />
         </button>
       </div>
     </div>

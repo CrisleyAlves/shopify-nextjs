@@ -7,6 +7,7 @@ import type { Product, ProductVariant } from "@/lib/shopify/product/types";
 import Prose from "@/components/shared/Prose";
 import GuaranteeStatement from "@/components/shared/GuaranteeStatement";
 import SizeVariant from "@/components/variants/SizeVariant";
+import Icon from "@/components/shared/Icon";
 
 export default function ProductDetail({
   product,
@@ -107,21 +108,10 @@ export default function ProductDetail({
             >
               <h3 className="font-normal text-md">Description</h3>
               <span className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1"
-                  stroke="currentColor"
-                  className="size-5"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15"
-                  />
-                </svg>
+                <Icon
+                  path="/icons/plus.svg"
+                  altText="toggle product description"
+                />
               </span>
             </label>
             <div

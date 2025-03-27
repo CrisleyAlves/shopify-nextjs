@@ -4,6 +4,8 @@ import { MouseEventHandler } from "react";
 
 import type { Menu } from "@/lib/shopify/menu/types";
 
+import Icon from "@/components/shared/Icon";
+
 export default function SideMenu({
   menu,
   showSideNav = false,
@@ -38,21 +40,7 @@ export default function SideMenu({
             <Link href="/">BEYOND</Link>
           </h1>
           <button aria-label="Close Sidemenu" onClick={onClickCloseIcon}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
-            </svg>
+            <Icon path="/icons/close.svg" altText="Close Sidemenu" />
           </button>
         </div>
 

@@ -5,6 +5,7 @@ import Image from "next/image";
 import type { Product, ProductVariant } from "@/lib/shopify/product/types";
 
 import SizeVariant from "@/components/variants/SizeVariant";
+import Icon from "@/components/shared/Icon";
 
 export default function AddToCartModal({
   product,
@@ -28,21 +29,7 @@ export default function AddToCartModal({
           className="absolute right-5 top-5"
           onClick={onClickCloseModalAction}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18 18 6M6 6l12 12"
-            />
-          </svg>
+          <Icon path="/icons/close.svg" altText="Close Add To Cart Modal" />
         </button>
         <div className="flex flex-row border-b border-b-gray-200 pb-5">
           <Image
