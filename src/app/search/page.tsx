@@ -1,6 +1,5 @@
 import type { Product } from "@/lib/shopify/product/types";
 
-import { getCollections } from "@/lib/shopify/api/collection";
 import { getProducts } from "@/lib/shopify/api/product";
 import { DEFAULT_SORT, sorting } from "@/lib/shopify/constants";
 import SearchContainer from "@/ui/search/SearchContainer";
@@ -35,7 +34,6 @@ export default async function Page({
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }>) {
   const products = await getProductsWithArguments({ searchParams });
-  const collections = await getCollections();
 
-  return <SearchContainer collections={collections} products={products} />;
+  return <SearchContainer products={products} />;
 }
