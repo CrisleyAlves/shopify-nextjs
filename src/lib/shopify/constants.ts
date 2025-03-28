@@ -83,3 +83,5 @@ export const ROUTES = {
 export const PRODUCT_VARIANT_TYPE = {
   SIZE: "Size",
 };
+
+export const IMAGE_NOT_AVAILABLE_PATH = "/image-not-available.jpg";

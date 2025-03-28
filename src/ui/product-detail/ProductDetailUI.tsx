@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useState, useCallback, useMemo } from "react";
 
 import type { Product, ProductVariant } from "@/lib/shopify/product/types";
@@ -8,6 +7,8 @@ import Prose from "@/components/shared/Prose";
 import GuaranteeStatement from "@/components/shared/GuaranteeStatement";
 import SizeVariant from "@/components/variants/SizeVariant";
 import Icon from "@/components/shared/Icon";
+
+import ProductGallery from "./ProductGallery";
 
 export default function ProductDetail({
   product,
@@ -41,18 +42,13 @@ export default function ProductDetail({
         grid grid-cols-1
         md:gap-x-10 md:mb-10 md:mt-5
         xl:grid-cols-2
-        xl:gap-x-20
+        xl:gap-x-10
       "
     >
-      <section className="w-full h-[50vh] md:h-auto md:mb-3 xl:h-[600px]">
-        <Image
-          priority={true}
-          src={product.featuredImage.url}
-          alt={product.featuredImage.altText || "Product Image"}
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="h-full w-full object-center rounded-t-xl"
+      <section className="md:mb-3">
+        <ProductGallery
+          featuredImage={product.featuredImage}
+          images={product.images}
         />
       </section>
       <section className="w-full">
@@ -68,7 +64,7 @@ export default function ProductDetail({
             </span>
           </p>
         </div>
-        <p className="font-light mt-3 ">
+        <p className="font-light">
           Sent From:{" "}
           <span className="font-extralight">Brazil, South America</span>
         </p>
