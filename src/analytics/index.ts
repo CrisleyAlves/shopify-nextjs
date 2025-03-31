@@ -8,7 +8,7 @@ const ANALYTICS_DEBUG_MODE = false;
 /**
  * ## FOR HISTORY PURPOSES ##
  *
- * @description window?.gtag may not be available in case analytics is not enabled
+ * @description window.gtag may not be available in case analytics is not enabled
  * in development, this is why optional chaining is used in this file, so I don't need to add validation
  * for each function checking the environment.
  */
@@ -20,7 +20,7 @@ const ANALYTICS_DEBUG_MODE = false;
  * FYI -> This is important to track analytics purchase journey
  */
 const trackViewedItem = (product: Product) => {
-  window?.gtag?.("event", "view_item", {
+  window.gtag?.("event", "view_item", {
     currency: product.priceRange.maxVariantPrice.currencyCode,
     value: Number(product.priceRange.maxVariantPrice.amount),
     items: [
@@ -47,7 +47,7 @@ const trackAddToCart = ({
   product: Product;
   variant: ProductVariant;
 }) => {
-  window?.gtag?.("event", "add_to_cart", {
+  window.gtag?.("event", "add_to_cart", {
     currency: product.priceRange.maxVariantPrice.currencyCode,
     value: Number(product.priceRange.maxVariantPrice.amount),
     items: [
@@ -68,7 +68,7 @@ const trackAddToCart = ({
  *
  */
 const trackIncreaseCartQuantity = (cartItem: CartItem) => {
-  window?.gtag?.("event", "cart_quantity_increased", {
+  window.gtag?.("event", "cart_quantity_increased", {
     event_category: "cart",
     event_label: "cart_quantity_increase",
     value:
@@ -83,7 +83,7 @@ const trackIncreaseCartQuantity = (cartItem: CartItem) => {
  *
  */
 const trackDecreaseCartQuantity = (cartItem: CartItem) => {
-  window?.gtag?.("event", "cart_quantity_decreased", {
+  window.gtag?.("event", "cart_quantity_decreased", {
     event_category: "cart",
     event_label: "cart_quantity_decrease",
     price:
@@ -110,7 +110,7 @@ const trackPurchase = (cart: Cart) => {
     };
   });
 
-  window?.gtag?.("event", "purchase", {
+  window.gtag?.("event", "purchase", {
     transaction_id: getRandomOrderId(),
     affiliation: "Beyond",
     currency: cart.cost.totalAmount.currencyCode,
@@ -138,7 +138,7 @@ const trackBeginCheckout = (cart: Cart) => {
     };
   });
 
-  window?.gtag?.("event", "begin_checkout", {
+  window.gtag?.("event", "begin_checkout", {
     currency: cart.cost.totalAmount.currencyCode,
     value: Number(cart.cost.totalAmount.amount),
     items: cartItems,
@@ -162,7 +162,7 @@ const trackAddShippingInfo = (cart: Cart) => {
     };
   });
 
-  window?.gtag?.("event", "add_shipping_info", {
+  window.gtag?.("event", "add_shipping_info", {
     currency: cart.cost.totalTaxAmount.currencyCode,
     value: Number(cart.cost.totalTaxAmount.amount),
     items: cartItems,
@@ -186,7 +186,7 @@ const trackAddPaymentInfo = (cart: Cart) => {
     };
   });
 
-  gtag("event", "add_payment_info", {
+  window.gtag?.("event", "add_payment_info", {
     currency: cart.cost.totalAmount.currencyCode,
     value: Number(cart.cost.totalAmount.amount),
     payment_type: "Credit Card",
@@ -201,7 +201,7 @@ const trackAddPaymentInfo = (cart: Cart) => {
  * FYI -> used locally to confirm refund behavior in Analytics. Yeah, it worked. Keeping it here as a reference
  */
 const trackUserRefund = () => {
-  gtag("event", "refund", {
+  window.gtag?.("event", "refund", {
     currency: "USD",
     transaction_id: 174,
     value: 200,
