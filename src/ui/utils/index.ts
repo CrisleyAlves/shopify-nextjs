@@ -4,6 +4,11 @@ export const scrollToTop = () => {
   });
 };
 
-export const getRandomOrderId = () => {
-  return Math.floor(Math.random() * (1000 - 50 + 1)) + 50;
+/**
+ * @description returns a random order id.
+ *
+ * FYI -> increasing range limit so I don't get conflicts in Analytics with transaction_id property.
+ */
+export const getRandomOrderId = (): number => {
+  return Math.floor(Math.random() * (900000 - 50 + 1)) + 50;
 };
