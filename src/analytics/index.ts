@@ -2,6 +2,11 @@ import type { Cart, CartItem } from "@/lib/shopify/cart/types";
 import type { Product, ProductVariant } from "@/lib/shopify/product/types";
 
 import { getRandomOrderId } from "@/ui/utils";
+import {
+  formatCartItemsForAnalyticsUsage,
+  formatProductItemForAddToCartAnalyticsUsage,
+  formatProductItemForAnalyticsUsage,
+} from "@/analytics/utils";
 
 const ANALYTICS_DEBUG_MODE = false;
 
@@ -23,15 +28,7 @@ const trackViewedItem = (product: Product) => {
   window.gtag?.("event", "view_item", {
     currency: product.priceRange.maxVariantPrice.currencyCode,
     value: Number(product.priceRange.maxVariantPrice.amount),
-    items: [
-      {
-        item_id: product.id,
-        item_name: product.title,
-        price: Number(product.priceRange.maxVariantPrice.amount).toFixed(2),
-        brand: product.brand?.value,
-        quantity: 1,
-      },
-    ],
+    items: formatProductItemForAnalyticsUsage(product),
     debug_mode: ANALYTICS_DEBUG_MODE,
   });
 };
@@ -50,15 +47,7 @@ const trackAddToCart = ({
   window.gtag?.("event", "add_to_cart", {
     currency: product.priceRange.maxVariantPrice.currencyCode,
     value: Number(product.priceRange.maxVariantPrice.amount),
-    items: [
-      {
-        item_id: variant.id,
-        item_name: product.title,
-        item_variant: variant.title,
-        price: Number(variant.price).toFixed(2),
-        quantity: 1,
-      },
-    ],
+    items: formatProductItemForAddToCartAnalyticsUsage({ product, variant }),
     debug_mode: ANALYTICS_DEBUG_MODE,
   });
 };
@@ -98,17 +87,7 @@ const trackDecreaseCartQuantity = (cartItem: CartItem) => {
  *
  */
 const trackPurchase = (cart: Cart) => {
-  const cartItems = cart.lines.map((item) => {
-    return {
-      item_id: item.merchandise.product.id,
-      item_name: item.merchandise.product.title,
-      item_variant: item.merchandise.selectedOptions[0].value,
-      price: Number(
-        item.merchandise.product.priceRange.maxVariantPrice.amount
-      ).toFixed(2),
-      quantity: item.quantity,
-    };
-  });
+  const cartItems = formatCartItemsForAnalyticsUsage(cart);
 
   window.gtag?.("event", "purchase", {
     transaction_id: getRandomOrderId(),
@@ -127,16 +106,7 @@ const trackPurchase = (cart: Cart) => {
  *
  */
 const trackBeginCheckout = (cart: Cart) => {
-  const cartItems = cart.lines.map((item) => {
-    return {
-      item_id: item.merchandise.product.id,
-      item_name: item.merchandise.product.title,
-      price: Number(
-        item.merchandise.product.priceRange.maxVariantPrice.amount
-      ).toFixed(2),
-      quantity: item.quantity,
-    };
-  });
+  const cartItems = formatCartItemsForAnalyticsUsage(cart);
 
   window.gtag?.("event", "begin_checkout", {
     currency: cart.cost.totalAmount.currencyCode,
@@ -151,16 +121,7 @@ const trackBeginCheckout = (cart: Cart) => {
  *
  */
 const trackAddShippingInfo = (cart: Cart) => {
-  const cartItems = cart.lines.map((item) => {
-    return {
-      item_id: item.merchandise.product.id,
-      item_name: item.merchandise.product.title,
-      price: Number(
-        item.merchandise.product.priceRange.maxVariantPrice.amount
-      ).toFixed(2),
-      quantity: item.quantity,
-    };
-  });
+  const cartItems = formatCartItemsForAnalyticsUsage(cart);
 
   window.gtag?.("event", "add_shipping_info", {
     currency: cart.cost.totalTaxAmount.currencyCode,
@@ -175,16 +136,7 @@ const trackAddShippingInfo = (cart: Cart) => {
  *
  */
 const trackAddPaymentInfo = (cart: Cart) => {
-  const cartItems = cart.lines.map((item) => {
-    return {
-      item_id: item.merchandise.product.id,
-      item_name: item.merchandise.product.title,
-      price: Number(
-        item.merchandise.product.priceRange.maxVariantPrice.amount
-      ).toFixed(2),
-      quantity: item.quantity,
-    };
-  });
+  const cartItems = formatCartItemsForAnalyticsUsage(cart);
 
   window.gtag?.("event", "add_payment_info", {
     currency: cart.cost.totalAmount.currencyCode,
