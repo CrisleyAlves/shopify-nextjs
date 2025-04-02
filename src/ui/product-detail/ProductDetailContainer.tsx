@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import type { Product, ProductVariant } from "@/lib/shopify/product/types";
 
+import Analytics from "@/analytics";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
 import ProductList from "@/components/shared/ProductList";
@@ -20,11 +21,13 @@ export default function ProductDetailContainer({
   const { setShowCart } = useUI();
 
   useEffect(() => {
+    Analytics.trackViewedItem(product);
     setShowCart(false);
   }, []);
 
   const onClickAddToCart = async (selectedVariant: ProductVariant) => {
     if (!selectedVariant) return;
+    Analytics.trackAddToCart({ product, variant: selectedVariant });
     addToCart(selectedVariant);
   };
 

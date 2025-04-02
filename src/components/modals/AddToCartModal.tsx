@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import type { Product, ProductVariant } from "@/lib/shopify/product/types";
 
+import Analytics from "@/analytics";
 import SizeVariant from "@/components/variants/SizeVariant";
 import Icon from "@/components/shared/Icon";
 
@@ -19,6 +20,10 @@ export default function AddToCartModal({
   const [selectedVariant, setSelectedVariant] = useState<
     ProductVariant | undefined
   >(undefined);
+
+  useEffect(() => {
+    Analytics.trackViewedItem(product);
+  }, []);
 
   return (
     <div className="fixed left-0 top-0 w-full h-full bg-black/80 flex justify-center items-center z-30">

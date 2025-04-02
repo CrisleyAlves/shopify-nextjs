@@ -3,7 +3,9 @@ import clsx from "clsx";
 import { useEffect, useState, useMemo, useCallback, JSX } from "react";
 import { useRouter } from "next/navigation";
 
+import Analytics from "@/analytics";
 import { PAYMENT_OPTIONS, STEPS } from "@/constants";
+import { ROUTES } from "@/lib/shopify/constants";
 import { scrollToTop } from "@/ui/utils";
 import { createCartAndSetCookie } from "@/services/cart-service";
 import { useCart } from "@/context/CartContext";
@@ -12,7 +14,6 @@ import { useUI } from "@/context/UIContext";
 import Summary from "./Summary";
 import ShippingAddress from "./ShippingAddress";
 import CheckoutItems from "./CheckoutItems";
-import { ROUTES } from "@/lib/shopify/constants";
 
 export default function CheckoutContainer(): JSX.Element {
   const router = useRouter();
@@ -29,6 +30,9 @@ export default function CheckoutContainer(): JSX.Element {
   }, [step]);
 
   useEffect(() => {
+    if (cart) {
+      Analytics.trackBeginCheckout(cart);
+    }
     return () => setShowLoader(false);
   }, []);
 
@@ -50,11 +54,22 @@ export default function CheckoutContainer(): JSX.Element {
   );
 
   const onCLickFinishOrder = useCallback(async () => {
+    if (!cart) return;
+
     setShowLoader(true);
-    const cart = await createCartAndSetCookie();
-    updateShopifyCart(cart);
+    Analytics.trackAddPaymentInfo(cart);
+    Analytics.trackPurchase(cart);
+    const shopifyCart = await createCartAndSetCookie();
+    updateShopifyCart(shopifyCart);
     router.replace(ROUTES.SUCCESS);
   }, [router]);
+
+  const onSubmitShippingAddress = useCallback(() => {
+    setStep(STEPS.PRODUCT_REVIEW.id);
+
+    if (!cart) return;
+    Analytics.trackAddShippingInfo(cart);
+  }, []);
 
   return (
     <div className="grid grid-cols-5">
@@ -72,7 +87,7 @@ export default function CheckoutContainer(): JSX.Element {
 
             <div className={handleStepAnimation(STEPS.SHIPPING_ADDRESS.id)}>
               <ShippingAddress
-                onSubmitShippingAddress={() => setStep(STEPS.PRODUCT_REVIEW.id)}
+                onSubmitShippingAddress={() => onSubmitShippingAddress()}
               />
             </div>
           </li>

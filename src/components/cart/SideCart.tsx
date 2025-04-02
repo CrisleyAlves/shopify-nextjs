@@ -15,6 +15,7 @@ const AddToCartModal = dynamic(
   }
 );
 
+import Analytics from "@/analytics";
 import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
@@ -49,10 +50,17 @@ export default function SideCart({
 
   const handleOnClickAddToCart = useCallback(
     (productVariant: ProductVariant) => {
+      if (!selectedProduct?.id) return;
+
+      Analytics.trackAddToCart({
+        product: selectedProduct,
+        variant: productVariant,
+      });
+
       addToCart(productVariant);
       setSelectedProduct(undefined);
     },
-    [addToCart, setSelectedProduct]
+    [addToCart, setSelectedProduct, selectedProduct]
   );
 
   useEffect(() => {
@@ -71,6 +79,7 @@ export default function SideCart({
   const onClickIncreaseItem = useCallback(
     async (item: CartItemType) => {
       increaseItemQuantity(item);
+      Analytics.trackIncreaseCartQuantity(item);
     },
     [setShowLoader, updateShopifyCart, handleNotification]
   );
@@ -78,6 +87,7 @@ export default function SideCart({
   const onClickDecreaseItem = useCallback(
     async (item: CartItemType) => {
       decreaseItemQuantity(item);
+      Analytics.trackDecreaseCartQuantity(item);
     },
     [setShowLoader, updateShopifyCart, handleNotification]
   );
