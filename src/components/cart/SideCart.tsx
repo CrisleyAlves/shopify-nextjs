@@ -5,8 +5,11 @@ import dynamic from "next/dynamic";
 import { MouseEventHandler, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import type { CartItem as CartItemType } from "@/lib/shopify/cart/types";
-import type { Product, ProductVariant } from "@/lib/shopify/product/types";
+import type { CartItemType } from "@/lib/shopify/cart/types";
+import type {
+  ProductType,
+  ProductVariantType,
+} from "@/lib/shopify/product/types";
 
 const AddToCartModal = dynamic(
   () => import("@/components/modals/AddToCartModal"),
@@ -32,7 +35,7 @@ export default function SideCart({
 }: {
   showCart: boolean;
   onClickCloseIcon: MouseEventHandler<HTMLButtonElement>;
-  products: Product[];
+  products: ProductType[];
 }) {
   const router = useRouter();
   const {
@@ -43,13 +46,13 @@ export default function SideCart({
     decreaseItemQuantity,
     addToCart,
   } = useCart();
-  const { setShowLoader, handleNotification, setShowCart } = useUI();
-  const [selectedProduct, setSelectedProduct] = useState<undefined | Product>(
-    undefined
-  );
+  const { setShowLoader, setShowCart } = useUI();
+  const [selectedProduct, setSelectedProduct] = useState<
+    undefined | ProductType
+  >(undefined);
 
   const handleOnClickAddToCart = useCallback(
-    (productVariant: ProductVariant) => {
+    (productVariant: ProductVariantType) => {
       if (!selectedProduct?.id) return;
 
       Analytics.trackAddToCart({
@@ -81,7 +84,7 @@ export default function SideCart({
       increaseItemQuantity(item);
       Analytics.trackIncreaseCartQuantity(item);
     },
-    [setShowLoader, updateShopifyCart, handleNotification]
+    [setShowLoader, updateShopifyCart]
   );
 
   const onClickDecreaseItem = useCallback(
@@ -89,7 +92,7 @@ export default function SideCart({
       decreaseItemQuantity(item);
       Analytics.trackDecreaseCartQuantity(item);
     },
-    [setShowLoader, updateShopifyCart, handleNotification]
+    [setShowLoader, updateShopifyCart]
   );
 
   const onClickCheckout = useCallback(() => {

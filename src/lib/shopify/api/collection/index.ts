@@ -1,24 +1,24 @@
-import { shopifyFetch } from "../shopify-fetch";
+import type {
+  CollectionType,
+  CollectionProductsType,
+  ShopifyCollectionProductsOperationType,
+  ShopifyCollectionsOperationType,
+} from "@/lib/shopify/collection/types";
+
 import {
   getCollectionProductsQuery,
   getCollectionsQuery,
-} from "../../collection/queries";
-import {
-  Collection,
-  CollectionProducts,
-  ShopifyCollectionProductsOperation,
-  ShopifyCollectionsOperation,
-} from "../../collection/types";
-import { TAGS } from "../../constants";
-import { Product } from "../../product/types";
+} from "@/lib/shopify/collection/queries";
+import { TAGS } from "@/lib/shopify/constants";
 import {
   removeEdgesAndNodes,
   reshapeCollections,
   reshapeProducts,
 } from "../utils";
+import { shopifyFetch } from "../shopify-fetch";
 
-export async function getCollections(): Promise<Collection[]> {
-  const res = await shopifyFetch<ShopifyCollectionsOperation>({
+export async function getCollections(): Promise<CollectionType[]> {
+  const res = await shopifyFetch<ShopifyCollectionsOperationType>({
     query: getCollectionsQuery,
     tags: [TAGS.collections],
   });
@@ -42,8 +42,8 @@ export async function getCollectionProducts({
   collection: string;
   reverse?: boolean;
   sortKey?: string;
-}): Promise<CollectionProducts> {
-  const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
+}): Promise<CollectionProductsType> {
+  const res = await shopifyFetch<ShopifyCollectionProductsOperationType>({
     query: getCollectionProductsQuery,
     tags: [TAGS.collections, TAGS.products],
     variables: {

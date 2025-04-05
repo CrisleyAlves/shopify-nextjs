@@ -1,24 +1,24 @@
-import type { Connection, Image, Money } from "../shared/types";
+import type { ConnectionType, ImageType, MoneyType } from "../shared/types";
 
-export type CartProduct = {
+export type CartProductType = {
   id: string;
   handle: string;
   title: string;
   brand: {
     value: string;
   };
-  featuredImage: Image;
+  featuredImage: ImageType;
   priceRange: {
-    maxVariantPrice: Money;
-    minVariantPrice: Money;
+    maxVariantPrice: MoneyType;
+    minVariantPrice: MoneyType;
   };
 };
 
-export type CartItem = {
+export type CartItemType = {
   id: string;
   quantity: number;
   cost: {
-    totalAmount: Money;
+    totalAmount: MoneyType;
   };
   merchandise: {
     id: string;
@@ -27,39 +27,39 @@ export type CartItem = {
       name: string;
       value: string;
     }[];
-    product: CartProduct;
+    product: CartProductType;
   };
 };
 
-export type ShopifyCart = {
+export type ShopifyCartType = {
   id: string | undefined;
   checkoutUrl: string;
   cost: {
-    subtotalAmount: Money;
-    totalAmount: Money;
-    totalTaxAmount: Money;
+    subtotalAmount: MoneyType;
+    totalAmount: MoneyType;
+    totalTaxAmount: MoneyType;
   };
-  lines: Connection<CartItem>;
+  lines: ConnectionType<CartItemType>;
   totalQuantity: number;
 };
 
-export type ShopifyCartOperation = {
+export type ShopifyCartOperationType = {
   data: {
-    cart: ShopifyCart;
+    cart: ShopifyCartType;
   };
   variables: {
     cartId: string;
   };
 };
 
-export type ShopifyCreateCartOperation = {
-  data: { cartCreate: { cart: ShopifyCart } };
+export type ShopifyCreateCartOperationType = {
+  data: { cartCreate: { cart: ShopifyCartType } };
 };
 
-export type ShopifyUpdateCartOperation = {
+export type ShopifyUpdateCartOperationType = {
   data: {
     cartLinesUpdate: {
-      cart: ShopifyCart;
+      cart: ShopifyCartType;
     };
   };
   variables: {
@@ -72,10 +72,10 @@ export type ShopifyUpdateCartOperation = {
   };
 };
 
-export type ShopifyRemoveFromCartOperation = {
+export type ShopifyRemoveFromCartOperationType = {
   data: {
     cartLinesRemove: {
-      cart: ShopifyCart;
+      cart: ShopifyCartType;
     };
   };
   variables: {
@@ -84,14 +84,14 @@ export type ShopifyRemoveFromCartOperation = {
   };
 };
 
-export type Cart = Omit<ShopifyCart, "lines"> & {
-  lines: CartItem[];
+export type CartType = Omit<ShopifyCartType, "lines"> & {
+  lines: CartItemType[];
 };
 
-export type ShopifyAddToCartOperation = {
+export type ShopifyAddToCartOperationType = {
   data: {
     cartLinesAdd: {
-      cart: ShopifyCart;
+      cart: ShopifyCartType;
     };
   };
   variables: {

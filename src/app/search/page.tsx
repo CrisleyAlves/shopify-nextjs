@@ -1,4 +1,4 @@
-import type { Product } from "@/lib/shopify/product/types";
+import type { ProductType } from "@/lib/shopify/product/types";
 
 import { getProducts } from "@/lib/shopify/api/product";
 import { DEFAULT_SORT, sorting } from "@/lib/shopify/constants";
@@ -13,7 +13,7 @@ const getProductsWithArguments = async function ({
   searchParams,
 }: Readonly<{
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
-}>): Promise<Product[]> {
+}>): Promise<ProductType[]> {
   const param = await searchParams;
   const { sort, q: searchValue } = param as { [key: string]: string };
   const { sortKey, reverse } =

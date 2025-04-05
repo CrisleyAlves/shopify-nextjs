@@ -6,8 +6,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import type { Menu } from "@/lib/shopify/menu/types";
-import type { Product } from "@/lib/shopify/product/types";
+import type { MenuType } from "@/lib/shopify/menu/types";
+import type { ProductType } from "@/lib/shopify/product/types";
 
 import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
@@ -24,8 +24,8 @@ export default function Navbar({
   menu,
   products,
 }: {
-  menu: Menu[];
-  products: Product[];
+  menu: MenuType[];
+  products: ProductType[];
 }) {
   const [showBasicNavbar, setShowBasicNavbar] = useState(false);
   const pathname = usePathname();
@@ -61,7 +61,7 @@ export default function Navbar({
     if (showSearchForm) {
       setShowSearchForm(false);
     }
-  }, [pathname]);
+  }, [pathname, setShowSearchForm]);
 
   const onSubmitSearchForm = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {

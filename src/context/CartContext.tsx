@@ -7,20 +7,23 @@ import {
   useState,
 } from "react";
 
-import type { Cart, CartItem } from "@/lib/shopify/cart/types";
-import type { ProductVariant } from "@/lib/shopify/product/types";
+import type { CartType, CartItemType } from "@/lib/shopify/cart/types";
+import type { ProductVariantType } from "@/lib/shopify/product/types";
 
 import { MESSAGES, NOTIFICATION_TYPES } from "@/constants";
-import { addItemToCart, updateItemQuantity } from "@/services/cart-service";
+import {
+  addItemToCartAction,
+  updateItemQuantity,
+} from "@/services/cart-service";
 
 import { useUI } from "./UIContext";
 
 type CartContextType = {
-  cart: Cart | undefined;
+  cart: CartType | undefined;
   updateShopifyCart: (payload: any) => void;
-  addToCart: (selectedVariant: ProductVariant) => void;
-  increaseItemQuantity: (item: CartItem) => void;
-  decreaseItemQuantity: (item: CartItem) => void;
+  addToCart: (selectedVariant: ProductVariantType) => void;
+  increaseItemQuantity: (item: CartItemType) => void;
+  decreaseItemQuantity: (item: CartItemType) => void;
   totalQuantity: number;
   isEmpty: boolean;
 };
@@ -32,17 +35,17 @@ export function CartProvider({
   shopifyCart,
 }: {
   children: React.ReactNode;
-  shopifyCart: Cart | undefined;
+  shopifyCart: CartType | undefined;
 }): ReactElement {
-  const [cart, setCart] = useState<Cart | undefined>(shopifyCart);
+  const [cart, setCart] = useState<CartType | undefined>(shopifyCart);
   const { setShowLoader, handleNotification } = useUI();
 
-  const updateShopifyCart = (payload: Cart) => setCart(payload);
+  const updateShopifyCart = (payload: CartType) => setCart(payload);
 
-  const addToCart = async (selectedVariant: ProductVariant) => {
+  const addToCart = async (selectedVariant: ProductVariantType) => {
     try {
       setShowLoader(true);
-      const shopifyCart = await addItemToCart(selectedVariant.id);
+      const shopifyCart = await addItemToCartAction(selectedVariant.id);
 
       if (shopifyCart instanceof Error) {
         throw shopifyCart;
@@ -67,7 +70,7 @@ export function CartProvider({
     }
   };
 
-  const increaseItemQuantity = async (item: CartItem) => {
+  const increaseItemQuantity = async (item: CartItemType) => {
     try {
       setShowLoader(true);
       const shopifyCart = await updateItemQuantity({
@@ -99,7 +102,7 @@ export function CartProvider({
     }
   };
 
-  const decreaseItemQuantity = async (item: CartItem) => {
+  const decreaseItemQuantity = async (item: CartItemType) => {
     try {
       setShowLoader(true);
       const shopifyCart = await updateItemQuantity({

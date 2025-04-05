@@ -2,7 +2,10 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import type { Product, ProductVariant } from "@/lib/shopify/product/types";
+import type {
+  ProductType,
+  ProductVariantType,
+} from "@/lib/shopify/product/types";
 
 import Analytics from "@/analytics";
 import SizeVariant from "@/components/variants/SizeVariant";
@@ -13,17 +16,17 @@ export default function AddToCartModal({
   onClickAddToCartAction,
   onClickCloseModalAction,
 }: {
-  product: Product;
-  onClickAddToCartAction: (selectedVariant: ProductVariant) => void;
+  product: ProductType;
+  onClickAddToCartAction: (selectedVariant: ProductVariantType) => void;
   onClickCloseModalAction: () => void;
 }) {
   const [selectedVariant, setSelectedVariant] = useState<
-    ProductVariant | undefined
+    ProductVariantType | undefined
   >(undefined);
 
   useEffect(() => {
     Analytics.trackViewedItem(product);
-  }, []);
+  }, [product]);
 
   return (
     <div className="fixed left-0 top-0 w-full h-full bg-black/80 flex justify-center items-center z-30">

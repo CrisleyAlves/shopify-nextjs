@@ -1,8 +1,12 @@
-import type { Page } from "@/lib/shopify/page/types";
+import type { PageType } from "@/lib/shopify/page/types";
 
 import Prose from "@/components/shared/Prose";
 
-export default function PageContainer({ pageDetails }: { pageDetails: Page }) {
+export default function PageContainer({
+  pageDetails,
+}: {
+  pageDetails: PageType;
+}) {
   return (
     <div className="w-full p-5">
       <h1 className="mb-12 mt-12 text-5xl font-bold text-black">

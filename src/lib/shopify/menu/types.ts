@@ -1,9 +1,9 @@
-export type Menu = {
+export type MenuType = {
   title: string;
   path: string;
 };
 
-export type ShopifyMenuOperation = {
+export type ShopifyMenuOperationType = {
   data: {
     menu?: {
       items: {

@@ -1,8 +1,8 @@
-import type { Menu } from "@/lib/shopify/menu/types";
+import type { MenuType } from "@/lib/shopify/menu/types";
 
 import Link from "next/link";
 
-const Footer = ({ footerMenu }: { footerMenu: Menu[] }) => {
+const Footer = ({ footerMenu }: { footerMenu: MenuType[] }) => {
   return (
     <footer className="w-full bg-white border border-t-2 shadow-lg">
       <div

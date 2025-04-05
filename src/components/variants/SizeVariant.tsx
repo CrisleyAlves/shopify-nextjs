@@ -1,7 +1,7 @@
 "use client";
 import clsx from "clsx";
 
-import type { ProductVariant } from "@/lib/shopify/product/types";
+import type { ProductVariantType } from "@/lib/shopify/product/types";
 
 import { PRODUCT_VARIANT_TYPE } from "@/lib/shopify/constants";
 
@@ -10,9 +10,9 @@ export default function SizeVariant({
   onSelectVariantAction,
   selectedVariant,
 }: {
-  sizeVariants: ProductVariant[];
-  onSelectVariantAction: (variant: ProductVariant) => void;
-  selectedVariant: ProductVariant | undefined;
+  sizeVariants: ProductVariantType[];
+  onSelectVariantAction: (variant: ProductVariantType) => void;
+  selectedVariant: ProductVariantType | undefined;
 }) {
   return (
     <>

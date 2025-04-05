@@ -3,7 +3,7 @@ import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import type { Cart } from "@/lib/shopify/cart/types";
+import type { CartType } from "@/lib/shopify/cart/types";
 
 import { TAGS } from "@/lib/shopify/constants";
 import {
@@ -20,9 +20,9 @@ export async function getCartIdFromCookies(): Promise<string | undefined> {
   return cartId;
 }
 
-export async function addItemToCart(
+export async function addItemToCartAction(
   selectedVariantId: string
-): Promise<Cart | Error> {
+): Promise<CartType | Error> {
   const cartId = await getCartIdFromCookies();
 
   if (!cartId || !selectedVariantId) {
@@ -43,7 +43,7 @@ export async function addItemToCart(
 export async function updateItemQuantity(payload: {
   merchandiseId: string;
   quantity: number;
-}): Promise<Cart | Error> {
+}): Promise<CartType | Error> {
   const cartId = await getCartIdFromCookies();
   if (!cartId) {
     return new Error("Missing cart ID");
@@ -104,7 +104,7 @@ export async function redirectToCheckout() {
   redirect(cart.checkoutUrl);
 }
 
-export async function createCartAndSetCookie(): Promise<Cart> {
+export async function createCartAndSetCookie(): Promise<CartType> {
   const cart = await createCart();
   const cookie = await cookies();
   cookie.set("cartId", cart.id!);

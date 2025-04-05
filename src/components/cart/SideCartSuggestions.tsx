@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import type { Product } from "@/lib/shopify/product/types";
+import type { ProductType } from "@/lib/shopify/product/types";
 
 export default function SideCartSuggestions({
   products,
   onClickAddToCart,
 }: {
-  products: Product[];
-  onClickAddToCart: (product: Product) => void;
+  products: ProductType[];
+  onClickAddToCart: (product: ProductType) => void;
 }) {
   return (
     <>

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { MouseEventHandler } from "react";
 
-import type { Menu } from "@/lib/shopify/menu/types";
+import type { MenuType } from "@/lib/shopify/menu/types";
 
 import Icon from "@/components/shared/Icon";
 
@@ -11,7 +11,7 @@ export default function SideMenu({
   showSideNav = false,
   onClickCloseIcon,
 }: {
-  menu: Menu[];
+  menu: MenuType[];
   showSideNav: boolean;
   pathname: string;
   onClickCloseIcon: MouseEventHandler<HTMLButtonElement>;

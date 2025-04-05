@@ -1,5 +1,5 @@
-import type { Cart } from "@/lib/shopify/cart/types";
-import { Product, ProductVariant } from "@/lib/shopify/product/types";
+import type { CartType } from "@/lib/shopify/cart/types";
+import { ProductType, ProductVariantType } from "@/lib/shopify/product/types";
 
 /**
  * @description returns formatted product item for add_to_cart event following Analytic's required format
@@ -9,8 +9,8 @@ export function formatProductItemForAddToCartAnalyticsUsage({
   product,
   variant,
 }: {
-  product: Product;
-  variant: ProductVariant;
+  product: ProductType;
+  variant: ProductVariantType;
 }): Gtag.Item[] {
   return [
     {
@@ -30,7 +30,7 @@ export function formatProductItemForAddToCartAnalyticsUsage({
  * @returns Gtag.Item[]
  */
 export function formatProductItemForAnalyticsUsage(
-  product: Product
+  product: ProductType
 ): Gtag.Item {
   return {
     item_id: product.id,
@@ -46,7 +46,7 @@ export function formatProductItemForAnalyticsUsage(
  * @description returns formatted cart item data following Analytic's required format
  * @returns Gtag.Item[]
  */
-export function formatCartItemsForAnalyticsUsage(cart: Cart): Gtag.Item[] {
+export function formatCartItemsForAnalyticsUsage(cart: CartType): Gtag.Item[] {
   const cartItems = cart.lines.map((item) => {
     return {
       item_id: item.merchandise.product.id,

@@ -1,5 +1,8 @@
-import type { Cart, CartItem } from "@/lib/shopify/cart/types";
-import type { Product, ProductVariant } from "@/lib/shopify/product/types";
+import type { CartType, CartItemType } from "@/lib/shopify/cart/types";
+import type {
+  ProductType,
+  ProductVariantType,
+} from "@/lib/shopify/product/types";
 
 import { getRandomOrderId } from "@/ui/utils";
 import {
@@ -24,7 +27,7 @@ const ANALYTICS_DEBUG_MODE = false;
  *
  * FYI -> This is important to track analytics purchase journey
  */
-const trackViewedItem = (product: Product) => {
+const trackViewedItem = (product: ProductType) => {
   window.gtag?.("event", "view_item", {
     currency: product.priceRange.maxVariantPrice.currencyCode,
     value: Number(product.priceRange.maxVariantPrice.amount),
@@ -41,8 +44,8 @@ const trackAddToCart = ({
   product,
   variant,
 }: {
-  product: Product;
-  variant: ProductVariant;
+  product: ProductType;
+  variant: ProductVariantType;
 }) => {
   window.gtag?.("event", "add_to_cart", {
     currency: product.priceRange.maxVariantPrice.currencyCode,
@@ -56,7 +59,7 @@ const trackAddToCart = ({
  * @description Notify Analytics if user increases cart item quantity
  *
  */
-const trackIncreaseCartQuantity = (cartItem: CartItem) => {
+const trackIncreaseCartQuantity = (cartItem: CartItemType) => {
   window.gtag?.("event", "cart_quantity_increased", {
     event_category: "cart",
     event_label: "cart_quantity_increase",
@@ -71,7 +74,7 @@ const trackIncreaseCartQuantity = (cartItem: CartItem) => {
  * @description Notify Analytics if user decreases cart item quantity
  *
  */
-const trackDecreaseCartQuantity = (cartItem: CartItem) => {
+const trackDecreaseCartQuantity = (cartItem: CartItemType) => {
   window.gtag?.("event", "cart_quantity_decreased", {
     event_category: "cart",
     event_label: "cart_quantity_decrease",
@@ -86,7 +89,7 @@ const trackDecreaseCartQuantity = (cartItem: CartItem) => {
  * @description Notify Analytics when user creates an order
  *
  */
-const trackPurchase = (cart: Cart) => {
+const trackPurchase = (cart: CartType) => {
   const cartItems = formatCartItemsForAnalyticsUsage(cart);
 
   window.gtag?.("event", "purchase", {
@@ -105,7 +108,7 @@ const trackPurchase = (cart: Cart) => {
  * @description Notify Analytics once user starts checkout flow
  *
  */
-const trackBeginCheckout = (cart: Cart) => {
+const trackBeginCheckout = (cart: CartType) => {
   const cartItems = formatCartItemsForAnalyticsUsage(cart);
 
   window.gtag?.("event", "begin_checkout", {
@@ -120,7 +123,7 @@ const trackBeginCheckout = (cart: Cart) => {
  * @description Notify Analytics once user adds shipping info
  *
  */
-const trackAddShippingInfo = (cart: Cart) => {
+const trackAddShippingInfo = (cart: CartType) => {
   const cartItems = formatCartItemsForAnalyticsUsage(cart);
 
   window.gtag?.("event", "add_shipping_info", {
@@ -135,7 +138,7 @@ const trackAddShippingInfo = (cart: Cart) => {
  * @description Notify Analytics once user adds a payment method
  *
  */
-const trackAddPaymentInfo = (cart: Cart) => {
+const trackAddPaymentInfo = (cart: CartType) => {
   const cartItems = formatCartItemsForAnalyticsUsage(cart);
 
   window.gtag?.("event", "add_payment_info", {

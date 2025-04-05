@@ -1,9 +1,13 @@
 import Image from "next/image";
 import { JSX } from "react";
 
-import type { Cart } from "@/lib/shopify/cart/types";
+import type { CartType } from "@/lib/shopify/cart/types";
 
-export default function CheckoutItems({ cart }: { cart: Cart }): JSX.Element {
+export default function CheckoutItems({
+  cart,
+}: {
+  cart: CartType;
+}): JSX.Element {
   return (
     <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {cart?.lines.map((item) => {

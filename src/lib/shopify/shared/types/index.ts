@@ -1,24 +1,24 @@
-export type Money = {
+export type MoneyType = {
   amount: string;
   currencyCode: string;
 };
 
-export type Image = {
+export type ImageType = {
   url: string;
   altText: string;
   width: number;
   height: number;
 };
 
-export type SEO = {
+export type SEOType = {
   title: string;
   description: string;
 };
 
-export type Edge<T> = {
+export type EdgeType<T> = {
   node: T;
 };
 
-export type Connection<T> = {
-  edges: Array<Edge<T>>;
+export type ConnectionType<T> = {
+  edges: Array<EdgeType<T>>;
 };

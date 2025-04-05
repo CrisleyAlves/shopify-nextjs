@@ -1,10 +1,14 @@
-import type { Product } from "@/lib/shopify/product/types";
+import type { ProductType } from "@/lib/shopify/product/types";
 
 import ProductList from "@/components/shared/ProductList";
 
 import CollectionSortSelect from "./CollectionSortSelect";
 
-export default function SearchContainer({ products }: { products: Product[] }) {
+export default function SearchContainer({
+  products,
+}: {
+  products: ProductType[];
+}) {
   return (
     <div className="container pt-5 pb-5">
       <div className="grid md:grid-cols-1">

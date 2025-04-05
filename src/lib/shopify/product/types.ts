@@ -1,12 +1,17 @@
-import type { Connection, Image, Money, SEO } from "../shared/types";
+import type {
+  ConnectionType,
+  ImageType,
+  MoneyType,
+  SEOType,
+} from "../shared/types";
 
-export type ProductOption = {
+export type ProductOptionType = {
   id: string;
   name: string;
   values: string[];
 };
 
-export type ProductVariant = {
+export type ProductVariantType = {
   id: string;
   title: string;
   availableForSale: boolean;
@@ -14,40 +19,40 @@ export type ProductVariant = {
     name: string;
     value: string;
   }[];
-  price: Money;
+  price: MoneyType;
 };
 
-export type ShopifyProduct = {
+export type ShopifyProductType = {
   id: string;
   handle: string;
   availableForSale: boolean;
   title: string;
   description: string;
   descriptionHtml: string;
-  options: ProductOption[];
+  options: ProductOptionType[];
   brand: {
     value: string;
   };
   priceRange: {
-    maxVariantPrice: Money;
-    minVariantPrice: Money;
+    maxVariantPrice: MoneyType;
+    minVariantPrice: MoneyType;
   };
-  variants: Connection<ProductVariant>;
-  featuredImage: Image;
-  images: Connection<Image>;
-  seo: SEO;
+  variants: ConnectionType<ProductVariantType>;
+  featuredImage: ImageType;
+  images: ConnectionType<ImageType>;
+  seo: SEOType;
   tags: string[];
   updatedAt: string;
 };
 
-export type Product = Omit<ShopifyProduct, "variants" | "images"> & {
-  variants: ProductVariant[];
-  images: Image[];
+export type ProductType = Omit<ShopifyProductType, "variants" | "images"> & {
+  variants: ProductVariantType[];
+  images: ImageType[];
 };
 
-export type ShopifyProductsOperation = {
+export type ShopifyProductsOperationType = {
   data: {
-    products: Connection<ShopifyProduct>;
+    products: ConnectionType<ShopifyProductType>;
   };
   variables: {
     query?: string;
@@ -56,16 +61,16 @@ export type ShopifyProductsOperation = {
   };
 };
 
-export type ShopifyProductOperation = {
-  data: { product: ShopifyProduct };
+export type ShopifyProductOperationType = {
+  data: { product: ShopifyProductType };
   variables: {
     handle: string;
   };
 };
 
-export type ShopifyProductRecommendationsOperation = {
+export type ShopifyProductRecommendationsOperationType = {
   data: {
-    productRecommendations: ShopifyProduct[];
+    productRecommendations: ShopifyProductType[];
   };
   variables: {
     productId: string;

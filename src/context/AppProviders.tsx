@@ -1,4 +1,4 @@
-import type { Cart } from "@/lib/shopify/cart/types";
+import type { CartType } from "@/lib/shopify/cart/types";
 
 import { CartProvider } from "./CartContext";
 import { UIProvider } from "./UIContext";
@@ -8,7 +8,7 @@ export function AppProviders({
   shopifyCart,
 }: {
   children: React.ReactNode;
-  shopifyCart: Cart | undefined;
+  shopifyCart: CartType | undefined;
 }) {
   return (
     <UIProvider>

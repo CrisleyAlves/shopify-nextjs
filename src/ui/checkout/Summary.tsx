@@ -1,12 +1,12 @@
 import { JSX } from "react";
 
-import type { Cart } from "@/lib/shopify/cart/types";
+import type { CartType } from "@/lib/shopify/cart/types";
 
 export default function Summary({
   cart,
   hideSummaryTitle,
 }: {
-  cart: Cart;
+  cart: CartType;
   hideSummaryTitle?: boolean;
 }): JSX.Element {
   return (

@@ -1,10 +1,10 @@
 import type {
-  Cart,
-  ShopifyAddToCartOperation,
-  ShopifyCartOperation,
-  ShopifyCreateCartOperation,
-  ShopifyRemoveFromCartOperation,
-  ShopifyUpdateCartOperation,
+  CartType,
+  ShopifyAddToCartOperationType,
+  ShopifyCartOperationType,
+  ShopifyCreateCartOperationType,
+  ShopifyRemoveFromCartOperationType,
+  ShopifyUpdateCartOperationType,
 } from "@/lib/shopify/cart/types";
 
 import { shopifyFetch } from "../shopify-fetch";
@@ -18,8 +18,8 @@ import { getCartQuery } from "../../cart/queries";
 import { TAGS } from "../../constants";
 import { reshapeCart } from "../utils";
 
-export async function createCart(): Promise<Cart> {
-  const res = await shopifyFetch<ShopifyCreateCartOperation>({
+export async function createCart(): Promise<CartType> {
+  const res = await shopifyFetch<ShopifyCreateCartOperationType>({
     query: createCartMutation,
     cache: "no-store",
   });
@@ -29,10 +29,10 @@ export async function createCart(): Promise<Cart> {
 
 export async function getCart(
   cartId: string | undefined
-): Promise<Cart | undefined> {
+): Promise<CartType | undefined> {
   if (!cartId) return undefined;
 
-  const res = await shopifyFetch<ShopifyCartOperation>({
+  const res = await shopifyFetch<ShopifyCartOperationType>({
     cache: "no-cache",
     query: getCartQuery,
     variables: { cartId },
@@ -50,8 +50,8 @@ export async function getCart(
 export async function removeFromCart(
   cartId: string,
   lineIds: string[]
-): Promise<Cart> {
-  const res = await shopifyFetch<ShopifyRemoveFromCartOperation>({
+): Promise<CartType> {
+  const res = await shopifyFetch<ShopifyRemoveFromCartOperationType>({
     query: removeFromCartMutation,
     variables: {
       cartId,
@@ -66,8 +66,8 @@ export async function removeFromCart(
 export async function updateCart(
   cartId: string,
   lines: { id: string; merchandiseId: string; quantity: number }[]
-): Promise<Cart> {
-  const res = await shopifyFetch<ShopifyUpdateCartOperation>({
+): Promise<CartType> {
+  const res = await shopifyFetch<ShopifyUpdateCartOperationType>({
     query: editCartItemsMutation,
     variables: {
       cartId,
@@ -82,8 +82,8 @@ export async function updateCart(
 export async function addToCart(
   cartId: string,
   lines: { merchandiseId: string; quantity: number }[]
-): Promise<Cart> {
-  const res = await shopifyFetch<ShopifyAddToCartOperation>({
+): Promise<CartType> {
+  const res = await shopifyFetch<ShopifyAddToCartOperationType>({
     query: addToCartMutation,
     variables: {
       cartId,

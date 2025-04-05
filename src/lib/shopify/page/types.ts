@@ -1,23 +1,23 @@
-import type { Connection, SEO } from "../shared/types";
+import type { ConnectionType, SEOType } from "../shared/types";
 
-export type Page = {
+export type PageType = {
   id: string;
   title: string;
   handle: string;
   body: string;
   bodySummary: string;
-  seo?: SEO;
+  seo?: SEOType;
   createdAt: string;
   updatedAt: string;
 };
 
-export type ShopifyPageOperation = {
-  data: { pageByHandle: Page };
+export type ShopifyPageOperationType = {
+  data: { pageByHandle: PageType };
   variables: { handle: string };
 };
 
-export type ShopifyPagesOperation = {
+export type ShopifyPagesOperationType = {
   data: {
-    pages: Connection<Page>;
+    pages: ConnectionType<PageType>;
   };
 };

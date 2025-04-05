@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-import type { Product } from "@/lib/shopify/product/types";
+import type { ProductType } from "@/lib/shopify/product/types";
 
 import ProductList from "@/components/shared/ProductList";
 
@@ -15,7 +15,7 @@ export default function SuccessContainer({
   recommendedProducts,
 }: {
   orderId: number;
-  recommendedProducts: Product[];
+  recommendedProducts: ProductType[];
 }) {
   const router = useRouter();
 

@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import type { Collection } from "@/lib/shopify/collection/types";
+import type { CollectionType } from "@/lib/shopify/collection/types";
 
 export default function CollectionBanners({
   collections,
 }: {
-  collections: Collection[];
+  collections: CollectionType[];
 }): React.JSX.Element {
   return (
     <section className="container px-5 mt-5">

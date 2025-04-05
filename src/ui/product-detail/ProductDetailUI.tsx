@@ -1,7 +1,10 @@
 "use client";
 import { useState, useCallback, useMemo } from "react";
 
-import type { Product, ProductVariant } from "@/lib/shopify/product/types";
+import type {
+  ProductType,
+  ProductVariantType,
+} from "@/lib/shopify/product/types";
 
 import Prose from "@/components/shared/Prose";
 import GuaranteeStatement from "@/components/shared/GuaranteeStatement";
@@ -14,11 +17,11 @@ export default function ProductDetail({
   product,
   onClickAddToCartAction,
 }: {
-  product: Product;
-  onClickAddToCartAction: (selectedVariant: ProductVariant) => void;
+  product: ProductType;
+  onClickAddToCartAction: (selectedVariant: ProductVariantType) => void;
 }) {
   const [selectedVariant, setSelectedVariant] = useState<
-    ProductVariant | undefined
+    ProductVariantType | undefined
   >(undefined);
 
   const handleOnClickAddToCart = useCallback(() => {

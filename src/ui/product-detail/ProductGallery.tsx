@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-import type { Image as ImageType } from "@/lib/shopify/shared/types";
+import type { ImageType } from "@/lib/shopify/shared/types";
 
 import { IMAGE_NOT_AVAILABLE_PATH } from "@/lib/shopify/constants";
 import { scrollToTop } from "@/ui/utils";

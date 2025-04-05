@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import type { Product } from "@/lib/shopify/product/types";
+import type { ProductType } from "@/lib/shopify/product/types";
 
 import Icon from "@/components/shared/Icon";
 
@@ -10,7 +10,7 @@ export default function ProductList({
   products,
 }: {
   title?: string;
-  products: Product[];
+  products: ProductType[];
 }) {
   return (
     <section>
@@ -30,7 +30,7 @@ export default function ProductList({
   );
 }
 
-const ProductCard = ({ product }: { product: Product }) => {
+const ProductCard = ({ product }: { product: ProductType }) => {
   return (
     <div
       className="

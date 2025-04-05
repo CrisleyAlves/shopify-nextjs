@@ -1,35 +1,35 @@
-import type { Product, ShopifyProduct } from "../product/types";
-import type { Connection, Image, SEO } from "../shared/types";
+import type { ProductType, ShopifyProductType } from "../product/types";
+import type { ConnectionType, ImageType, SEOType } from "../shared/types";
 
-export type CollectionProducts = {
-  products: Product[];
+export type CollectionProductsType = {
+  products: ProductType[];
   descriptionHtml: string;
 };
 
-export type ShopifyCollection = {
+export type ShopifyCollectionType = {
   handle: string;
   title: string;
   description: string;
-  image: Image;
-  seo: SEO;
+  image: ImageType;
+  seo: SEOType;
   updatedAt: string;
 };
 
-export type Collection = ShopifyCollection & {
+export type CollectionType = ShopifyCollectionType & {
   path: string;
 };
 
-export type ShopifyCollectionsOperation = {
+export type ShopifyCollectionsOperationType = {
   data: {
-    collections: Connection<ShopifyCollection>;
+    collections: ConnectionType<ShopifyCollectionType>;
   };
 };
 
-export type ShopifyCollectionProductsOperation = {
+export type ShopifyCollectionProductsOperationType = {
   data: {
     collection: {
       descriptionHtml: string;
-      products: Connection<ShopifyProduct>;
+      products: ConnectionType<ShopifyProductType>;
     };
   };
   variables: {

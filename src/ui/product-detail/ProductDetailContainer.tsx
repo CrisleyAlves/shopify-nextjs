@@ -1,7 +1,10 @@
 "use client";
 import { useEffect } from "react";
 
-import type { Product, ProductVariant } from "@/lib/shopify/product/types";
+import type {
+  ProductType,
+  ProductVariantType,
+} from "@/lib/shopify/product/types";
 
 import Analytics from "@/analytics";
 import { useCart } from "@/context/CartContext";
@@ -14,8 +17,8 @@ export default function ProductDetailContainer({
   product,
   recommended,
 }: {
-  product: Product;
-  recommended: Product[];
+  product: ProductType;
+  recommended: ProductType[];
 }) {
   const { addToCart } = useCart();
   const { setShowCart } = useUI();
@@ -25,7 +28,7 @@ export default function ProductDetailContainer({
     setShowCart(false);
   }, []);
 
-  const onClickAddToCart = async (selectedVariant: ProductVariant) => {
+  const onClickAddToCart = async (selectedVariant: ProductVariantType) => {
     if (!selectedVariant) return;
     Analytics.trackAddToCart({ product, variant: selectedVariant });
     addToCart(selectedVariant);

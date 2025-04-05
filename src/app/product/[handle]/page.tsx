@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import {
@@ -11,7 +12,7 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ handle: string }>;
-}): Promise<any> {
+}): Promise<Metadata> {
   const product = await getProduct((await params).handle);
   if (!product) return notFound();
   const { url, width, height, altText: alt } = product.featuredImage || {};
