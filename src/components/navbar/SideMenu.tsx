@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { MouseEventHandler } from "react";
 
-import type { MenuType } from "@/lib/shopify/menu/types";
+import type { MenuType } from "@/lib/shopify/types/";
 
 import Icon from "@/components/shared/Icon";
 

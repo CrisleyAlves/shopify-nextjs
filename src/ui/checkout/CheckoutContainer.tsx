@@ -50,7 +50,7 @@ export default function CheckoutContainer(): JSX.Element {
       if (newStep > step) return;
       setStep(newStep);
     },
-    [step]
+    [step, setStep]
   );
 
   const onCLickFinishOrder = useCallback(async () => {
@@ -62,14 +62,14 @@ export default function CheckoutContainer(): JSX.Element {
     const shopifyCart = await createCartAndSetCookie();
     updateShopifyCart(shopifyCart);
     router.replace(ROUTES.SUCCESS);
-  }, [router]);
+  }, [router, setShowLoader, updateShopifyCart, cart]);
 
   const onSubmitShippingAddress = useCallback(() => {
     setStep(STEPS.PRODUCT_REVIEW.id);
 
     if (!cart) return;
     Analytics.trackAddShippingInfo(cart);
-  }, []);
+  }, [setStep, cart]);
 
   return (
     <div className="grid grid-cols-5">

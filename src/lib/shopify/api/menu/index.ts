@@ -1,10 +1,11 @@
-import { shopifyFetch } from "../shopify-fetch";
+import type { MenuType, ShopifyMenuOperationType } from "../../types/";
+
+import shopifyFetch from "../shopify-fetch";
 import { DOMAIN, TAGS } from "../../constants";
 import { getMenuQuery } from "../../menu/queries";
-import { Menu, ShopifyMenuOperation } from "../../menu/types";
 
-export async function getMenu(handle: string): Promise<Menu[]> {
-  const res = await shopifyFetch<ShopifyMenuOperation>({
+export async function getMenu(handle: string): Promise<MenuType[]> {
+  const res = await shopifyFetch<ShopifyMenuOperationType>({
     query: getMenuQuery,
     tags: [TAGS.collections],
     variables: {

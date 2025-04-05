@@ -1,4 +1,4 @@
-import type { MenuType } from "@/lib/shopify/menu/types";
+import type { MenuType } from "@/lib/shopify/types/";
 
 import Link from "next/link";
 

@@ -1,4 +1,4 @@
-import type { ConnectionType, SEOType } from "../shared/types";
+import type { ConnectionType, SEOType } from "./shared";
 
 export type PageType = {
   id: string;

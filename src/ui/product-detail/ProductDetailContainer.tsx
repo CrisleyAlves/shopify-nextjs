@@ -1,10 +1,7 @@
 "use client";
 import { useEffect } from "react";
 
-import type {
-  ProductType,
-  ProductVariantType,
-} from "@/lib/shopify/product/types";
+import type { ProductType, ProductVariantType } from "@/lib/shopify/types/";
 
 import Analytics from "@/analytics";
 import { useCart } from "@/context/CartContext";
@@ -26,7 +23,7 @@ export default function ProductDetailContainer({
   useEffect(() => {
     Analytics.trackViewedItem(product);
     setShowCart(false);
-  }, []);
+  }, [product.id]);
 
   const onClickAddToCart = async (selectedVariant: ProductVariantType) => {
     if (!selectedVariant) return;

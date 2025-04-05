@@ -1,14 +1,20 @@
-import { Cart, ShopifyCart } from "../../cart/types";
-import { Collection, ShopifyCollection } from "../../collection/types";
-import { HIDDEN_PRODUCT_TAG } from "../../constants";
-import { ShopifyProduct } from "../../product/types";
-import { Connection, Image } from "../../shared/types";
+import type {
+  CartType,
+  ShopifyCartType,
+  CollectionType,
+  ShopifyCollectionType,
+  ShopifyProductType,
+  ConnectionType,
+  ImageType,
+} from "@/lib/shopify/types";
 
-export function removeEdgesAndNodes<T>(array: Connection<T>): T[] {
+import { HIDDEN_PRODUCT_TAG } from "@/lib/shopify/constants";
+
+export function removeEdgesAndNodes<T>(array: ConnectionType<T>): T[] {
   return array.edges.map((edge) => edge?.node);
 }
 
-export function reshapeProducts(products: ShopifyProduct[]) {
+export function reshapeProducts(products: ShopifyProductType[]) {
   const reshapedProducts = [];
 
   for (const product of products) {
@@ -24,7 +30,10 @@ export function reshapeProducts(products: ShopifyProduct[]) {
   return reshapedProducts;
 }
 
-export function reshapeImages(images: Connection<Image>, productTitle: string) {
+export function reshapeImages(
+  images: ConnectionType<ImageType>,
+  productTitle: string
+) {
   const flattened = removeEdgesAndNodes(images);
 
   return flattened.map((image) => {
@@ -38,7 +47,7 @@ export function reshapeImages(images: Connection<Image>, productTitle: string) {
 }
 
 export function reshapeProduct(
-  product: ShopifyProduct,
+  product: ShopifyProductType,
   filterHiddenProducts: boolean = true
 ) {
   if (
@@ -58,8 +67,8 @@ export function reshapeProduct(
 }
 
 export function reshapeCollection(
-  collection: ShopifyCollection
-): Collection | undefined {
+  collection: ShopifyCollectionType
+): CollectionType | undefined {
   if (!collection) return undefined;
 
   return {
@@ -68,7 +77,7 @@ export function reshapeCollection(
   };
 }
 
-export function reshapeCollections(collections: ShopifyCollection[]) {
+export function reshapeCollections(collections: ShopifyCollectionType[]) {
   const reshapedCollections = [];
 
   for (const collection of collections) {
@@ -84,7 +93,7 @@ export function reshapeCollections(collections: ShopifyCollection[]) {
   return reshapedCollections;
 }
 
-export function reshapeCart(cart: ShopifyCart): Cart {
+export function reshapeCart(cart: ShopifyCartType): CartType {
   if (!cart.cost?.totalTaxAmount) {
     cart.cost.totalTaxAmount = {
       amount: "0.0",

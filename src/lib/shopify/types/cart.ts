@@ -1,4 +1,4 @@
-import type { ConnectionType, ImageType, MoneyType } from "../shared/types";
+import type { ConnectionType, ImageType, MoneyType } from "./shared";
 
 export type CartProductType = {
   id: string;

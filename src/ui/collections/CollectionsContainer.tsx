@@ -1,4 +1,4 @@
-import type { ProductType } from "@/lib/shopify/product/types";
+import type { ProductType } from "@/lib/shopify/types/";
 
 import ProductList from "@/components/shared/ProductList";
 

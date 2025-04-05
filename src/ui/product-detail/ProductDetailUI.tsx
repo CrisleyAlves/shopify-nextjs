@@ -1,10 +1,7 @@
 "use client";
 import { useState, useCallback, useMemo } from "react";
 
-import type {
-  ProductType,
-  ProductVariantType,
-} from "@/lib/shopify/product/types";
+import type { ProductType, ProductVariantType } from "@/lib/shopify/types/";
 
 import Prose from "@/components/shared/Prose";
 import GuaranteeStatement from "@/components/shared/GuaranteeStatement";

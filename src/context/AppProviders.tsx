@@ -1,4 +1,4 @@
-import type { CartType } from "@/lib/shopify/cart/types";
+import type { CartType } from "@/lib/shopify/types/";
 
 import { CartProvider } from "./CartContext";
 import { UIProvider } from "./UIContext";

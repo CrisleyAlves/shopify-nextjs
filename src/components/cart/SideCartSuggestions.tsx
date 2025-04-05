@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import type { ProductType } from "@/lib/shopify/product/types";
+import type { ProductType } from "@/lib/shopify/types/product";
 
 export default function SideCartSuggestions({
   products,

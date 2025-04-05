@@ -1,5 +1,8 @@
-import type { CartType } from "@/lib/shopify/cart/types";
-import { ProductType, ProductVariantType } from "@/lib/shopify/product/types";
+import {
+  ProductType,
+  ProductVariantType,
+  CartType,
+} from "@/lib/shopify/types/";
 
 /**
  * @description returns formatted product item for add_to_cart event following Analytic's required format

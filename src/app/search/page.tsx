@@ -1,4 +1,4 @@
-import type { ProductType } from "@/lib/shopify/product/types";
+import type { ProductType } from "@/lib/shopify/types/";
 
 import { getProducts } from "@/lib/shopify/api/product";
 import { DEFAULT_SORT, sorting } from "@/lib/shopify/constants";

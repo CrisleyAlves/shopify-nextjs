@@ -1,7 +1,7 @@
 "use client";
 import clsx from "clsx";
 
-import type { ProductVariantType } from "@/lib/shopify/product/types";
+import type { ProductVariantType } from "@/lib/shopify/types/";
 
 import { PRODUCT_VARIANT_TYPE } from "@/lib/shopify/constants";
 

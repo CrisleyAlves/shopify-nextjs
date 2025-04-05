@@ -1,9 +1,4 @@
-import type {
-  ConnectionType,
-  ImageType,
-  MoneyType,
-  SEOType,
-} from "../shared/types";
+import type { ConnectionType, ImageType, MoneyType, SEOType } from "./shared";
 
 export type ProductOptionType = {
   id: string;

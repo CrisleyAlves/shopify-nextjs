@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { JSX } from "react";
 
-import type { CartType } from "@/lib/shopify/cart/types";
+import type { CartType } from "@/lib/shopify/types/";
 
 export default function CheckoutItems({
   cart,

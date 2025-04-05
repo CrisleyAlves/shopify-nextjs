@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import type { CollectionType } from "@/lib/shopify/collection/types";
+import type { CollectionType } from "@/lib/shopify/types";
 
 /**
  * @todo considering to add some complex filters here as an exercise, but I don't know which ones yet...

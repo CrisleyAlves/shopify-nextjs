@@ -5,18 +5,18 @@ import type {
   ShopifyCreateCartOperationType,
   ShopifyRemoveFromCartOperationType,
   ShopifyUpdateCartOperationType,
-} from "@/lib/shopify/cart/types";
+} from "@/lib/shopify/types/";
 
-import { shopifyFetch } from "../shopify-fetch";
 import {
   addToCartMutation,
   createCartMutation,
   editCartItemsMutation,
   removeFromCartMutation,
-} from "../../cart/mutations";
-import { getCartQuery } from "../../cart/queries";
-import { TAGS } from "../../constants";
+} from "@/lib/shopify/cart/mutations";
+import { getCartQuery } from "@/lib/shopify/cart/queries";
+import { TAGS } from "@/lib/shopify/constants";
 import { reshapeCart } from "../utils";
+import shopifyFetch from "../shopify-fetch";
 
 export async function createCart(): Promise<CartType> {
   const res = await shopifyFetch<ShopifyCreateCartOperationType>({

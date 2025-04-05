@@ -2,10 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import type {
-  ProductType,
-  ProductVariantType,
-} from "@/lib/shopify/product/types";
+import type { ProductType, ProductVariantType } from "@/lib/shopify/types/";
 
 import Analytics from "@/analytics";
 import SizeVariant from "@/components/variants/SizeVariant";

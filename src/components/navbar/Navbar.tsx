@@ -6,8 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import type { MenuType } from "@/lib/shopify/menu/types";
-import type { ProductType } from "@/lib/shopify/product/types";
+import type { ProductType, MenuType } from "@/lib/shopify/types/";
 
 import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
@@ -61,7 +60,7 @@ export default function Navbar({
     if (showSearchForm) {
       setShowSearchForm(false);
     }
-  }, [pathname, setShowSearchForm]);
+  }, [pathname]);
 
   const onSubmitSearchForm = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -82,10 +81,14 @@ export default function Navbar({
   );
 
   const stickNavbar = () => {
-    if (window !== undefined) {
-      const windowHeight = window.scrollY;
-      windowHeight > 64 ? setShowStickyNav(true) : setShowStickyNav(false);
+    const windowHeight = window.scrollY;
+
+    if (windowHeight > 64) {
+      setShowStickyNav(true);
+      return;
     }
+
+    setShowStickyNav(false);
   };
 
   useEffect(() => {

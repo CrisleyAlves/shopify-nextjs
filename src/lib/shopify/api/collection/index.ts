@@ -3,7 +3,7 @@ import type {
   CollectionProductsType,
   ShopifyCollectionProductsOperationType,
   ShopifyCollectionsOperationType,
-} from "@/lib/shopify/collection/types";
+} from "@/lib/shopify/types";
 
 import {
   getCollectionProductsQuery,
@@ -15,7 +15,7 @@ import {
   reshapeCollections,
   reshapeProducts,
 } from "../utils";
-import { shopifyFetch } from "../shopify-fetch";
+import shopifyFetch from "../shopify-fetch";
 
 export async function getCollections(): Promise<CollectionType[]> {
   const res = await shopifyFetch<ShopifyCollectionsOperationType>({

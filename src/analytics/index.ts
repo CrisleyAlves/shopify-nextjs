@@ -1,8 +1,9 @@
-import type { CartType, CartItemType } from "@/lib/shopify/cart/types";
 import type {
   ProductType,
   ProductVariantType,
-} from "@/lib/shopify/product/types";
+  CartType,
+  CartItemType,
+} from "@/lib/shopify/types/";
 
 import { getRandomOrderId } from "@/ui/utils";
 import {
@@ -163,7 +164,7 @@ const trackUserRefund = () => {
   });
 };
 
-export default {
+const Analytics = {
   trackViewedItem,
   trackAddToCart,
   trackIncreaseCartQuantity,
@@ -174,3 +175,5 @@ export default {
   trackAddPaymentInfo,
   trackUserRefund,
 };
+
+export default Analytics;

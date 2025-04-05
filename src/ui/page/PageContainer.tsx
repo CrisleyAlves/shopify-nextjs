@@ -1,4 +1,4 @@
-import type { PageType } from "@/lib/shopify/page/types";
+import type { PageType } from "@/lib/shopify/types/";
 
 import Prose from "@/components/shared/Prose";
 

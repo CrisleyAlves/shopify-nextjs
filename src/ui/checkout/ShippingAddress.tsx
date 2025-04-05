@@ -30,7 +30,7 @@ const ShippingAddress: FC<{ onSubmitShippingAddress: () => void }> = ({
     },
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = () => {
     onSubmitShippingAddress();
   };
 

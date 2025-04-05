@@ -7,8 +7,11 @@ import {
   useState,
 } from "react";
 
-import type { CartType, CartItemType } from "@/lib/shopify/cart/types";
-import type { ProductVariantType } from "@/lib/shopify/product/types";
+import type {
+  CartType,
+  CartItemType,
+  ProductVariantType,
+} from "@/lib/shopify/types/";
 
 import { MESSAGES, NOTIFICATION_TYPES } from "@/constants";
 import {
@@ -20,7 +23,7 @@ import { useUI } from "./UIContext";
 
 type CartContextType = {
   cart: CartType | undefined;
-  updateShopifyCart: (payload: any) => void;
+  updateShopifyCart: (payload: CartType) => void;
   addToCart: (selectedVariant: ProductVariantType) => void;
   increaseItemQuantity: (item: CartItemType) => void;
   decreaseItemQuantity: (item: CartItemType) => void;

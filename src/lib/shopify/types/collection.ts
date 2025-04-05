@@ -1,5 +1,10 @@
-import type { ProductType, ShopifyProductType } from "../product/types";
-import type { ConnectionType, ImageType, SEOType } from "../shared/types";
+import type {
+  ProductType,
+  ShopifyProductType,
+  ConnectionType,
+  ImageType,
+  SEOType,
+} from "./";
 
 export type CollectionProductsType = {
   products: ProductType[];

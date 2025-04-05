@@ -5,11 +5,11 @@ import dynamic from "next/dynamic";
 import { MouseEventHandler, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import type { CartItemType } from "@/lib/shopify/cart/types";
 import type {
+  CartItemType,
   ProductType,
   ProductVariantType,
-} from "@/lib/shopify/product/types";
+} from "@/lib/shopify/types/";
 
 const AddToCartModal = dynamic(
   () => import("@/components/modals/AddToCartModal"),
@@ -41,7 +41,6 @@ export default function SideCart({
   const {
     cart,
     isEmpty,
-    updateShopifyCart,
     increaseItemQuantity,
     decreaseItemQuantity,
     addToCart,
@@ -84,7 +83,7 @@ export default function SideCart({
       increaseItemQuantity(item);
       Analytics.trackIncreaseCartQuantity(item);
     },
-    [setShowLoader, updateShopifyCart]
+    [increaseItemQuantity]
   );
 
   const onClickDecreaseItem = useCallback(
@@ -92,7 +91,7 @@ export default function SideCart({
       decreaseItemQuantity(item);
       Analytics.trackDecreaseCartQuantity(item);
     },
-    [setShowLoader, updateShopifyCart]
+    [decreaseItemQuantity]
   );
 
   const onClickCheckout = useCallback(() => {
@@ -100,7 +99,7 @@ export default function SideCart({
     setTimeout(() => {
       router.push(ROUTES.CHECKOUT);
     }, 2000);
-  }, [router]);
+  }, [router, setShowLoader]);
 
   const totalText = `Total: (${cart?.totalQuantity}) Item(s)`;
 

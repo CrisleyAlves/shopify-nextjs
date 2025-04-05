@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import type { CollectionType } from "@/lib/shopify/collection/types";
+import type { CollectionType } from "@/lib/shopify/types";
 
 export default function CollectionBanners({
   collections,

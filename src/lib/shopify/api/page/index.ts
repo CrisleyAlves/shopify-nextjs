@@ -1,14 +1,15 @@
-import { getPageQuery, getPagesQuery } from "../../page/fragments";
-import {
-  Page,
-  ShopifyPageOperation,
-  ShopifyPagesOperation,
-} from "../../page/types";
-import { shopifyFetch } from "../shopify-fetch";
-import { removeEdgesAndNodes } from "../utils";
+import type {
+  PageType,
+  ShopifyPageOperationType,
+  ShopifyPagesOperationType,
+} from "@/lib/shopify/types/";
 
-export async function getPage(handle: string): Promise<Page> {
-  const res = await shopifyFetch<ShopifyPageOperation>({
+import { getPageQuery, getPagesQuery } from "../../page/fragments";
+import { removeEdgesAndNodes } from "../utils";
+import shopifyFetch from "../shopify-fetch";
+
+export async function getPage(handle: string): Promise<PageType> {
+  const res = await shopifyFetch<ShopifyPageOperationType>({
     query: getPageQuery,
     cache: "no-store",
     variables: { handle },
@@ -17,8 +18,8 @@ export async function getPage(handle: string): Promise<Page> {
   return res.body.data.pageByHandle;
 }
 
-export async function getPages(): Promise<Page[]> {
-  const res = await shopifyFetch<ShopifyPagesOperation>({
+export async function getPages(): Promise<PageType[]> {
+  const res = await shopifyFetch<ShopifyPagesOperationType>({
     query: getPagesQuery,
     cache: "no-store",
   });

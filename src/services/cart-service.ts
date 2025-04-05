@@ -3,7 +3,7 @@ import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import type { CartType } from "@/lib/shopify/cart/types";
+import type { CartType } from "@/lib/shopify/types/";
 
 import { TAGS } from "@/lib/shopify/constants";
 import {
@@ -36,6 +36,7 @@ export async function addItemToCartAction(
     revalidateTag(TAGS.cart);
     return response;
   } catch (error) {
+    console.error(error);
     return new Error("Error adding item to cart");
   }
 }

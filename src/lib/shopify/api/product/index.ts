@@ -1,20 +1,23 @@
-import { TAGS } from "../../constants";
+import type {
+  ProductType,
+  ShopifyProductOperationType,
+  ShopifyProductRecommendationsOperationType,
+  ShopifyProductsOperationType,
+} from "@/lib/shopify/types/";
+
+import { TAGS } from "@/lib/shopify/constants";
 import {
   getProductQuery,
   getProductRecommendationsQuery,
   getProductsQuery,
-} from "../../product/queries";
-import {
-  Product,
-  ShopifyProductOperation,
-  ShopifyProductRecommendationsOperation,
-  ShopifyProductsOperation,
-} from "../../product/types";
-import { shopifyFetch } from "../shopify-fetch";
+} from "@/lib/shopify/product/queries";
 import { removeEdgesAndNodes, reshapeProduct, reshapeProducts } from "../utils";
+import shopifyFetch from "../shopify-fetch";
 
-export async function getProduct(handle: string): Promise<Product | undefined> {
-  const res = await shopifyFetch<ShopifyProductOperation>({
+export async function getProduct(
+  handle: string
+): Promise<ProductType | undefined> {
+  const res = await shopifyFetch<ShopifyProductOperationType>({
     query: getProductQuery,
     tags: [TAGS.products],
     variables: {
@@ -26,8 +29,8 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
 
 export async function getProductRecommendations(
   productId: string
-): Promise<Product[]> {
-  const res = await shopifyFetch<ShopifyProductRecommendationsOperation>({
+): Promise<ProductType[]> {
+  const res = await shopifyFetch<ShopifyProductRecommendationsOperationType>({
     query: getProductRecommendationsQuery,
     tags: [TAGS.products],
     variables: {
@@ -47,8 +50,8 @@ export async function getProducts({
   query?: string;
   reverse?: boolean;
   sortKey?: string;
-}): Promise<Product[]> {
-  const res = await shopifyFetch<ShopifyProductsOperation>({
+}): Promise<ProductType[]> {
+  const res = await shopifyFetch<ShopifyProductsOperationType>({
     query: getProductsQuery,
     tags: [TAGS.products],
     variables: {
