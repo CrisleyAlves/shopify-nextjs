@@ -1,17 +1,23 @@
 import Image from "next/image";
 
-const DEFAULT_ICON_SIZE = 24;
-
 export default function Icon({
   path,
-  width = DEFAULT_ICON_SIZE,
-  height = DEFAULT_ICON_SIZE,
   altText,
+  className = "w-5 md:w-6",
 }: {
   width?: number;
   height?: number;
   path: string;
   altText: string;
+  className?: string;
 }) {
-  return <Image src={path} width={width} height={height} alt={altText} />;
+  return (
+    <Image
+      src={path}
+      width={0}
+      height={0}
+      alt={altText}
+      className={className}
+    />
+  );
 }

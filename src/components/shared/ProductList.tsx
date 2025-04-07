@@ -80,12 +80,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
               </span>
             </p>
             <div className="ml-auto">
-              <Icon
-                path="/icons/shop.svg"
-                altText="View Product Details"
-                width={20}
-                height={20}
-              />
+              <Icon path="/icons/shop.svg" altText="View Product Details" />
             </div>
           </div>
         </div>

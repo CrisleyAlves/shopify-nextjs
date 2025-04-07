@@ -52,7 +52,7 @@ export default async function RootLayout({
           <Loader />
           <Notification />
           <NavbarContainer />
-          <div className="min-h-[100vh]">{children}</div>
+          {children}
           <FooterContainer />
         </AppProviders>
       </body>

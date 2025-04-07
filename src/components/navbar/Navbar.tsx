@@ -83,7 +83,7 @@ export default function Navbar({
   const stickNavbar = () => {
     const windowHeight = window.scrollY;
 
-    if (windowHeight > 64) {
+    if (windowHeight > 500) {
       setShowStickyNav(true);
       return;
     }
@@ -151,9 +151,8 @@ export default function Navbar({
           <Link href="/">BEYOND</Link>
         </h1>
 
-        <div className="flex flex-row justify-end">
+        <div className="flex flex-row justify-end items-center">
           <button
-            className="mr-2"
             onClick={() => setShowSearchForm(!showSearchForm)}
             aria-label="Open search form"
           >
@@ -161,7 +160,7 @@ export default function Navbar({
           </button>
           <button
             aria-label="Open cart"
-            className="relative"
+            className="relative ml-2 mr-2"
             onClick={() => setShowCart(true)}
           >
             {totalQuantity > 0 && (
@@ -171,6 +170,10 @@ export default function Navbar({
             )}
             <Icon path="/icons/cart.svg" altText="Open Side Cart" />
           </button>
+
+          <Link href="/account/login" aria-label="Account">
+            <Icon path="/icons/account.svg" altText="navigate to account" />
+          </Link>
         </div>
       </header>
       <SideCart
