@@ -5,6 +5,10 @@ export const STORE_FRONT_API_MENUS = {
   FOOTER_MENU: "next-js-footer-menu",
 };
 
+export const STORE_FRONT_API_SECTIONS = {
+  INFO_LINK_SECTION: "info-link-section",
+};
+
 export const SORT_KEYS = {
   RELEVANCE: "RELEVANCE",
   BEST_SELLING: "BEST_SELLING",
@@ -75,9 +79,13 @@ export const STOREFRONT_KEY = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
  * @todo organize constants file later
  */
 export const ROUTES = {
+  HOME: "/",
   SEARCH: "/search",
   CHECKOUT: "/checkout",
   SUCCESS: "/success",
+  ACCOUNT_OVERVIEW: "/account",
+  ACCOUNT_LOGIN: "/account/login",
+  ACCOUNT_CREATE: "/account/create",
 };
 
 export const PRODUCT_VARIANT_TYPE = {
@@ -85,3 +93,4 @@ export const PRODUCT_VARIANT_TYPE = {
 };
 
 export const IMAGE_NOT_AVAILABLE_PATH = "/image-not-available.jpg";
+export const NO_PROFILE_IMAGE = "/no-profile-image.png";
