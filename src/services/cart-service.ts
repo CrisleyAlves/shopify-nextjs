@@ -41,7 +41,7 @@ export async function addItemToCartAction(
   }
 }
 
-export async function updateItemQuantity(payload: {
+export async function updateItemQuantityAction(payload: {
   merchandiseId: string;
   quantity: number;
 }): Promise<CartType | Error> {
@@ -86,10 +86,10 @@ export async function updateItemQuantity(payload: {
 }
 
 /**
- * @todo rework on redirectToCheckout later, need to confirm behavior
+ * @todo rework on redirectToCheckoutAction later, need to confirm behavior
  *
  */
-export async function redirectToCheckout() {
+export async function redirectToCheckoutAction() {
   const cartId = await getCartIdFromCookies();
 
   if (!cartId) {

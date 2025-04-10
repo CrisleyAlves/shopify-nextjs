@@ -1,28 +1,23 @@
-"use client";
+import type { MenuType } from "@/lib/shopify/types";
 
 import CreateAccount from "@/components/account/createAccount";
 import AlreadyHaveAnAccount from "@/components/account/createAccount/AlreadyHaveAnAccount";
 import InfoLinkSection from "@/components/shared/InfoLinkSection";
 
-export default function CreateAccountContainer() {
-  const onSubmitForm = (data: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-  }) => {
-    console.log("Form submitted", data);
-  };
-
+export default function CreateAccountContainer({
+  infoLinkSection,
+}: {
+  infoLinkSection: MenuType[];
+}) {
   return (
     <>
       <div className="flex flex-col md:flex-row md:h-[80vh]">
         <section
           className="
-        bgw-full flex-1 -gray-50 pt-16 pb-16
-        md:w-[50%] md:min-h-[500px] md:pt-0 md:mb-0"
+            bgw-full flex-1 -gray-50 pt-16 pb-16
+            md:w-[50%] md:min-h-[500px] md:pt-0 md:mb-0"
         >
-          <CreateAccount onSubmitFormAction={onSubmitForm} />
+          <CreateAccount />
         </section>
         <section
           className="
@@ -33,7 +28,7 @@ export default function CreateAccountContainer() {
           <AlreadyHaveAnAccount />
         </section>
       </div>
-      <InfoLinkSection />
+      <InfoLinkSection sections={infoLinkSection} />
     </>
   );
 }

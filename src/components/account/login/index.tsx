@@ -1,16 +1,24 @@
 "use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+import { useUI } from "@/context/UIContext";
+import { APIErrorType } from "@/lib/shopify/types/errors";
+import { createCustomerAccessTokenAction } from "@/services/customer-service";
 
 interface FormFields {
   email: string;
   password: string;
 }
 
-export default function Login({
-  onSubmitFormAction,
-}: {
-  onSubmitFormAction: (data: FormFields) => void;
-}) {
+export default function Login() {
+  const [apiErrorMessage, setApiErrorMessage] = useState<null | string>(null);
+
+  const router = useRouter();
+  const { setShowLoader } = useUI();
+
   const {
     register,
     handleSubmit,
@@ -22,6 +30,20 @@ export default function Login({
     },
   });
 
+  const onSubmitForm = async (data: { email: string; password: string }) => {
+    try {
+      setApiErrorMessage(null);
+      setShowLoader(true);
+      await createCustomerAccessTokenAction(data);
+      router.push("/account/");
+    } catch (error) {
+      const apiError = error as APIErrorType;
+      setApiErrorMessage(apiError?.message);
+    } finally {
+      setShowLoader(false);
+    }
+  };
+
   return (
     <section
       className="
@@ -29,7 +51,7 @@ export default function Login({
         md:w-[50%] md:min-h-[500px] md:pt-0 md:pb-0"
     >
       <form
-        onSubmit={handleSubmit(onSubmitFormAction)}
+        onSubmit={handleSubmit(onSubmitForm)}
         className="flex flex-col justify-center items-center h-full w-[70%] mx-auto"
       >
         <h1 className="text-2xl text-center mb-5 uppercase">Login</h1>
@@ -87,6 +109,11 @@ export default function Login({
         >
           Login
         </button>
+        {apiErrorMessage && (
+          <p className="text-red-500 font-semibold text-sm mt-3">
+            {apiErrorMessage}
+          </p>
+        )}
       </form>
     </section>
   );

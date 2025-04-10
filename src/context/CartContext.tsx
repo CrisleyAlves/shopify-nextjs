@@ -16,7 +16,7 @@ import type {
 import { MESSAGES, NOTIFICATION_TYPES } from "@/constants";
 import {
   addItemToCartAction,
-  updateItemQuantity,
+  updateItemQuantityAction,
 } from "@/services/cart-service";
 
 import { useUI } from "./UIContext";
@@ -76,7 +76,7 @@ export function CartProvider({
   const increaseItemQuantity = async (item: CartItemType) => {
     try {
       setShowLoader(true);
-      const shopifyCart = await updateItemQuantity({
+      const shopifyCart = await updateItemQuantityAction({
         merchandiseId: item.merchandise.id,
         quantity: item.quantity + 1,
       });
@@ -108,7 +108,7 @@ export function CartProvider({
   const decreaseItemQuantity = async (item: CartItemType) => {
     try {
       setShowLoader(true);
-      const shopifyCart = await updateItemQuantity({
+      const shopifyCart = await updateItemQuantityAction({
         merchandiseId: item.merchandise.id,
         quantity: item.quantity - 1,
       });

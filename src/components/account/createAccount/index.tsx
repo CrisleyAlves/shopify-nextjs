@@ -1,18 +1,27 @@
 "use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+import type { APIErrorType } from "@/lib/shopify/types/errors";
+
+import { useUI } from "@/context/UIContext";
+import { createCustomerAction } from "@/services/customer-service";
+
 interface FormFields {
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
 
-export default function CreateAccount({
-  onSubmitFormAction,
-}: {
-  onSubmitFormAction: (data: FormFields) => void;
-}) {
+export default function CreateAccount() {
+  const [apiErrorMessage, setApiErrorMessage] = useState<null | string>(null);
+
+  const router = useRouter();
+  const { setShowLoader } = useUI();
+
   const {
     register,
     handleSubmit,
@@ -26,9 +35,28 @@ export default function CreateAccount({
     },
   });
 
+  const onSubmitForm = async (data: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+  }) => {
+    try {
+      setApiErrorMessage(null);
+      setShowLoader(true);
+      await createCustomerAction(data);
+      router.push("/account/");
+    } catch (error) {
+      const apiError = error as APIErrorType;
+      setApiErrorMessage(apiError?.message);
+    } finally {
+      setShowLoader(false);
+    }
+  };
+
   return (
     <form
-      onSubmit={handleSubmit(onSubmitFormAction)}
+      onSubmit={handleSubmit(onSubmitForm)}
       className="flex flex-col justify-center items-center h-full w-[70%] mx-auto"
     >
       <h1 className="text-2xl text-center mb-5 uppercase">Create Account</h1>
@@ -131,6 +159,12 @@ export default function CreateAccount({
       >
         Create Account
       </button>
+
+      {apiErrorMessage && (
+        <p className="text-red-500 font-semibold text-sm mt-3">
+          {apiErrorMessage}
+        </p>
+      )}
     </form>
   );
 }
