@@ -1,9 +1,9 @@
 "use client";
 
-import { useUI } from "@/context/UIContext";
+import { useLoader } from "@/context/LoaderContext";
 
 export default function Loader() {
-  const { showLoader } = useUI();
+  const { showLoader } = useLoader();
 
   return (
     <div>

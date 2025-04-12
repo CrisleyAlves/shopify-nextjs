@@ -22,8 +22,6 @@ interface UIProviderType {
   setShowCart: (value: boolean) => void;
   showSidenav: boolean;
   setShowSidenav: (value: boolean) => void;
-  showLoader: boolean;
-  setShowLoader: (value: boolean) => void;
   handleNotification: (value: NotificationType) => void;
   notification: NotificationType;
 }
@@ -35,7 +33,6 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
   const [showSearchForm, setShowSearchForm] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [showSidenav, setShowSidenav] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
   const [notification, setNotification] = useState<NotificationType>(
     NOTIFICATION_INITIAL_VALUES
   );
@@ -62,8 +59,6 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
         setShowCart,
         showSidenav,
         setShowSidenav,
-        showLoader,
-        setShowLoader,
         notification,
         handleNotification,
       }}

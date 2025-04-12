@@ -20,6 +20,7 @@ import {
 } from "@/services/cart-service";
 
 import { useUI } from "./UIContext";
+import { useLoader } from "./LoaderContext";
 
 type CartContextType = {
   cart: CartType | undefined;
@@ -41,7 +42,8 @@ export function CartProvider({
   shopifyCart: CartType | undefined;
 }): ReactElement {
   const [cart, setCart] = useState<CartType | undefined>(shopifyCart);
-  const { setShowLoader, handleNotification } = useUI();
+  const { handleNotification } = useUI();
+  const { setShowLoader } = useLoader();
 
   const updateShopifyCart = (payload: CartType) => setCart(payload);
 

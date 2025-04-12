@@ -1,11 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useUI } from "@/context/UIContext";
-import { APIErrorType } from "@/lib/shopify/types/errors";
+import type { APIErrorType } from "@/lib/shopify/types/errors";
+
+import { ROUTES } from "@/lib/shopify/constants";
+import { useLoader } from "@/context/LoaderContext";
 import { createCustomerAccessTokenAction } from "@/services/customer-service";
 
 interface FormFields {
@@ -16,8 +17,7 @@ interface FormFields {
 export default function Login() {
   const [apiErrorMessage, setApiErrorMessage] = useState<null | string>(null);
 
-  const router = useRouter();
-  const { setShowLoader } = useUI();
+  const { pushWithLoader, setShowLoader } = useLoader();
 
   const {
     register,
@@ -35,11 +35,10 @@ export default function Login() {
       setApiErrorMessage(null);
       setShowLoader(true);
       await createCustomerAccessTokenAction(data);
-      router.push("/account/");
+      pushWithLoader(ROUTES.ACCOUNT_OVERVIEW);
     } catch (error) {
       const apiError = error as APIErrorType;
       setApiErrorMessage(apiError?.message);
-    } finally {
       setShowLoader(false);
     }
   };

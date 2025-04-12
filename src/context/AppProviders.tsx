@@ -2,6 +2,7 @@ import type { CartType } from "@/lib/shopify/types/";
 
 import { CartProvider } from "./CartContext";
 import { UIProvider } from "./UIContext";
+import { LoaderProvider } from "./LoaderContext";
 
 export function AppProviders({
   children,
@@ -12,7 +13,9 @@ export function AppProviders({
 }) {
   return (
     <UIProvider>
-      <CartProvider shopifyCart={shopifyCart}>{children}</CartProvider>
+      <LoaderProvider>
+        <CartProvider shopifyCart={shopifyCart}>{children}</CartProvider>
+      </LoaderProvider>
     </UIProvider>
   );
 }
