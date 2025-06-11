@@ -1,7 +1,7 @@
 import type {
   GetOrderDetailsReturnType,
   ShopifyGetOrderDetailsOperationType,
-} from "../types/order";
+} from "../types/";
 
 import shopifyFetch from "../api/shopify-fetch";
 import { removeEdgesAndNodes } from "../api/utils";
@@ -24,6 +24,6 @@ export async function getOrderDetails(
   return {
     customer: res.body.data.customer,
     orders: removeEdgesAndNodes(res.body.data.customer?.orders),
-    addresses: removeEdgesAndNodes(res.body.data.customer.addresses),
+    addresses: removeEdgesAndNodes(res.body.data.customer?.addresses),
   };
 }

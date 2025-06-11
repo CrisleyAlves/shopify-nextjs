@@ -11,7 +11,7 @@ import type {
 import { HIDDEN_PRODUCT_TAG } from "@/lib/shopify/constants";
 
 export function removeEdgesAndNodes<T>(array: ConnectionType<T>): T[] {
-  return array.edges.map((edge) => edge?.node);
+  return array?.edges?.map((edge) => edge?.node);
 }
 
 export function reshapeProducts(products: ShopifyProductType[]) {

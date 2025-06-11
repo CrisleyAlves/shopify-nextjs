@@ -43,3 +43,22 @@ export type {
   ShopifyPageOperationType,
   ShopifyPagesOperationType,
 } from "./page";
+
+export type {
+  CreateCustomerAccessTokenType,
+  CreateCustomerType,
+  CustomerAccessTokenType,
+  CustomerAddressType,
+  CustomerType,
+  GetCustomerVariables,
+  ShopifyCreateCustomerAccessTokenOperationType,
+  ShopifyCreateCustomerOperationType,
+  ShopifyDeleteCustomerAccessTokenOperationType,
+  ShopifyDeleteCustomerAcessTokenReturnType,
+} from "./customer";
+
+export type {
+  GetOrderDetailsReturnType,
+  OrderType,
+  ShopifyGetOrderDetailsOperationType,
+} from "./order";

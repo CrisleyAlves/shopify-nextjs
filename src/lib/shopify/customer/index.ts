@@ -1,12 +1,14 @@
 import type {
   CreateCustomerAccessTokenType,
   CreateCustomerType,
-  CustomerAccessTokenType,
-  CustomerType,
   ShopifyCreateCustomerAccessTokenOperationType,
   ShopifyCreateCustomerOperationType,
   ShopifyDeleteCustomerAccessTokenOperationType,
   ShopifyDeleteCustomerAcessTokenReturnType,
+} from "../types/";
+import type {
+  CustomerAccessTokenCreateReturnType,
+  CustomerCreateReturnType,
 } from "../types/customer";
 
 import shopifyFetch from "@/lib/shopify/api/shopify-fetch";
@@ -24,7 +26,7 @@ import {
  */
 export async function createCustomerAccessToken(
   createCustomerAccessToken: CreateCustomerAccessTokenType
-): Promise<CustomerAccessTokenType> {
+): Promise<CustomerAccessTokenCreateReturnType> {
   const res = await shopifyFetch<ShopifyCreateCustomerAccessTokenOperationType>(
     {
       query: createCustomerAccessTokenMutation,
@@ -35,7 +37,7 @@ export async function createCustomerAccessToken(
       },
     }
   );
-  return res.body.data.customerAccessTokenCreate.customerAccessToken;
+  return res.body.data.customerAccessTokenCreate;
 }
 
 /**
@@ -44,7 +46,7 @@ export async function createCustomerAccessToken(
  */
 export async function createCustomer(
   createCustomer: CreateCustomerType
-): Promise<CustomerType> {
+): Promise<CustomerCreateReturnType> {
   const res = await shopifyFetch<ShopifyCreateCustomerOperationType>({
     query: createCustomerMutation,
     variables: {
@@ -53,7 +55,7 @@ export async function createCustomer(
       },
     },
   });
-  return res.body.data.customerCreate.customer;
+  return res.body.data.customerCreate;
 }
 
 /**

@@ -9,11 +9,17 @@ export type CreateCustomerAccessTokenType = {
   password: string;
 };
 
+export type CustomerAccessTokenCreateReturnType = {
+  customerAccessToken: CustomerAccessTokenType;
+  customerUserErrors: {
+    code: string;
+    message: string;
+  }[];
+};
+
 export type ShopifyCreateCustomerAccessTokenOperationType = {
   data: {
-    customerAccessTokenCreate: {
-      customerAccessToken: CustomerAccessTokenType;
-    };
+    customerAccessTokenCreate: CustomerAccessTokenCreateReturnType;
   };
   variables: {
     input: CreateCustomerAccessTokenType;
@@ -37,11 +43,17 @@ export type CustomerType = {
   displayName: string;
 };
 
+export type CustomerCreateReturnType = {
+  customer: CustomerType;
+  customerUserErrors: {
+    code: string;
+    message: string;
+  }[];
+};
+
 export type ShopifyCreateCustomerOperationType = {
   data: {
-    customerCreate: {
-      customer: CustomerType;
-    };
+    customerCreate: CustomerCreateReturnType;
   };
   variables: {
     input: CreateCustomerType;

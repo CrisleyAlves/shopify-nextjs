@@ -2,16 +2,17 @@
 
 import { cookies } from "next/headers";
 
+import type { APIErrorType } from "@/lib/shopify/types/errors";
+
 import {
   createCustomer,
   createCustomerAccessToken,
-  customerLogout,
 } from "../lib/shopify/customer";
 import {
   CreateCustomerAccessTokenType,
   CreateCustomerType,
   CustomerAccessTokenType,
-} from "@/lib/shopify/types/customer";
+} from "@/lib/shopify/types/";
 
 /**
  * @todo may move it to an utility folder in server
@@ -58,8 +59,11 @@ export const createCustomerAccessTokenAction = async (
   customer: CreateCustomerAccessTokenType
 ): Promise<void | Error> => {
   try {
-    const data = await createCustomerAccessToken(customer);
-    await setCustomerAccessToken(data);
+    const response = await createCustomerAccessToken(customer);
+    if (!response.customerAccessToken) {
+      throw new Error();
+    }
+    await setCustomerAccessToken(response.customerAccessToken);
   } catch (error) {
     console.error("Error creating customer access token:", error);
     throw new Error("Invalid Credentials Provided");
@@ -73,10 +77,14 @@ export const createCustomerAction = async (
   customer: CreateCustomerType
 ): Promise<void | Error> => {
   try {
-    await createCustomer(customer);
+    const response = await createCustomer(customer);
+    if (!response.customer) {
+      throw new Error(response.customerUserErrors[0].message);
+    }
   } catch (error) {
+    const apiError = error as APIErrorType;
     console.error("Error creating customer:", error);
-    throw new Error("Error Creating Account, please try again later");
+    throw new Error(apiError.message);
   }
 };
 
@@ -85,13 +93,11 @@ export const createCustomerAction = async (
  */
 export const customerLogoutAction = async (): Promise<void | Error> => {
   try {
-    const customerAccessToken = await getCustomerAccessTokenFromCookies();
-
-    if (!customerAccessToken) {
-      throw new Error("Error loging out customer");
-    }
-
-    await customerLogout(customerAccessToken);
+    /**
+     * @todo shopify sometimes does not logout user from server, so I'm pretty much clearing cookies
+     *  const customerAccessToken = await getCustomerAccessTokenFromCookies();
+     *  await customerLogout(customerAccessToken);
+     */
     await clearCustomerAccessToken();
   } catch (error) {
     console.error("Error loging out customer:", error);

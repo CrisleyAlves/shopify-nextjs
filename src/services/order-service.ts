@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
-import { GetOrderDetailsReturnType } from "@/lib/shopify/types/order";
+import { ROUTES } from "@/lib/shopify/constants";
+import { GetOrderDetailsReturnType } from "@/lib/shopify/types/";
 import { getCustomerAccessTokenFromCookies } from "./customer-service";
 import { getOrderDetails } from "@/lib/shopify/order";
 
@@ -13,7 +14,7 @@ export const getOrderDetailsAction =
     const accessToken = await getCustomerAccessTokenFromCookies();
 
     if (!accessToken) {
-      return redirect("/");
+      return redirect(ROUTES.HOME);
     }
     const data = await getOrderDetails(accessToken);
     return data;
