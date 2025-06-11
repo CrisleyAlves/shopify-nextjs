@@ -1,7 +1,6 @@
-import Link from "next/link";
-
 import type { MenuType } from "@/lib/shopify/types";
 
+import ButtonLink from "@/components/shared/ButtonLink";
 import Icon from "./Icon";
 
 type IconPath = "/about" | "/privacy" | "/contact-us" | "/guarantee";
@@ -13,9 +12,6 @@ const Icons: Record<IconPath, string> = {
   "/guarantee": "/icons/security.svg",
 };
 
-/**
- * @todo make it dynamic -- i.e missing guarantee page in Shopify
- */
 export default function InfoLinkSection({
   sections,
 }: {
@@ -34,12 +30,12 @@ export default function InfoLinkSection({
             >
               <Icon path={icon} altText={section.title} />
               <h3 className="text-sm mt-2 capitalize">{section.title}</h3>
-              <Link
-                href={section.path}
+              <ButtonLink
+                navigateTo={section.path}
                 className="text-sm underline text-gray-500"
               >
                 Learn More
-              </Link>
+              </ButtonLink>
             </li>
           );
         })}

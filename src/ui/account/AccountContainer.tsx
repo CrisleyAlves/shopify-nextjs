@@ -1,19 +1,24 @@
 "use client";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import type {
   CustomerAddressType,
   CustomerType,
-} from "@/lib/shopify/types/customer";
-import type { OrderType } from "@/lib/shopify/types/order";
+  OrderType,
+} from "@/lib/shopify/types/";
 
-import { NO_PROFILE_IMAGE } from "@/lib/shopify/constants";
+import { useLoader } from "@/context/LoaderContext";
+import { NO_PROFILE_IMAGE, ROUTES } from "@/lib/shopify/constants";
 import { DataTable } from "@/components/shared/DataTable";
 import { customerLogoutAction } from "@/services/customer-service";
-import { useUI } from "@/context/UIContext";
 
 import { addressColumns, ordersColumns } from "./util";
+
+/**
+ *
+ * @todo auth is working, but Shopify stops sending customer data all of sudden.
+ * @returns
+ */
 
 export default function AccountContainer({
   customer,
@@ -24,23 +29,21 @@ export default function AccountContainer({
   orders: OrderType[];
   addresses: CustomerAddressType[];
 }) {
-  const { setShowLoader } = useUI();
-  const router = useRouter();
+  const { setShowLoader, pushWithLoader } = useLoader();
 
   const handleOnClickLogout = async () => {
     try {
       setShowLoader(true);
       await customerLogoutAction();
-      router.replace("/");
+      pushWithLoader(ROUTES.HOME);
     } catch (error) {
       console.error(error);
-    } finally {
       setShowLoader(false);
     }
   };
   return (
     <div className="container mt-10 mb-10 p-5 xl:p-0">
-      <div className="flex justify-center flex-col items-center">
+      <div className="flex justify-center flex-col items-center mb-5 md:mb-0">
         <Image
           priority={true}
           src={NO_PROFILE_IMAGE}
@@ -50,7 +53,7 @@ export default function AccountContainer({
           sizes="100vw"
           className="w-28"
         />
-        <h2 className="mt-2 text-gray-900">Hello, {customer.displayName}</h2>
+        <h2 className="mt-2 text-gray-900">Hello, {customer?.displayName}</h2>
         <button
           onClick={handleOnClickLogout}
           aria-label="Logout"

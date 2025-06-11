@@ -1,4 +1,4 @@
-import Link from "next/link";
+import ButtonLink from "@/components/shared/ButtonLink";
 
 export default function NotAMember() {
   return (
@@ -12,12 +12,12 @@ export default function NotAMember() {
         Enjoy exclusive benefits with a free account — including early sale
         access, birthday rewards and unique offers.
       </p>
-      <Link
-        href="/account/create"
+      <ButtonLink
+        navigateTo="/account/create"
         className="font-normal mt-5 border-b-2 border-b-white/20"
       >
         Create an account
-      </Link>
+      </ButtonLink>
     </section>
   );
 }

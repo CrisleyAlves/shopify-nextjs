@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 import type { MenuType } from "@/lib/shopify/types/";
 
-import Link from "next/link";
+import ButtonLink from "@/components/shared/ButtonLink";
 
 const Footer = ({ footerMenu }: { footerMenu: MenuType[] }) => {
   return (
@@ -20,7 +22,7 @@ const Footer = ({ footerMenu }: { footerMenu: MenuType[] }) => {
               key={item.path}
               className="font-light text-sm ml-5 hover:underline"
             >
-              <Link href={item.path}>{item.title}</Link>
+              <ButtonLink navigateTo={item.path}>{item.title}</ButtonLink>
             </li>
           ))}
         </ul>

@@ -5,6 +5,7 @@ import { MouseEventHandler } from "react";
 import type { MenuType } from "@/lib/shopify/types/";
 
 import Icon from "@/components/shared/Icon";
+import ButtonLink from "@/components/shared/ButtonLink";
 
 export default function SideMenu({
   menu,
@@ -49,8 +50,13 @@ export default function SideMenu({
           <ul>
             {menu.map((item) => {
               return (
-                <li key={item.path} className="mb-1 font-light text-sm">
-                  <Link href={"/" + item.path}>{item.title}</Link>
+                <li key={item.path}>
+                  <ButtonLink
+                    className="mb-1 font-light text-sm"
+                    navigateTo={"/" + item.path}
+                  >
+                    {item.title}
+                  </ButtonLink>
                 </li>
               );
             })}

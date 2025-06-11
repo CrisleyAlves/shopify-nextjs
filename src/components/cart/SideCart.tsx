@@ -21,6 +21,7 @@ const AddToCartModal = dynamic(
 import Analytics from "@/analytics";
 import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
+import { useLoader } from "@/context/LoaderContext";
 import { useUI } from "@/context/UIContext";
 import { createCartAndSetCookie } from "@/services/cart-service";
 import Icon from "@/components/shared/Icon";
@@ -45,7 +46,9 @@ export default function SideCart({
     decreaseItemQuantity,
     addToCart,
   } = useCart();
-  const { setShowLoader, setShowCart } = useUI();
+  const { setShowCart } = useUI();
+  const { setShowLoader } = useLoader();
+
   const [selectedProduct, setSelectedProduct] = useState<
     undefined | ProductType
   >(undefined);

@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import type { APIErrorType } from "@/lib/shopify/types/errors";
-
 import { ROUTES } from "@/lib/shopify/constants";
 import { useLoader } from "@/context/LoaderContext";
 import { createCustomerAccessTokenAction } from "@/services/customer-service";
@@ -37,8 +35,8 @@ export default function Login() {
       await createCustomerAccessTokenAction(data);
       pushWithLoader(ROUTES.ACCOUNT_OVERVIEW);
     } catch (error) {
-      const apiError = error as APIErrorType;
-      setApiErrorMessage(apiError?.message);
+      console.error("Login error:", error);
+      setApiErrorMessage("Invalid Credentials Provided");
       setShowLoader(false);
     }
   };

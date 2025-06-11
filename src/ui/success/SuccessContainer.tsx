@@ -1,9 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
 
 import type { ProductType } from "@/lib/shopify/types/";
 
+import { ROUTES } from "@/lib/shopify/constants";
 import ProductList from "@/components/shared/ProductList";
+import { useLoader } from "@/context/LoaderContext";
 
 export const metadata = {
   title: "Success Page",
@@ -17,7 +18,7 @@ export default function SuccessContainer({
   orderId: number;
   recommendedProducts: ProductType[];
 }) {
-  const router = useRouter();
+  const { pushWithLoader } = useLoader();
 
   return (
     <section>
@@ -37,7 +38,7 @@ export default function SuccessContainer({
 
         <button
           className="w-full max-w-xs mx-auto bg-indigo-950 hover:text-indigo-950 hover:bg-white border border-indigo-950 text-white p-3 block text-center"
-          onClick={() => router.replace("/")}
+          onClick={() => pushWithLoader(ROUTES.HOME)}
         >
           Go back to home page
         </button>

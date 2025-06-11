@@ -1,9 +1,10 @@
 "use client";
 
 import clsx from "clsx";
-import Link from "next/link";
+
 import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 import { usePathname, useSearchParams } from "next/navigation";
 
 import type { ProductType, MenuType } from "@/lib/shopify/types/";
@@ -11,9 +12,11 @@ import type { ProductType, MenuType } from "@/lib/shopify/types/";
 import { ROUTES } from "@/lib/shopify/constants";
 import { useCart } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
+import { useLoader } from "@/context/LoaderContext";
 import { buildQueryStringParams } from "@/lib/shopify/utils/navigation";
 import SideCart from "@/components/cart/SideCart";
 import Icon from "@/components/shared/Icon";
+import ButtonLink from "@/components/shared/ButtonLink";
 
 import SearchForm from "./SearchForm";
 import SideMenu from "./SideMenu";
@@ -29,7 +32,7 @@ export default function Navbar({
   const [showBasicNavbar, setShowBasicNavbar] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const router = useRouter();
+  const { pushWithLoader } = useLoader();
 
   const {
     showStickyNav,
@@ -75,15 +78,15 @@ export default function Navbar({
         search.value
       );
 
-      router.push(url);
+      pushWithLoader(url);
     },
-    [router, searchParams]
+    [pushWithLoader, searchParams]
   );
 
   const stickNavbar = () => {
     const windowHeight = window.scrollY;
 
-    if (windowHeight > 500) {
+    if (windowHeight > 600) {
       setShowStickyNav(true);
       return;
     }
@@ -127,20 +130,20 @@ export default function Navbar({
         </button>
 
         <h1 className="hidden font-light md:block uppercase">
-          <Link href="/">BEYOND</Link>
+          <ButtonLink navigateTo="/">BEYOND</ButtonLink>
         </h1>
 
         <nav className="hidden md:block">
           <ul className="flex flex-row items-center justify-center h-full uppercase">
             {menu.map((item) => {
               return (
-                <li
-                  key={item.path}
-                  className="font-light text-md ml-3 hover:underline"
-                >
-                  <Link prefetch href={"/" + item.path}>
+                <li key={item.path}>
+                  <ButtonLink
+                    navigateTo={"/" + item.path}
+                    className="font-light text-md ml-3 hover:underline uppercase"
+                  >
                     {item.title}
-                  </Link>
+                  </ButtonLink>
                 </li>
               );
             })}
@@ -148,7 +151,7 @@ export default function Navbar({
         </nav>
 
         <h1 className="font-light text-2xl text-center md:hidden uppercase">
-          <Link href="/">BEYOND</Link>
+          <ButtonLink navigateTo="/">BEYOND</ButtonLink>
         </h1>
 
         <div className="flex flex-row justify-end items-center">

@@ -1,8 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 import type { CollectionType } from "@/lib/shopify/types";
+
+import ButtonLink from "@/components/shared/ButtonLink";
 
 export default function CollectionBanners({
   collections,
@@ -19,8 +20,8 @@ export default function CollectionBanners({
       >
         {collections.map((collection) => (
           <li key={collection.path}>
-            <Link
-              href={collection.path}
+            <ButtonLink
+              navigateTo={collection.path}
               className="relative w-full shadow-lg"
               aria-label={`View ${collection.title} collection`}
             >
@@ -41,7 +42,7 @@ export default function CollectionBanners({
                 sizes="100vw"
                 className="w-full blur-[2px]"
               />
-            </Link>
+            </ButtonLink>
           </li>
         ))}
       </ul>

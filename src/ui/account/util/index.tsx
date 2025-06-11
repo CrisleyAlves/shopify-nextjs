@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { CustomerAddressType } from "@/lib/shopify/types/customer";
-import { OrderType } from "@/lib/shopify/types/order";
+import type { CustomerAddressType } from "@/lib/shopify/types/";
+import type { OrderType } from "@/lib/shopify/types/";
 import { formatDate } from "@/ui/utils";
 
 export const addressColumns = [

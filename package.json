@@ -10,7 +10,7 @@
   },
   "engines": {
     "npm": "10.9.2",
-    "node": "22.14.0"
+    "node": "^22.14.0"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",

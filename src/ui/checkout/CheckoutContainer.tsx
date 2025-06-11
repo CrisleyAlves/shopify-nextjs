@@ -9,7 +9,7 @@ import { ROUTES } from "@/lib/shopify/constants";
 import { scrollToTop } from "@/ui/utils";
 import { createCartAndSetCookie } from "@/services/cart-service";
 import { useCart } from "@/context/CartContext";
-import { useUI } from "@/context/UIContext";
+import { useLoader } from "@/context/LoaderContext";
 
 import Summary from "./Summary";
 import ShippingAddress from "./ShippingAddress";
@@ -21,7 +21,7 @@ export default function CheckoutContainer(): JSX.Element {
   const [selected, setSelected] = useState<string | null>(null);
 
   const { cart, updateShopifyCart } = useCart();
-  const { setShowLoader } = useUI();
+  const { setShowLoader } = useLoader();
 
   const paymentOptions = useMemo(() => PAYMENT_OPTIONS, []);
 

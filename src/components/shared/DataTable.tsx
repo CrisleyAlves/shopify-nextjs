@@ -9,7 +9,16 @@ type DataTableProps<T> = {
   title?: string;
 };
 
-export function DataTable<T>({ columns, data, title }: DataTableProps<T>) {
+export function DataTable<T>({ columns, data = [], title }: DataTableProps<T>) {
+  if (!data.length) {
+    return (
+      <>
+        {title && <h3 className="font-extralight text-2xl mb-4">{title}</h3>}
+        <p className="mb-10">No data found</p>
+      </>
+    );
+  }
+
   return (
     <div className="mt-10">
       {title && <h3 className="font-extralight text-2xl mb-4">{title}</h3>}

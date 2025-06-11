@@ -1,11 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import type { APIErrorType } from "@/lib/shopify/types/errors";
-
+import { ROUTES } from "@/lib/shopify/constants";
+import { useLoader } from "@/context/LoaderContext";
 import { useUI } from "@/context/UIContext";
 import { createCustomerAction } from "@/services/customer-service";
 
@@ -19,8 +18,8 @@ interface FormFields {
 export default function CreateAccount() {
   const [apiErrorMessage, setApiErrorMessage] = useState<null | string>(null);
 
-  const router = useRouter();
-  const { setShowLoader } = useUI();
+  const { pushWithLoader, setShowLoader } = useLoader();
+  const { handleNotification } = useUI();
 
   const {
     register,
@@ -45,11 +44,17 @@ export default function CreateAccount() {
       setApiErrorMessage(null);
       setShowLoader(true);
       await createCustomerAction(data);
-      router.push("/account/");
+      pushWithLoader(ROUTES.ACCOUNT_LOGIN);
+      handleNotification({
+        type: "success",
+        visible: true,
+        message: "Account Created",
+      });
     } catch (error) {
-      const apiError = error as APIErrorType;
-      setApiErrorMessage(apiError?.message);
-    } finally {
+      console.error("Create Account error:", error);
+      setApiErrorMessage(
+        "An error occurred while creating your account, please try again later."
+      );
       setShowLoader(false);
     }
   };
