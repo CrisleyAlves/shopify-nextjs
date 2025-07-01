@@ -104,7 +104,8 @@ export default function SideCart({
     }, 2000);
   }, [router, setShowLoader]);
 
-  const totalText = `Total: (${cart?.totalQuantity}) Item(s)`;
+  const cartTotalQuantity = cart ? cart.totalQuantity : 0;
+  const totalText = `Total: (${cartTotalQuantity}) Item(s)`;
 
   return (
     <div
