@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`InfoLinkSection should render section correcly 1`] = `
+<div>
+  <section
+    class="text-black font-extralight pt-10 pb-10 border-t-2 bg-gray-50"
+  >
+    <ul
+      class="grid grid-cols-2 gap-y-5 md:gap-y-0 md:grid-cols-4 md:container"
+    >
+      <li
+        class="flex flex-col items-center justify-center"
+      >
+        <img
+          alt="About"
+          class="w-5 md:w-6"
+          data-nimg="1"
+          decoding="async"
+          height="0"
+          loading="lazy"
+          src="/icons/account.svg"
+          style="color: transparent;"
+          width="0"
+        />
+        <h3
+          class="text-sm mt-2 capitalize"
+        >
+          About
+        </h3>
+        <button
+          class="text-sm underline text-gray-500"
+        >
+          Learn More
+        </button>
+      </li>
+      <li
+        class="flex flex-col items-center justify-center"
+      >
+        <img
+          alt="Privacy"
+          class="w-5 md:w-6"
+          data-nimg="1"
+          decoding="async"
+          height="0"
+          loading="lazy"
+          src="/icons/eye.svg"
+          style="color: transparent;"
+          width="0"
+        />
+        <h3
+          class="text-sm mt-2 capitalize"
+        >
+          Privacy
+        </h3>
+        <button
+          class="text-sm underline text-gray-500"
+        >
+          Learn More
+        </button>
+      </li>
+      <li
+        class="flex flex-col items-center justify-center"
+      >
+        <img
+          alt="Contact Us"
+          class="w-5 md:w-6"
+          data-nimg="1"
+          decoding="async"
+          height="0"
+          loading="lazy"
+          src="/icons/email-symbol.svg"
+          style="color: transparent;"
+          width="0"
+        />
+        <h3
+          class="text-sm mt-2 capitalize"
+        >
+          Contact Us
+        </h3>
+        <button
+          class="text-sm underline text-gray-500"
+        >
+          Learn More
+        </button>
+      </li>
+      <li
+        class="flex flex-col items-center justify-center"
+      >
+        <img
+          alt="Guarantee"
+          class="w-5 md:w-6"
+          data-nimg="1"
+          decoding="async"
+          height="0"
+          loading="lazy"
+          src="/icons/security.svg"
+          style="color: transparent;"
+          width="0"
+        />
+        <h3
+          class="text-sm mt-2 capitalize"
+        >
+          Guarantee
+        </h3>
+        <button
+          class="text-sm underline text-gray-500"
+        >
+          Learn More
+        </button>
+      </li>
+    </ul>
+  </section>
+</div>
+`;
